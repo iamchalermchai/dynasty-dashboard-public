@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>อัปเดตคดีฮั้ว สว. — สิงหาคม 2569 (ก่อนลงมติ)</title>
+<link href="house.css" rel="stylesheet">
+<style>
+:root{--maxw:820px;--mark:#C8102E}
+[data-theme="dark"]{--mark:#F26D7D}
+.mk{color:var(--mark);font-weight:600}
+.tempflag{background:var(--gold-fill);color:#1B2430;font-family:'IBM Plex Mono',monospace;font-size:12px;
+  letter-spacing:.06em;text-align:center;padding:6px;font-weight:500}
+.hero h1{font-size:clamp(32px,5.5vw,54px)}
+.kick{display:flex;flex-wrap:wrap;gap:0;margin:26px 0 8px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.kick .k{flex:1;min-width:140px;padding:16px 20px 16px 0;border-right:1px solid var(--border)}
+.kick .k:last-child{border-right:none}
+.kick .kn{font-family:'Trirong',serif;font-weight:700;font-size:34px;line-height:1;color:var(--gold-loud)}
+.kick .kl{margin-top:6px;font-size:13.5px;color:var(--text-secondary);line-height:1.4}
+@media(max-width:640px){.kick .k{flex-basis:100%;border-right:none;border-bottom:1px solid var(--border);padding-right:0}.kick .k:last-child{border-bottom:none}}
+.tl{position:relative;margin:8px 0;padding-left:26px}
+.tl::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+.ev{position:relative;padding:14px 0 14px 0}
+.ev::before{content:'';position:absolute;left:-26px;top:20px;width:12px;height:12px;border-radius:50%;
+  background:var(--gold-fill);border:2px solid var(--gold-dim)}
+.ev.hot::before{background:var(--gold-loud)}
+.ev .d{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--gold-dim);letter-spacing:.04em}
+.ev .h{font-family:'Trirong',serif;font-weight:600;font-size:19px;margin:3px 0 4px}
+.ev .b{font-size:15.5px;color:var(--text);max-width:60ch}
+.ev .s{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-secondary);margin-top:5px}
+.grid229{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0}
+.g229{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:16px 18px}
+.g229 .n{font-family:'Trirong',serif;font-weight:700;font-size:30px;color:var(--gold-dim)}
+.g229 .l{font-size:14px;color:var(--text-secondary);margin-top:4px}
+.g229 .sub{font-size:12.5px;color:var(--text-secondary);margin-top:6px;font-family:'IBM Plex Mono',monospace}
+@media(max-width:640px){.grid229{grid-template-columns:1fr}}
+.more{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.more a{display:block;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:16px 18px;font-family:'Sarabun',sans-serif;font-weight:400}
+.more a::after{content:none}
+.more a .t{font-family:'Trirong',serif;font-weight:600;font-size:17px;color:var(--text)}
+.more a .t::after{content:' →';color:var(--gold-dim)}
+.more a .d{font-size:13px;color:var(--text-secondary);margin-top:4px}
+
+/* ── กราฟ 229 จุด (interactive) ── */
+.frame{position:relative;margin:14px 0 4px;padding:34px 30px 30px;background:var(--surface);
+  border:1px solid var(--gold-dim);border-radius:4px}
+.frame svg.corner{position:absolute;width:56px;height:56px;color:var(--gold-loud);opacity:.85;pointer-events:none}
+.frame svg.tl{top:-2px;left:-2px}
+.frame svg.tr{top:-2px;right:-2px;transform:scaleX(-1)}
+.frame svg.bl{bottom:-2px;left:-2px;transform:scaleY(-1)}
+.frame svg.br{bottom:-2px;right:-2px;transform:scale(-1,-1)}
+.tier{margin:0 0 20px}.tier:last-child{margin-bottom:0}
+.tier .th{display:flex;align-items:baseline;gap:8px;margin-bottom:9px}
+.tier .th .tn{font-family:'Trirong',serif;font-weight:700;font-size:19px;color:var(--gold-dim)}
+.tier .th .tl2{font-size:13px;color:var(--text-secondary)}
+.dots{display:flex;flex-wrap:wrap;gap:6px}
+.dot{width:17px;height:17px;border-radius:50%;cursor:pointer;position:relative;
+  border:1.5px solid transparent;transition:transform .1s}
+.dot:hover{transform:scale(1.35);z-index:3}
+.dot:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.dot.sv{background:var(--gold-fill);border-color:var(--gold-dim)}
+.dot.cand{background:transparent;border-color:#2B7A6F}   /* teal outline = ผู้สมัคร */
+.dot.net{background:#DCD6C4;border-color:var(--text-secondary);border-radius:2px}  /* สี่เหลี่ยม = เครือข่าย */
+.dot.has{box-shadow:0 0 0 1px var(--surface),0 0 0 2.5px var(--gold-dim)}  /* มีบทบาทคดีเจาะจง */
+.dot.red9{border-color:var(--mark);border-width:2px;box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--mark)}
+.leg{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);
+  font-size:12.5px;color:var(--text-secondary)}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.leg i{width:14px;height:14px;border-radius:50%;border:1.5px solid transparent;display:inline-block}
+.leg i.sv{background:var(--gold-fill);border-color:var(--gold-dim)}
+.leg i.cand{border-color:#2B7A6F}.leg i.net{background:#DCD6C4;border-color:var(--text-secondary);border-radius:2px}
+.leg i.red9{border-color:var(--mark);border-width:2px}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(27,36,48,.55);display:none;align-items:center;justify-content:center;
+  padding:20px;z-index:50}
+.ov.on{display:flex}
+.card{background:var(--bg);border:1px solid var(--gold-dim);border-radius:8px;max-width:520px;width:100%;
+  max-height:86vh;overflow:auto;padding:24px 26px;position:relative}
+.card .x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-secondary)}
+.card .cn{font-family:'Trirong',serif;font-weight:700;font-size:26px;line-height:1.15;padding-right:24px}
+.card .badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:2px 8px;
+  border-radius:3px;margin:8px 8px 0 0;border:1px solid var(--border);color:var(--text-secondary)}
+.card .badge.r{border-color:var(--mark);color:var(--mark)}
+.card .pos{font-size:14.5px;color:var(--text);margin:12px 0 2px}
+.card h4{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:var(--gold-dim);
+  text-transform:uppercase;margin:18px 0 8px;border-top:1px solid var(--border);padding-top:14px}
+.al{margin:0 0 14px}
+.al .ar{font-family:'Trirong',serif;font-weight:600;font-size:16px}
+.al .ac{font-size:14px;color:var(--text);margin:3px 0 6px;line-height:1.5}
+.al .am{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-secondary);display:flex;flex-wrap:wrap;gap:8px}
+.al .tier{margin:0;display:inline-block;padding:1px 7px;border:1px solid var(--gold-dim);border-radius:3px;color:var(--gold-dim)}
+.al .rsp{font-size:13px;color:var(--text-secondary);border-left:2px solid var(--rule);padding-left:10px;margin-top:6px;font-style:italic}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:1px 6px;
+  border:1px solid var(--border);border-radius:3px;margin:3px 4px 0 0;color:var(--text-secondary)}
+.none{font-size:14px;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:12px 14px;line-height:1.5}
+.star{color:var(--mark);font-weight:700}
+.foot{font-size:12.5px;color:var(--text-secondary);background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--mark);border-radius:6px;padding:10px 12px;margin-top:6px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="tempflag">หน้าชั่วคราว — รวมอัปเดตล่าสุด ก่อนหน้ากลางจะรวมเข้าเรื่องหลัก</div>
+<button class="toggle mono" onclick="var c=document.documentElement.getAttribute('data-theme');document.documentElement.setAttribute('data-theme',c==='dark'?'light':'dark')">◐ ธีม</button>
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">คดีฮั้ว สว. 2567 · อัปเดตสิงหาคม 2569</div>
+    <h1>โค้งสุดท้ายก่อน กกต. ลงมติ</h1>
+    <p class="lede">หลังปากคำ 4 พยานเปิดคดี (ก.ค.) iLaw และฝ่ายค้านทยอยเปิดหลักฐานเพิ่ม —
+      <b>เส้นเงิน · ประวัติการโทร · ความน่าจะเป็น</b> — กดดันก่อน กกต. ชี้ขาด</p>
+    <div class="kick">
+      <div class="k"><div class="kn">229</div><div class="kl">ผู้ถูกกล่าวหา (สว. 138 · ผู้สมัคร 48 · เครือข่าย 43)</div></div>
+      <div class="k"><div class="kn">31 ส.ค.</div><div class="kl">วันที่ กกต. นัด/คาดลงมติ (ไม่ใช่เส้นตายกฎหมาย)</div></div>
+      <div class="k"><div class="kn">6</div><div class="kl">จังหวัด ที่ฝ่ายค้านเปิดเส้นเงิน</div></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="slabel">ไทม์ไลน์ · สิ่งที่เปิดเพิ่มเดือนสิงหาคม</div>
+    <h2>iLaw / ไอติม เปิดอะไรบ้าง</h2>
+    <div class="tl">
+      <div class="ev"><div class="d">9 ส.ค. 2569</div><div class="h">เส้นเงินถึงเจ้าหน้าที่ กกต.</div>
+        <div class="b">ฝ่ายค้านเปิดหลักฐาน ส.อบจ.อำนาจเจริญ (ญาณี สีฟ้า) โอนเงินให้ สุรชัย ขันติยานนท์ พนักงานสืบสวน กกต. รวม 860,000 บาท 13 ครั้ง (เม.ย.–ก.ค.67) · กกต.ยืนยันการโอนมีจริง แต่ชี้แจงว่าไม่เกี่ยวการเลือก สว.</div>
+        <div class="s">[S089/S090 · A043/A044] · ⚠️ กกต.ไม่ระบุชื่อผู้โอน — process-fact</div></div>
+      <div class="ev hot"><div class="d">14 ส.ค. 2569</div><div class="h">เส้นเงิน 6 จังหวัด (เวทีวิปฝ่ายค้าน ภาค 4)</div>
+        <div class="b">พริษฐ์เปิดเส้นเงินรายจังหวัด: สุราษฎร์ · หนองบัวลำภู · นครพนม · ลำพูน · สงขลา×2 · อำนาจเจริญ×2 — พร้อมพยานศูนย์โพย + "บริษัทครอบครัว สว.ลำพูน"</div>
+        <div class="s">[S101] · เพิ่ม A044, A046–A051 (สว.สงขลา/ลำพูน/นครพนม)</div></div>
+      <div class="ev"><div class="d">15 ส.ค. 2569</div><div class="h">สุขสมรวย (รมต.) ปฏิเสธ + ฟ้องหมิ่น 3 คดี</div>
+        <div class="b">สุขสมรวย วันทนียกุล — รมต.ประจำสำนักนายกฯ (ครม.อนุทิน2/1) คนในฐาน — ปฏิเสธเส้นเงิน + ฟ้องหมิ่นประมาท พริษฐ์/ยิ่งชีพ/ทนายอั๋น ที่ สภ.อำนาจเจริญ · <b>คนในทะเบียนตระกูลโต้กลับครั้งแรก</b></div>
+        <div class="s">[S103 · A052] · tier=inference · presumption of innocence</div></div>
+      <div class="ev"><div class="d">19 ส.ค. 2569</div><div class="h">DSI เส้นทางคู่ขนาน</div>
+        <div class="b">กลุ่ม สว.สำรอง (พล.ต.ท.คำรบ ปัญญาแก้ว) บุก DSI จี้เร่งสำนวนอั้งยี่-ฟอกเงิน ไม่รอผลไต่สวน กกต. · DSI เคยสรุปฟ้อง 8 ราย แต่อัยการส่งกลับสอบเพิ่ม</div>
+        <div class="s">[S106]</div></div>
+      <div class="ev hot"><div class="d">23 ส.ค. 2569</div><div class="h">หลักฐานโทร "ก๊วนอ่างทอง"</div>
+        <div class="b">ยิ่งชีพ (iLaw) เปิดประวัติโทร: ผู้สมัคร สว.อ่างทอง โทรหา <b>ภราดร + กรวีร์ ปริศนานันทกุล</b> เช้าวันเลือก + อีกครั้ง 23.00 น. (หลังเวลาที่ต้องยึดโทรศัพท์) · + ผู้ช่วย สส.จัดที่พักโรงแรม</div>
+        <div class="s">[S107 · A053/A054] · tier=hearsay · หลักฐานกดดัน ไม่ใช่คำวินิจฉัย</div></div>
+      <div class="ev"><div class="d">~31 ส.ค. 2569</div><div class="h">กกต. นัดลงมติ (คาด)</div>
+        <div class="b">บอร์ด กกต. 7 คน ตัดสินว่าจะส่งศาลฎีกาหรือยกคำร้อง 229 คน · ⚠️ ความขัดแย้งภายใน: คกก.ไต่สวนเสนอฟ้อง 229 vs คกก.ทบทวนเสนอยก · <b>พ.ร.ป.สว. ม.62 ไม่ผูกเวลา</b> — 31 ส.ค.เป็นกำหนดที่ กกต.วางเอง</div>
+        <div class="s">[S104/S105] · ปลายทาง = ศาลฎีกาชี้ขาด ไม่ใช่ กกต.ฟ้องเอง</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">โครงสร้าง 229 คน · คลิกดูรายคน</div>
+    <h2>ใครอยู่ในคดี</h2>
+    <p class="sub">ผู้ถูกกล่าวหาทั้ง 229 คน แบ่ง 3 ชั้นตามบทบาทในระบบเลือก สว. — <b>คลิกจุดใดก็ได้</b>เพื่อดูชื่อ ตำแหน่ง ข้อกล่าวหา และแหล่งอ้างอิง · <b class="mk">วงแดง = 9 นักการเมืองภูมิใจไทย</b> ที่ iLaw ยื่นเอาผิดโดยตรง</p>
+    <div class="frame" id="frame">
+      <svg class="corner tl" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+        <path d="M2 54 L2 20 Q2 2 20 2 L54 2"/>
+        <path d="M2 20 Q10 20 12 12 Q20 10 20 2" stroke-width="1"/>
+        <circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+        <path d="M12 12 Q6 6 3 3 M12 12 Q18 6 21 3 M12 12 Q6 18 3 21 M12 12 Q18 18 21 21" stroke-width=".8"/>
+        <circle cx="30" cy="4.5" r="2.2"/><circle cx="4.5" cy="30" r="2.2"/>
+      </svg>
+      <svg class="corner tr" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+        <path d="M2 54 L2 20 Q2 2 20 2 L54 2"/>
+        <path d="M2 20 Q10 20 12 12 Q20 10 20 2" stroke-width="1"/>
+        <circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+        <path d="M12 12 Q6 6 3 3 M12 12 Q18 6 21 3 M12 12 Q6 18 3 21 M12 12 Q18 18 21 21" stroke-width=".8"/>
+        <circle cx="30" cy="4.5" r="2.2"/><circle cx="4.5" cy="30" r="2.2"/>
+      </svg>
+      <svg class="corner bl" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+        <path d="M2 54 L2 20 Q2 2 20 2 L54 2"/>
+        <path d="M2 20 Q10 20 12 12 Q20 10 20 2" stroke-width="1"/>
+        <circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+        <path d="M12 12 Q6 6 3 3 M12 12 Q18 6 21 3 M12 12 Q6 18 3 21 M12 12 Q18 18 21 21" stroke-width=".8"/>
+        <circle cx="30" cy="4.5" r="2.2"/><circle cx="4.5" cy="30" r="2.2"/>
+      </svg>
+      <svg class="corner br" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+        <path d="M2 54 L2 20 Q2 2 20 2 L54 2"/>
+        <path d="M2 20 Q10 20 12 12 Q20 10 20 2" stroke-width="1"/>
+        <circle cx="12" cy="12" r="3.4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+        <path d="M12 12 Q6 6 3 3 M12 12 Q18 6 21 3 M12 12 Q6 18 3 21 M12 12 Q18 18 21 21" stroke-width=".8"/>
+        <circle cx="30" cy="4.5" r="2.2"/><circle cx="4.5" cy="30" r="2.2"/>
+      </svg>
+      <div id="tiers"></div>
+      <div class="leg">
+        <span><i class="sv"></i> สว.ที่ได้รับเลือก (138)</span>
+        <span><i class="cand"></i> ผู้สมัคร/สว.สำรอง (48)</span>
+        <span><i class="net"></i> เครือข่ายการเมือง (43)</span>
+        <span><i class="red9"></i> 9 ภท. (iLaw ยื่นตรง)</span>
+        <span>◍ ขอบทอง = มีบทบาทคดีเจาะจงในสำนวน</span>
+      </div>
+    </div>
+    <div class="caveat"><b>ข้อควรระวัง:</b> ทุกชื่ออยู่ในสถานะ<b>ถูกกล่าวหา</b> ยังไม่มีคำวินิจฉัยถึงที่สุด ·
+      สำนวนที่เปิดเผยระบุ "บทบาทคดี" เจาะจงเพียง 25 คน (ที่เหลือถูกระบุชื่อในฐานะผู้ได้ประโยชน์/เครือข่าย) ·
+      2 ใน 9 ภท. (ทรงศักดิ์ ทองศรี · พิพัฒน์ รัชกิจประการ) ไม่อยู่ในลิสต์ 229 — วงแดงที่ญาติ (จักรกฤษณ์ · ชลัฐ) แทน ·
+      presumption of innocence</div>
+  </section>
+
+  <section>
+    <div class="slabel">อ่านต่อ · เรื่องหลัก</div>
+    <h2>เจาะลึกแต่ละมิติ</h2>
+    <div class="more">
+      <a href="hua_operation.html"><span class="t">กายวิภาคปฏิบัติการ (ปากคำ 4 พยาน)</span><span class="d">ใครทำหน้าที่อะไร — ก.ค.69</span></a>
+      <a href="hua_sv_story.html"><span class="t">ความน่าจะเป็นของบัตร</span><span class="d">บัตรตรงกัน 1 ใน 1,534 ล้านล้าน (The Matter ยืนยัน)</span></a>
+      <a href="baanyai_story.html"><span class="t">บ้านใหญ่ (หน้ารวม)</span><span class="d">เมื่อโครงสร้างตระกูลเข้าสู่วุฒิสภา</span></a>
+    </div>
+  </section>
+
+  <footer>ฐานข้อมูลตระกูลการเมืองไทย · หน้าชั่วคราว (temp) · ข้อมูล ณ 26 ส.ค. 2569 · CC BY 4.0 · process-fact เท่านั้น ไม่ใช่คำวินิจฉัย</footer>
+</main>
+
+<div class="ov" id="ov" onclick="if(event.target===this)closeCard()">
+  <div class="card" role="dialog" aria-modal="true" id="card">
+    <button class="x" onclick="closeCard()" aria-label="ปิด">×</button>
+    <div id="cardbody"></div>
+  </div>
+</div>
+
+<script src="hua_aug_data.js?v=35"></script>
+<script>
+var TIERS=[
+  {k:'sv',   n:'สว. ที่ได้รับเลือก',       sub:'ผู้ได้ประโยชน์ · 75% ของคดี'},
+  {k:'cand', n:'ผู้สมัคร สว. / สว.สำรอง',  sub:''},
+  {k:'net',  n:'เครือข่ายการเมือง',        sub:'รมต. · สส. · ท้องถิ่น/พรรค'}
+];
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+(function render(){
+  var host=document.getElementById('tiers');
+  TIERS.forEach(function(t){
+    var ppl=HUA229.filter(function(p){return p.zone===t.k;});
+    var wrap=document.createElement('div');wrap.className='tier';
+    wrap.innerHTML='<div class="th"><span class="tn">'+ppl.length+'</span><span class="tl2">'+t.n+
+      (t.sub?' — '+t.sub:'')+'</span></div>';
+    var dots=document.createElement('div');dots.className='dots';
+    ppl.forEach(function(p){
+      var b=document.createElement('button');
+      b.className='dot '+p.zone+(p.allegations.length?' has':'')+(p.red9?' red9':'');
+      b.title=p.name+(p.red9?' · 9 ภท.':'');
+      b.setAttribute('aria-label',p.name);
+      b.onclick=function(){openCard(p);};
+      dots.appendChild(b);
+    });
+    wrap.appendChild(dots);host.appendChild(wrap);
+  });
+})();
+var ZTH={sv:'สว. ที่ได้รับเลือก',cand:'ผู้สมัคร สว./สว.สำรอง',net:'เครือข่ายการเมือง'};
+function openCard(p){
+  var h='<div class="cn">'+esc(p.name)+'</div>';
+  h+='<span class="badge">'+ZTH[p.zone]+'</span>';
+  if(p.red9)h+='<span class="badge r">9 ภท. — iLaw ยื่นตรง</span>';
+  if(p.red9label)h+='<span class="badge r">'+esc(p.red9label)+'</span>';
+  h+='<div class="pos">'+esc(p.pos)+'</div>';
+  if(p.allegations.length){
+    h+='<h4>ข้อกล่าวหา ('+p.allegations.length+')</h4>';
+    var anyLeaked=false;
+    p.allegations.forEach(function(a){
+      if(a.leaked)anyLeaked=true;
+      h+='<div class="al"><div class="ar">'+esc(a.role)+(a.leaked?' <span class="star">*</span>':'')+'</div>';
+      h+='<div class="ac">'+esc(a.claim)+'</div>';
+      h+='<div class="am"><span class="tier">หลักฐาน: '+esc(a.tier)+'</span>';
+      if(a.stage)h+='<span>ขั้น: '+esc(a.stage)+(a.date?' ('+esc(a.date)+')':'')+'</span>';
+      if(a.auth)h+='<span>โดย: '+esc(a.auth)+'</span>';
+      h+='</div>';
+      if(a.src&&a.src.length){h+='<div>';a.src.forEach(function(s){
+        h+='<span class="chip" title="'+esc(s.cite)+'">'+esc(s.id)+' · '+esc(s.cite)+'</span>';});h+='</div>';}
+      if(a.response)h+='<div class="rsp">คำชี้แจง: '+esc(a.response)+'</div>';
+      h+='</div>';
+    });
+    if(anyLeaked)h+='<div class="foot"><span class="star">*</span> จากเอกสารความเห็นภายใน กกต.ที่<b>รั่วไหล</b> (รองเลขาฯ) — ยังไม่ใช่มติ กกต.ชุดใหญ่ · DSI แจ้งความหาคนทำเอกสารหลุด</div>';
+  }else{
+    h+='<div class="none">ถูกระบุชื่อในลิสต์ผู้ถูกกล่าวหา แต่<b>ยังไม่มีบทบาทคดีเจาะจง</b>ในสำนวนที่เปิดเผย — อยู่ในฐานะผู้ได้ประโยชน์/เครือข่าย · สถานะในฐานข้อมูล: '+esc(p.status||'—')+'</div>';
+  }
+  document.getElementById('cardbody').innerHTML=h;
+  document.getElementById('ov').classList.add('on');
+}
+function closeCard(){document.getElementById('ov').classList.remove('on');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCard();});
+</script>
+<script>(function(){try{var s=localStorage.getItem('baanyai-theme');if(s)document.documentElement.setAttribute('data-theme',s);}catch(e){}})();</script>
+</body>
+</html>

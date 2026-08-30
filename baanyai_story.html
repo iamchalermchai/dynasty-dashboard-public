@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บ้านใหญ่ — เครือข่าย การโหวต และภูมิศาสตร์</title>
+<link href="house.css?v=vm2" rel="stylesheet">
+<style>
+/* baanyai_story (หน้าหลัก) — base จาก house.css · เหลือเฉพาะ page-specific + override */
+:root{--maxw:960px; --land:#DEDACD;
+  --pprp:#2E5CA6; --dp:#00A6E4; --mfp:#FF6413; --utn:#0A1E5A;
+  --kl:#7A4FBF; --ctp:#E90080; --pc:#009639; --oth:#9AA3AE}
+:root[data-theme="dark"]{--land:#242832}
+.hero h1{font-size:clamp(40px,7vw,74px)}         /* override: ใหญ่กว่า house เล็กน้อย (landing) */
+.hero .lede{max-width:46ch}
+
+.status{border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  margin:32px 0 0; padding:20px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px}
+.status .k{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--text-secondary); margin-bottom:5px}
+.status .v{font-size:15px; font-weight:500; line-height:1.35}
+
+/* hero kicker — 3 finding ตอกทันที (แสดงก่อนบอก) */
+.kick{display:flex; flex-wrap:wrap; gap:0; margin:28px 0 4px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.kick .k{flex:1; min-width:150px; padding:16px 20px 16px 0; border-right:1px solid var(--border)}
+.kick .k:last-child{border-right:none}
+.kick .kn{font-family:'Trirong',serif; font-weight:700; font-size:38px; line-height:1; color:var(--gold-loud)}
+.kick .kl{margin-top:6px; font-size:14px; color:var(--text-secondary); line-height:1.4}
+@media(max-width:680px){.kick .k{flex-basis:100%; border-right:none; border-bottom:1px solid var(--border); padding-right:0}
+  .kick .k:last-child{border-bottom:none}}
+
+.stats{display:grid; grid-template-columns:1.35fr 1fr 1fr; gap:18px}
+.stat{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:24px}
+.stat .num{font-family:'Trirong',serif; font-weight:700; font-size:44px; line-height:1; color:var(--text)}
+.stat.feat{border-color:var(--gold-loud)}
+.stat.feat .num{color:var(--gold-loud); font-size:62px}
+.stat .lab{margin-top:10px; font-size:15px; color:var(--text-secondary)}
+
+/* NETWORK */
+#net{width:100%; height:auto; display:block; margin:4px 0; cursor:default}
+#net .edge{stroke:var(--rule); stroke-width:1; opacity:.7}
+#net circle{stroke:var(--bg); stroke-width:1.5; cursor:pointer}
+#net circle.era-ch2{fill:var(--gold-dim)}
+#net circle.era-span{fill:var(--gold-loud)}
+#net circle.era-now{fill:var(--dissent)}
+#net circle.era-old{fill:var(--kl)}
+#net text{font-family:'Sarabun',sans-serif; font-size:12.5px; fill:var(--text);
+  paint-order:stroke; stroke:var(--bg); stroke-width:3.4px; stroke-linejoin:round; cursor:pointer}
+#net text.hub{font-weight:600; font-size:14px}
+#net.picked .edge{opacity:.12}
+#net.picked .edge.on{opacity:.95; stroke:var(--text)}
+#net.picked circle.dim{opacity:.18}
+#net.picked text.dim{opacity:0}
+#net circle:focus{outline:none}
+#net circle:focus-visible{stroke:var(--bg); stroke-width:1.5}
+/* decoder — ถอดมาร์กจริงเหนือกราฟ (หลักจาก IUCN: ผ่าตัวอย่างจุด ไม่ใช่แค่สี่เหลี่ยมสี) */
+.decode{margin:0 0 22px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  padding:12px 0 10px}
+.decode-k{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--text-secondary); margin:0 0 6px}
+.decode-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:2px 18px}
+.decode-cell{display:grid; grid-template-columns:72px minmax(0,1fr); gap:10px; align-items:center;
+  padding:8px 0}
+.decode-cell svg{width:72px; height:44px; display:block}
+.decode-cell b{display:block; font-weight:600; font-size:14.5px; line-height:1.3}
+.decode-cell span{display:block; font-size:13px; color:var(--text-secondary); line-height:1.4; margin-top:2px}
+.decode-cell circle{stroke:var(--bg); stroke-width:1.4}
+.decode .mk-ch2{fill:var(--gold-dim)} .decode .mk-span{fill:var(--gold-loud)}
+.decode .mk-now{fill:var(--dissent)} .decode .mk-ink{fill:var(--text)}
+.decode .mk-line{fill:none; stroke:var(--rule); stroke-width:1.4}
+.decode .mk-dim{opacity:.2}
+.decode .mk-land{fill:var(--land)}
+.decode .mk-pt{fill:var(--pt)} .decode .mk-bjt{fill:var(--bjt)} .decode .mk-oth{fill:var(--oth)}
+.decode .mk-pprp{fill:var(--pprp)}
+.decode .mk-gold{fill:var(--gold-fill)}
+.decode .mk-teal{fill:var(--dissent)}
+.decode .mk-coup{stroke:#c0392b; stroke-width:1.6; stroke-dasharray:2.5 2}
+.ink{color:var(--text); font-weight:600}
+.dissent-ink{color:var(--dissent)}
+
+/* MAP — ชั้นพรรค + ชั้นบ้านใหญ่ ทับพิกัดเดียวกัน (เลื่อนเทียบ) */
+.mapwrap{min-width:0}
+.ctrl{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; align-items:center}
+.seg{display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden}
+.seg button{font-family:'IBM Plex Mono',monospace; font-size:13px; background:var(--surface);
+  color:var(--text-secondary); border:none; padding:8px 13px; cursor:pointer; border-right:1px solid var(--border)}
+.seg button:last-child{border-right:none}
+.seg button:hover{color:var(--text)}
+.seg button:active{transform:translateY(1px)}
+.seg button:focus-visible{outline:2px solid var(--gold-loud); outline-offset:-2px}
+.seg button[aria-pressed="true"]{background:var(--text); color:var(--surface); font-weight:500}
+.map-stage{max-width:420px; margin:0 auto}
+#map{width:100%; height:auto; display:block; cursor:default}
+#mapg-party path,#mapg-dyn path{stroke:var(--bg); stroke-width:.6; pointer-events:none}
+#mapg-hit path{fill:transparent; stroke:transparent; stroke-width:1.35; cursor:pointer}
+#mapg-hit path.on{stroke:var(--text)}
+#map.picked #mapg-party path.dim,#map.picked #mapg-dyn path.dim{opacity:.22}
+#mapg-party path.on,#mapg-dyn path.on{stroke:var(--text); stroke-width:1.35}
+#wipeRule{stroke:var(--text); stroke-width:1.15; vector-effect:non-scaling-stroke; pointer-events:none}
+#wipeKnob{fill:var(--text); stroke:var(--bg); stroke-width:1.5; pointer-events:none}
+#wipeHit{cursor:ew-resize; fill:transparent}
+.wipe-labs{display:flex; justify-content:space-between; margin:8px 2px 0;
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--text-secondary)}
+#wiper{width:100%; margin:8px 0 0; accent-color:var(--gold-dim)}
+#wiper[hidden],.wipe-labs[hidden]{display:none}
+.mapstat{font-size:15px; margin:16px 0 10px; line-height:1.5}
+.mapstat b{color:var(--gold-dim); font-weight:600}
+.legend{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:6px; align-items:center}
+.legend .li{display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--text-secondary)}
+.legend .sw{width:12px; height:12px; border-radius:3px; border:1px solid rgba(0,0,0,.15)}
+.sw.pt,.chip.pt{background:var(--pt)} .chip.pt{background:transparent; border-color:var(--pt); color:var(--pt)}
+.sw.bjt{background:var(--bjt)} .chip.bjt{border-color:var(--bjt); color:var(--bjt)}
+.sw.pprp{background:var(--pprp);
+  background-image:repeating-linear-gradient(-45deg,transparent,transparent 2px,rgba(255,255,255,.45) 2px,rgba(255,255,255,.45) 3.2px)}
+.sw.dp{background:var(--dp)} .sw.mfp,.sw.pp{background:var(--mfp)}
+.sw.utn{background:var(--utn)} .sw.kl{background:var(--kl)} .sw.ctp{background:var(--ctp)}
+.sw.pc{background:var(--pc)} .sw.oth{background:var(--oth)}
+.walllegend .sw.pprp{background:var(--pprp);
+  background-image:repeating-linear-gradient(-45deg,transparent,transparent 2px,rgba(255,255,255,.45) 2px,rgba(255,255,255,.45) 3.2px);
+  border-color:var(--pprp)}
+.chip.mute{border-color:var(--text-secondary)}
+.dynscale{height:12px; width:120px; border-radius:3px;
+  background:linear-gradient(90deg,var(--land),var(--gold-dim)); border:1px solid var(--border)}
+#tip{position:fixed; pointer-events:none; z-index:60; background:var(--surface);
+  border:1px solid var(--rule); border-radius:8px; padding:10px 13px; font-size:14px;
+  box-shadow:0 6px 22px rgba(0,0,0,.14); max-width:260px; opacity:0; transition:opacity .1s}
+#tip.pinned{pointer-events:auto}
+#tip .pv{font-family:'Trirong',serif; font-weight:600; font-size:16px; margin-bottom:3px}
+#tip .row{display:flex; justify-content:space-between; gap:14px; font-size:13px}
+#tip .mono{color:var(--text-secondary)}
+#tip .go{display:inline-block; margin-top:8px; font-size:13.5px; color:var(--gold-dim);
+  border-bottom:1px solid var(--border); text-decoration:none}
+#tip .go:hover{border-color:var(--gold-loud)}
+#tip .go:focus-visible{outline:2px solid var(--gold-loud); outline-offset:3px}
+.mapnote{font-size:13.5px; color:var(--text-secondary); margin-top:18px}
+
+/* voting */
+.vsplit{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-bottom:8px}
+.vcard{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:22px}
+.vcard .big{font-family:'Trirong',serif; font-weight:700; font-size:38px; line-height:1; color:var(--dissent)}
+.vcard.na .big{color:var(--text-secondary)}
+.vcard .cap{margin-top:9px; font-size:14.5px; color:var(--text-secondary)}
+
+/* sankey */
+#sankey .cyr{font-family:'IBM Plex Mono',monospace; fill:var(--text-secondary); font-size:12px}
+.skcap{font-size:14px; color:var(--text-secondary); margin-top:6px}
+.embedh{font-family:'Trirong',serif; font-weight:600; font-size:19px; margin:34px 0 4px; padding-top:22px; border-top:1px solid var(--border)}
+.embedwrap{border:1px solid var(--border); border-radius:10px; overflow-x:auto; overflow-y:hidden;
+  -webkit-overflow-scrolling:touch; background:var(--bg); margin:6px 0}
+.embed{width:100%; height:640px; border:0; display:block; background:var(--bg); color-scheme:light}
+:root[data-theme="dark"] .embed{color-scheme:dark}
+.embed-fallback{display:none; padding:28px 22px; text-align:center}
+.embedwrap.is-file .embed{display:none}
+.embedwrap.is-file .embed-fallback{display:block}
+.embed-fallback .t{font-family:'Trirong',serif; font-weight:600; font-size:19px}
+.embed-fallback .d{font-size:14px; color:var(--text-secondary); margin:8px 0 14px}
+.embed-fallback a{display:inline-block; font-family:'Trirong',serif; font-weight:600;
+  color:var(--text); border:1px solid var(--border); border-radius:8px; padding:10px 16px}
+@media(max-width:680px){.embed{height:520px}}
+
+/* many-parties */
+.hedge{display:grid; gap:12px}
+.hedge .row{background:var(--surface); border:1px solid var(--border); border-radius:9px;
+  padding:15px 18px; display:grid; grid-template-columns:145px 1fr; gap:16px; align-items:baseline}
+.hedge .fam{font-family:'Trirong',serif; font-weight:600; font-size:19px}
+.hedge .fam .mono{display:block; font-family:'IBM Plex Mono',monospace; font-weight:400;
+  font-size:11px; color:var(--text-secondary); margin-top:2px}
+.splits{display:flex; flex-wrap:wrap; gap:8px}
+.chip{font-size:14px; padding:4px 11px; border-radius:20px; border:1px solid var(--border); white-space:nowrap}
+.chip .nm{font-weight:600}
+
+/* .more = การ์ด (override house.css ที่เป็นปุ่ม flex) */
+.more{margin-top:22px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.more a{display:block; background:var(--surface); border:1px solid var(--border); border-radius:9px;
+  padding:16px 18px; font-family:'Sarabun',sans-serif; font-weight:400}
+.more a::after{content:none}                       /* กัน → ของ house เกาะทั้งการ์ด */
+.more a .t{font-family:'Trirong',serif; font-weight:600; font-size:17px; color:var(--text)}
+.more a .t::after{content:" →"; color:var(--gold-dim)}
+.more a .d{font-size:13.5px; color:var(--text-secondary); margin-top:4px}
+
+@media(max-width:760px){
+  .status{grid-template-columns:1fr 1fr} .stats{grid-template-columns:1fr}
+  .vsplit{grid-template-columns:1fr}
+  .hedge .row{grid-template-columns:1fr}
+  .decode-grid{grid-template-columns:1fr}
+}
+@media print{.ctrl{display:none}}
+</style>
+</head>
+<body>
+<div class="viz-menu">
+  <button class="viz-menu-toggle" type="button" onclick="toggleMenu()" aria-label="เมนู">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+  </button>
+  <div class="viz-menu-dropdown" id="vizMenuDropdown">
+    <button type="button" onclick="cycleTheme()"><span id="themeIcon">◐</span><span id="themeLabel">กระดาษ</span></button>
+    <button type="button" onclick="downloadImage()"><span>↓</span><span>บันทึก PNG</span></button>
+    <button type="button" onclick="window.print()"><span>⎙</span><span>พิมพ์ / PDF</span></button>
+  </div>
+</div>
+<div id="tip" role="status" aria-live="polite"></div>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">ฐานข้อมูลตระกูลการเมืองไทย</div>
+    <h1>บ้านใหญ่</h1>
+    <p class="lede">ตระกูลที่ส่งต่ออำนาจการเมืองข้ามรุ่น — ครอง<b>ที่นั่งกว่าครึ่ง</b>ในหลายจังหวัด,
+      โยกพรรคไปมาข้ามสมัย และเวลาลงมติมัก<b>โหวตไม่เหมือนที่ประชุม</b></p>
+    <div class="kick">
+      <div class="k"><div class="kn">82</div><div class="kl">จังหวัด มีบ้านใหญ่<br>(จาก 77 จังหวัดปัจจุบัน + เขตเดิม)</div></div>
+      <div class="k"><div class="kn">53%</div><div class="kl">ของตระกูล เคยอยู่ ≥3 พรรค<br>ตลอด ช.7–27 (ย้ายบ่อย)</div></div>
+      <div class="k"><div class="kn">10%</div><div class="kl">บ้านใหญ่โหวตต่างจากสภา<br>เฉลี่ยต่อมติ (216 มติ)</div></div>
+    </div>
+  </header>
+
+  <div class="status">
+    <div><div class="k">ขอบเขต</div><div class="v">531 ตระกูล · 1,569 คน · 519 สาย</div></div>
+    <div><div class="k">กรอบทฤษฎี</div><div class="v">Nishizaki — dynastic democracy</div></div>
+    <div><div class="k">การโหวต</div><div class="v">216 มติ (ช.25–26)</div></div>
+    <div><div class="k">สถานะ</div><div class="v">ข้อมูลเปิด · โครงสร้าง ไม่ใช่คำกล่าวหา</div></div>
+  </div>
+
+  <section>
+    <div class="slabel">01 — นิยาม</div>
+    <h2>บ้านใหญ่คืออะไร</h2>
+    <p class="sub">ตระกูลนับเป็น “บ้านใหญ่” เมื่อมีสมาชิกในวงการการเมือง ≥ 2 คน หรือมีสายสัมพันธ์
+      (สายเลือด/การแต่งงาน) เชื่อมกับตระกูลการเมืองอื่น — อำนาจไม่ได้อยู่ที่ตัวบุคคล แต่อยู่ที่ตระกูล</p>
+    <div class="stats">
+      <div class="stat feat"><div class="num">531</div><div class="lab">ตระกูลในทะเบียน</div></div>
+      <div class="stat"><div class="num">1,569</div><div class="lab">บุคคลที่ถือครองตำแหน่ง/เครือญาติ</div></div>
+      <div class="stat"><div class="num">519</div><div class="lab">สายสัมพันธ์เครือญาติ+ดอง</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">02 — เครือข่ายเครือญาติ</div>
+    <h2>ตระกูลชั้นนำแต่งงานกันเป็นก้อนเดียว</h2>
+    <p class="sub">ก้อนเครือญาติที่ใหญ่ที่สุดในฐาน — <b>35 ตระกูล</b>ต่อกันได้ด้วยการแต่งงานและสายเลือด
+      · 34 จาก 35 เป็นตระกูลที่เข้าการเมือง<b>หลังเปลี่ยนแปลงการปกครอง 2475</b>
+      (ยุค Nishizaki บทที่ 2 · พ.ศ. 2475–2516) · ชาติกำเนิดราชสกุลหรือขุนนาง 34 ราย
+      — ไม่ใช่ยุคก่อน 2475</p>
+    <div class="decode" role="group" aria-label="อ่านก้อนเครือญาติ">
+      <div class="decode-k">อ่านจุด</div>
+      <div class="decode-grid">
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <circle class="mk-ch2" cx="12" cy="26" r="5"/><circle class="mk-ch2" cx="32" cy="23" r="8"/>
+            <circle class="mk-ch2" cx="56" cy="20" r="12"/>
+          </svg>
+          <div><b>ขนาด = บ้านที่เชื่อม</b><span>จุดใหญ่เชื่อมหลายตระกูล · จุดเล็กเชื่อม 1 บ้าน</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <circle class="mk-ch2" cx="14" cy="22" r="8"/><circle class="mk-span" cx="36" cy="22" r="8"/>
+            <circle class="mk-now" cx="58" cy="22" r="8"/>
+          </svg>
+          <div><b>สี = ยุคในฐาน</b><span>น้ำตาล 2475–2516 · ทอง ข้ามมาถึงปัจจุบัน · เขียว บ้านใหญ่ปัจจุบัน</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <line class="mk-line" x1="14" y1="22" x2="58" y2="22"/>
+            <circle class="mk-ch2" cx="14" cy="22" r="7"/><circle class="mk-span" cx="58" cy="22" r="7"/>
+          </svg>
+          <div><b>เส้น = เครือญาติข้ามตระกูล</b><span>สายเลือดหรือแต่งงาน · ไม่ใช่เส้นพรรค</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <circle class="mk-ch2 mk-dim" cx="12" cy="30" r="5"/><circle class="mk-span" cx="28" cy="18" r="6"/>
+            <circle class="mk-ch2" cx="48" cy="20" r="10"/><circle class="mk-now" cx="62" cy="32" r="5"/>
+          </svg>
+          <div><b>คลิกจุด = บ้านที่เชื่อม</b><span>จุดสว่าง = ตัวเอง+ที่ดอง · จากแผงเปิดกราฟรายคน · คลิกว่างหรือ Escape รีเซ็ต</span></div>
+        </div>
+      </div>
+    </div>
+    <svg id="net" viewBox="0 0 900 560" role="img" aria-label="แผนภาพเครือข่ายการแต่งงานข้ามตระกูลชั้นนำ 35 ตระกูล"></svg>
+    <p class="mapnote">อีก 27 ก้อนย่อย (2–4 ตระกูล) ไม่แสดง — เครือข่ายบ้านใหญ่ไม่ได้รวมศูนย์ก้อนเดียว</p>
+    <div class="more">
+      <a href="network_closed.html"><span class="t">กราฟรายคนทั้งฐาน</span><span class="d">633 คนที่มีเครือญาติในฐาน + พรรค + กลุ่ม</span></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">03 — ภูมิศาสตร์อำนาจ</div>
+    <h2>ใครครองจังหวัดไหน</h2>
+    <p class="sub">ชั้นเดียวกัน สองมาร์ก — พรรคครองเขต กับสัดส่วนบ้านใหญ่ (นามสกุลตรงตระกูลในฐาน)
+      · เลื่อนแถบเทียบจังหวัดเดิม ไม่ต้องสลับตา · สถิติและกุญแจเปลี่ยนตามชุดที่เลือก</p>
+    <div class="decode" role="group" aria-label="อ่านแผนที่ชุดนี้">
+      <div class="decode-k" id="mapeda-k">อ่านแผนที่</div>
+      <div class="walllegend" id="mapeda"></div>
+    </div>
+    <div class="mapwrap">
+      <div class="ctrl">
+        <div class="seg" id="termseg">
+          <button data-term="25" aria-pressed="false">ชุด 25 · 2562</button>
+          <button data-term="26" aria-pressed="false">ชุด 26 · 2566</button>
+          <button data-term="27" aria-pressed="true">ชุด 27 · 2569</button>
+        </div>
+        <div class="seg" id="layerseg">
+          <button data-layer="party" aria-pressed="false">พรรคครอง</button>
+          <button data-layer="dyn" aria-pressed="false">บ้านใหญ่</button>
+          <button data-layer="wipe" aria-pressed="true">เทียบ</button>
+        </div>
+      </div>
+      <div class="map-stage">
+        <svg id="map" viewBox="0 0 360 620" role="img" aria-label="แผนที่สองชั้น พรรคครองเขตและสัดส่วนบ้านใหญ่ เลื่อนเทียบรายจังหวัด">
+          <defs>
+            <clipPath id="wipeClip"><rect id="wipeRect" x="137" y="0" width="223" height="620"/></clipPath>
+            <pattern id="hatch-pprp" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(35)">
+              <rect width="6" height="6" fill="#2E5CA6"/>
+              <path d="M0 0V6" stroke="#fff" stroke-width="1.2" stroke-opacity=".4"/>
+            </pattern>
+          </defs>
+          <g id="mapg-party"></g>
+          <g id="mapg-dyn" clip-path="url(#wipeClip)"></g>
+          <g id="mapg-hit"></g>
+          <line id="wipeRule" x1="137" y1="0" x2="137" y2="620"/>
+          <circle id="wipeKnob" cx="137" cy="12" r="6"/>
+          <rect id="wipeHit" x="129" y="0" width="16" height="28"/>
+        </svg>
+        <div class="wipe-labs" id="wipelabs"><span>พรรคครอง</span><span>บ้านใหญ่</span></div>
+        <input type="range" id="wiper" min="0" max="100" value="38" aria-label="เลื่อนเทียบชั้นพรรคกับบ้านใหญ่">
+      </div>
+      <div class="mapstat" id="mapstat"></div>
+      <div class="legend" id="legend"></div>
+      <p class="mapnote" id="mapnote"></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">04 — พฤติกรรมการลงมติ</div>
+    <h2>บ้านใหญ่โหวตเป็นก้อนของตัวเอง</h2>
+    <p class="sub">เทียบอัตราโหวต “เห็นด้วย” ของ ส.ส.บ้านใหญ่ กับที่ประชุมทั้งสภา — ต่างกันเฉลี่ย
+      <b class="dissent-ink">10.1%</b> ต่อมติ (216 มติ ชุด 25–26)</p>
+    <div class="decode" role="group" aria-label="อ่านส่วนต่างการโหวต">
+      <div class="decode-k">อ่านตัวเลข</div>
+      <div class="decode-grid">
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <rect class="mk-land" x="8" y="18" width="22" height="16"/>
+            <rect class="mk-teal" x="38" y="8" width="22" height="26"/>
+            <text x="19" y="14" text-anchor="middle" fill="var(--text-secondary)" font-size="7" font-family="IBM Plex Mono,monospace">สภา</text>
+            <text x="49" y="6" text-anchor="middle" fill="var(--dissent)" font-size="7" font-family="IBM Plex Mono,monospace">บ้าน</text>
+          </svg>
+          <div><b>ตัวเลข = ส่วนต่างต่อมติ</b><span>|อัตราเห็นด้วยของ ส.ส.บ้านใหญ่ − อัตราที่ประชุม| เฉลี่ยทั้งชุด</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <text x="36" y="28" text-anchor="middle" fill="var(--text-secondary)" font-size="22" font-family="Trirong,serif" font-weight="700">—</text>
+          </svg>
+          <div><b>ขีด = ยังไม่มีมติในฐาน</b><span>ชุด 27 ยังไม่มี roll-call รายคน · ไม่ใช่โหวตตรงกัน</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="vsplit">
+      <div class="vcard"><div class="big" id="vd25">4.8%</div><div class="cap">ชุด 25 (2562) — ต่างจากสภาเฉลี่ย/มติ · 108 มติ</div></div>
+      <div class="vcard"><div class="big" id="vd26">15.3%</div><div class="cap">ชุด 26 (2566) — ต่างมากขึ้น · 108 มติ</div></div>
+      <div class="vcard na"><div class="big">—</div><div class="cap">ชุด 27 (2569) — ยังไม่มีข้อมูลมติในฐาน</div></div>
+    </div>
+    <p class="mapnote"><b class="ink">79</b> มติ ต่างจากสภา ≥10% · <b class="ink">25</b> มติ บ้านใหญ่กับสภาอยู่คนละฝั่งเสียงข้างมาก</p>
+    <div class="more">
+      <a href="baanyai_bloc.html"><span class="t">10 มติคัด — ตาราง + แท่งเทียบ</span><span class="d">บ้านใหญ่ × ทั่วไป ในฝั่งรัฐบาล/ค้าน · ไม่ใช่ HHI</span></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">05 — การโยกพรรค</div>
+    <h2>แม่น้ำคนย้ายพรรค — ราย ส.ส. ทุกสมัย (ชุด 7–27)</h2>
+    <p class="sub">ส.ส.ทุกคนไหลจากพรรคไหนไปไหน ทีละสมัย ตั้งแต่ 2495 + เหตุการณ์การเมือง (รัฐประหาร/ยุบพรรค) —
+      <b>1,617 การย้าย</b> · ค้นชื่อ/คลิกดูเส้นทางรายคนในกรอบด้านล่าง · เพื่อไทยทรงตัว ภท.โตข้ามสมัยชัด</p>
+    <div class="decode" role="group" aria-label="อ่านแม่น้ำย้ายพรรค">
+      <div class="decode-k">อ่านแม่น้ำ</div>
+      <div class="decode-grid">
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <rect class="mk-pt" x="6" y="8" width="10" height="28"/>
+            <rect class="mk-bjt" x="31" y="6" width="10" height="32"/>
+            <rect fill="#FF6413" x="56" y="12" width="10" height="24"/>
+            <text x="11" y="42" text-anchor="middle" fill="var(--text-secondary)" font-size="6" font-family="IBM Plex Mono,monospace">ช.n</text>
+            <text x="36" y="42" text-anchor="middle" fill="var(--text-secondary)" font-size="6" font-family="IBM Plex Mono,monospace">ช.n+1</text>
+          </svg>
+          <div><b>แท่งตั้ง = พรรคในแต่ละสมัย</b><span>ซ้ายไปขวา = ชุด 7→27 · สีแท่ง = พรรค</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <path d="M8 28 C22 28,22 14,36 14 S50 28,64 28" fill="none" stroke="#D0121A" stroke-width="7" stroke-opacity=".4" stroke-linecap="round"/>
+            <line class="mk-coup" x1="36" y1="4" x2="36" y2="40"/>
+          </svg>
+          <div><b>ริบบิ้น = คนย้ายพรรค</b><span>ความหนา = จำนวนคน · เส้นแดงประ = รัฐประหาร/ยุบพรรค</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <rect fill="none" stroke="var(--rule)" x="8" y="12" width="56" height="14" rx="2"/>
+            <circle class="mk-span" cx="18" cy="19" r="2.5"/>
+            <path d="M24 19 H56" stroke="var(--text-secondary)" stroke-width="1.2"/>
+          </svg>
+          <div><b>ค้นชื่อ / คลิกเส้น</b><span>เน้นเส้นทางรายคน · คนหายกลางแม่น้ำ = ไม่ได้ที่นั่งสมัยนั้น</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="embedwrap" id="flowbox">
+      <iframe class="embed" id="flowframe" src="party_flow_full.html" data-base="party_flow_full.html" loading="lazy" title="แม่น้ำคนย้ายพรรค ชุด 7–27 (รายคน)"></iframe>
+      <div class="embed-fallback">
+        <div class="t">แม่น้ำคนย้ายพรรค ชุด 7–27</div>
+        <p class="d">เปิดผ่าน file:// แล้ว iframe ถูกบล็อก — เปิดลิงก์นี้ หรือรัน <span class="mono">python -m http.server 8765</span></p>
+        <a href="party_flow_full.html">เปิดเต็มจอ</a>
+      </div>
+    </div>
+    <div class="more">
+      <a href="party_flow_full.html" target="_blank" rel="noopener"><span class="t">เปิดเต็มจอ</span><span class="d">แม่น้ำคนย้ายพรรค ราย ส.ส. ช.7-27</span></a>
+      <a href="baanyai_switch.html"><span class="t">บ้านใหญ่ย้ายพรรคบ่อยแค่ไหน</span><span class="d">53% เคยอยู่ ≥3 พรรค + แชมป์ 14 พรรค</span></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">06 — กลยุทธ์รายตระกูล</div>
+    <h2>“แทงหลายหน้า” — ตระกูลนำพรรค ไม่ใช่ตามพรรค</h2>
+    <p class="sub">ซูมจากภาพรวมลงรายตระกูล: บ้านใหญ่จำนวนมากส่งญาติ<b>หลายคนลงคนละพรรคพร้อมกัน</b>ในสมัยเดียว
+      กระจายความเสี่ยงให้มีคนได้ที่นั่งไม่ว่าพรรคไหนชนะ (~42 คู่ ตระกูล×สมัย)</p>
+    <div class="decode" role="group" aria-label="อ่านแทงหลายหน้า">
+      <div class="decode-k">อ่านแถว</div>
+      <div class="decode-grid">
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <rect fill="none" stroke="var(--bjt)" x="4" y="12" width="30" height="20" rx="10"/>
+            <rect fill="none" stroke="var(--pt)" x="38" y="12" width="30" height="20" rx="10"/>
+            <text x="19" y="26" text-anchor="middle" fill="var(--bjt)" font-size="7" font-family="Sarabun,sans-serif" font-weight="600">คน ก</text>
+            <text x="53" y="26" text-anchor="middle" fill="var(--pt)" font-size="7" font-family="Sarabun,sans-serif" font-weight="600">คน ข</text>
+          </svg>
+          <div><b>ชิป = คน × พรรค</b><span>ชื่อคน · สีขอบ = พรรคที่ลงสมัยนั้น</span></div>
+        </div>
+        <div class="decode-cell">
+          <svg viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+            <text x="8" y="18" fill="var(--text)" font-size="9" font-family="Trirong,serif" font-weight="600">ตระกูล</text>
+            <text x="8" y="32" fill="var(--text-secondary)" font-size="7" font-family="IBM Plex Mono,monospace">ช.23 · 3 พรรค</text>
+          </svg>
+          <div><b>ซ้าย = ตระกูล · สมัย</b><span>หลายชิปในแถวเดียว = แทงหลายหน้าพร้อมกัน</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hedge">
+      <div class="row"><div class="fam">ทองศรี<span class="mono">ช.23 · 3 พรรคพร้อมกัน</span></div>
+        <div class="splits"><span class="chip mute"><span class="nm">ทรงศักดิ์</span> · พลังประชาชน</span>
+          <span class="chip bjt"><span class="nm">เพิ่มพูน</span> · ภูมิใจไทย</span>
+          <span class="chip mute"><span class="nm">จักรกฤษณ์</span> · ประชาราช</span></div></div>
+      <div class="row"><div class="fam">ทิมสุวรรณ<span class="mono">ช.25–27 · แยกยาว 3 สมัย</span></div>
+        <div class="splits"><span class="chip bjt"><span class="nm">ธนยศ</span> · ภูมิใจไทย</span>
+          <span class="chip pt"><span class="nm">ศรัณย์</span> · เพื่อไทย</span></div></div>
+      <div class="row"><div class="fam">กิตติธเนศวร<span class="mono">ช.27</span></div>
+        <div class="splits"><span class="chip mute"><span class="nm">ปิยวัฒน์</span> · กล้าธรรม</span>
+          <span class="chip bjt"><span class="nm">เกรียงไกร</span> · ภูมิใจไทย</span></div></div>
+    </div>
+    <div class="caveat"><b>นัยต่อทฤษฎี:</b> ท้าทายภาพ “ตระกูล = ฐานเสียงของพรรค X” — บ้านใหญ่ปฏิบัติตัวเป็น
+      <b>หน่วยอิสระเหนือพรรค</b> ที่ใช้พรรคเป็นพาหนะ (สอดคล้อง Nishizaki: อำนาจอยู่ที่ตระกูล)</div>
+    <div class="more">
+      <a href="follow_party.html"><span class="t">การย้ายพรรครายคน</span><span class="d">ช.20–27 + โหวต 216 มติ</span></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="slabel">07 — อ่านต่อ</div>
+    <h2>โครงสร้างเดียวกัน อีกมิติหนึ่ง</h2>
+    <p>เครือข่ายภูมิศาสตร์+เครือญาติที่ทนต่อการเปลี่ยนพรรคนี้ ปรากฏอีกครั้งในกลไกการได้มาซึ่ง
+      สมาชิกวุฒิสภา 2567 — เก็บเป็นอีกเรื่องแยกต่างหาก</p>
+    <div class="caveat"><b>ข้อควรระวัง:</b> หน้านี้แสดง<b>โครงสร้างและรูปแบบการลงมติ</b>
+      ไม่ใช่ข้อพิสูจน์เรื่องเจตนา/การกระทำผิดของผู้ใด · “บ้านใหญ่” นับจากนามสกุลตรงตระกูลในฐาน (ประมาณ) ·
+      “ไม่พบ” ไม่เท่ากับ “ไม่มี”</div>
+    <div class="more">
+      <a href="hua_sv_story.html"><span class="t">คดีฮั้ว สว. 2567</span><span class="d">เมื่อโครงสร้างบ้านใหญ่เข้าสู่วุฒิสภา</span></a>
+      <a href="../../site/index.html#/"><span class="t">ดูตระกูลทั้งหมด (index)</span><span class="d">ค้น/กรอง 531 ตระกูล + เรื่อง/viz</span></a>
+      <a href="dynasty_dashboard.html"><span class="t">แดชบอร์ดรวม</span><span class="d">สำรวจทั้งฐานข้อมูล</span></a>
+    </div>
+  </section>
+
+  <footer>ฐานข้อมูลตระกูลการเมืองไทย · ข้อมูล ณ ส.ค. 2569 · CC BY 4.0 · generator: code/build_baanyai_story_data.py</footer>
+</main>
+
+<script src="baanyai_data.js?v=wipe"></script>
+<script>
+if(typeof EN2TH==='undefined'){
+  var EN2TH={};
+  var CANON={'กรุงเทพมหานคร':'กรุงเทพ','อยุธยา':'พระนครศรีอยุธยา'};
+  for(var k in TH2EN) EN2TH[TH2EN[k]]=CANON[k]||k;
+}
+var curTerm='27', mapFocus=null, mapLayer='wipe', wipePct=38, mapHitReady=false, wiping=false;
+var tip=document.getElementById('tip');
+var PSLUG={'เพื่อไทย':'pt','ภูมิใจไทย':'bjt','พลังประชารัฐ':'pprp','ประชาธิปัตย์':'dp',
+  'ก้าวไกล':'mfp','ประชาชน':'pp','รวมไทยสร้างชาติ':'utn','กล้าธรรม':'kl',
+  'ชาติไทยพัฒนา':'ctp','ประชาชาติ':'pc','อื่นๆ':'oth'};
+var ERA_CLASS={'ch2':'era-ch2','modern':'era-now','ch2+modern':'era-span',
+  'pre2475':'era-old','pre2475+ch2':'era-old','pre2475+ch2+modern':'era-old'};
+var ERA_LAB={'ch2':'หลัง 2475 · 2475–2516','modern':'บ้านใหญ่ปัจจุบัน','ch2+modern':'ข้ามมาถึงปัจจุบัน',
+  'pre2475':'ก่อน 2475','pre2475+ch2':'ก่อน 2475 + หลัง 2475','pre2475+ch2+modern':'ข้ามทุกยุค'};
+
+function provData(term,enName){
+  var th=EN2TH[enName]; if(!th) return null;
+  return {th:th, d:(TERMS[term].prov[th]||null)};
+}
+function partyFill(enName){
+  var pd=provData(curTerm,enName); if(!pd||!pd.d) return 'var(--land)';
+  return pd.d.top==='พลังประชารัฐ' ? 'url(#hatch-pprp)' : pd.d.color;
+}
+function dynFill(enName){
+  var pd=provData(curTerm,enName); if(!pd||!pd.d) return 'var(--land)';
+  var r=pd.d.total?pd.d.dyn/pd.d.total:0;
+  return 'color-mix(in srgb, var(--gold-dim) '+Math.round(8+84*r)+'%, var(--land))';
+}
+function pathMarkup(fillFn, extra){
+  var h='';
+  GEO.forEach(function(f){
+    var th=EN2TH[f.name]||f.name;
+    var fill=fillFn?fillFn(f.name):'transparent';
+    h+='<path d="'+f.d+'" fill="'+fill+'" data-en="'+f.name+'"'+(extra||'')+'></path>';
+  });
+  return h;
+}
+function paintMapGroup(gid, fillFn){
+  document.getElementById(gid).innerHTML=pathMarkup(fillFn);
+}
+function bindHit(){
+  if(mapHitReady) return;
+  var g=document.getElementById('mapg-hit');
+  g.innerHTML=pathMarkup(function(){return 'transparent';}, ' tabindex="0" role="button"');
+  [].forEach.call(g.querySelectorAll('path'),function(p){
+    var th=EN2TH[p.getAttribute('data-en')]||p.getAttribute('data-en');
+    p.setAttribute('aria-label', th);
+    p.addEventListener('mousemove',onHover);
+    p.addEventListener('mouseleave',onMapLeave);
+    p.addEventListener('focus',onActivate);
+    p.addEventListener('blur',onMapLeave);
+    p.addEventListener('click',onActivate);
+    p.addEventListener('touchstart',onActivate,{passive:true});
+  });
+  mapHitReady=true;
+}
+function setWipe(pct){
+  wipePct=Math.max(0,Math.min(100,pct));
+  var x=GEO_W*wipePct/100;
+  var rect=document.getElementById('wipeRect');
+  var rule=document.getElementById('wipeRule');
+  var hit=document.getElementById('wipeHit');
+  var knob=document.getElementById('wipeKnob');
+  rect.setAttribute('x', x); rect.setAttribute('width', GEO_W-x);
+  rule.setAttribute('x1', x); rule.setAttribute('x2', x);
+  if(knob){ knob.setAttribute('cx', x); }
+  hit.setAttribute('x', x-8);
+  var sl=document.getElementById('wiper');
+  if(sl && +sl.value!==Math.round(wipePct)) sl.value=Math.round(wipePct);
+}
+function applyLayer(){
+  var party=document.getElementById('mapg-party');
+  var dyn=document.getElementById('mapg-dyn');
+  var rule=document.getElementById('wipeRule');
+  var hit=document.getElementById('wipeHit');
+  var knob=document.getElementById('wipeKnob');
+  var sl=document.getElementById('wiper');
+  var labs=document.getElementById('wipelabs');
+  var svg=document.getElementById('map');
+  function showWipe(on){
+    rule.style.display=on?'':'none';
+    hit.style.display=on?'':'none';
+    if(knob) knob.style.display=on?'':'none';
+    sl.hidden=!on; labs.hidden=!on;
+  }
+  if(mapLayer==='party'){
+    party.style.display=''; dyn.style.display='none';
+    dyn.removeAttribute('clip-path');
+    showWipe(false);
+    svg.setAttribute('aria-label','แผนที่พรรคที่ได้ ส.ส.แบ่งเขตมากสุดรายจังหวัด');
+  } else if(mapLayer==='dyn'){
+    party.style.display='none'; dyn.style.display='';
+    dyn.removeAttribute('clip-path');
+    showWipe(false);
+    svg.setAttribute('aria-label','แผนที่สัดส่วนที่นั่งแบ่งเขตที่เป็นบ้านใหญ่รายจังหวัด');
+  } else {
+    party.style.display=''; dyn.style.display='';
+    dyn.setAttribute('clip-path','url(#wipeClip)');
+    showWipe(true);
+    setWipe(wipePct);
+    svg.setAttribute('aria-label','แผนที่สองชั้น พรรคครองเขตและสัดส่วนบ้านใหญ่ เลื่อนเทียบรายจังหวัด');
+  }
+}
+function syncMaps(en){
+  mapFocus=en;
+  document.getElementById('map').classList.toggle('picked', !!en);
+  [].forEach.call(document.querySelectorAll('#map path[data-en]'),function(p){
+    var hit=en && p.getAttribute('data-en')===en;
+    p.classList.toggle('on', !!hit);
+    p.classList.toggle('dim', !!(en && !hit));
+  });
+}
+function renderMap(){
+  paintMapGroup('mapg-party', partyFill);
+  paintMapGroup('mapg-dyn', dynFill);
+  bindHit();
+  applyLayer();
+  if(mapFocus) syncMaps(mapFocus);
+  renderStat(); renderLegend();
+}
+function tipHTML(en){
+  var pd=provData(curTerm,en); if(!pd) return null;
+  var d=pd.d, html='<div class="pv">'+pd.th+'</div>';
+  if(!d){html+='<div class="row"><span class="mono">ไม่มี ส.ส.แบ่งเขต</span></div>';}
+  else{
+    html+='<div class="row"><span>พรรคครอง</span><b>'+d.top+'</b></div>';
+    html+='<div class="row"><span class="mono">ที่นั่งเขต</span><span class="mono">'+d.total+'</span></div>';
+    html+='<div class="row"><span class="mono">บ้านใหญ่</span><span class="mono">'+d.dyn+' ('+Math.round(d.dyn/d.total*100)+'%)</span></div>';
+  }
+  return html;
+}
+function placeTip(x,y){
+  if(x>innerWidth-250)x=innerWidth-256;
+  tip.style.left=Math.max(6,x)+'px'; tip.style.top=Math.max(6,y)+'px'; tip.style.opacity='1';
+}
+function onHover(e){
+  if(tip.classList.contains('pinned')) return;
+  var en=e.target.getAttribute('data-en');
+  var h=tipHTML(en); if(!h){hideTip();return;}
+  syncMaps(en);
+  tip.innerHTML=h; placeTip(e.clientX+14,e.clientY+14);
+}
+function onActivate(e){
+  if(tip.classList.contains('pinned')){ netSel=null; paintNet(); tip.classList.remove('pinned'); }
+  var en=e.target.getAttribute('data-en');
+  var h=tipHTML(en); if(!h){hideTip();return;}
+  syncMaps(en);
+  var r=e.target.getBoundingClientRect();
+  tip.innerHTML=h; placeTip(r.left+r.width/2, r.top+r.height+8);
+}
+function onMapLeave(){
+  if(tip.classList.contains('pinned')) return;
+  syncMaps(null); hideTip();
+}
+function hideTip(){
+  if(tip.classList.contains('pinned')) return;
+  tip.style.opacity='0';
+}
+var TERM_LAB={'25':'ชุด 25 · 2562','26':'ชุด 26 · 2566','27':'ชุด 27 · 2569'};
+function termEda(){
+  var pv=TERMS[curTerm].prov, tot=0, dyn=0, dom={}, n=0;
+  for(var k in pv){ var d=pv[k]; n++; tot+=d.total; dyn+=d.dyn; dom[d.top]=(dom[d.top]||0)+1; }
+  var ranked=Object.keys(dom).sort(function(a,b){ return dom[b]-dom[a] || a.localeCompare(b,'th'); });
+  return {n:n, tot:tot, dyn:dyn, dom:dom, ranked:ranked, lab:TERM_LAB[curTerm]||('ชุด '+curTerm)};
+}
+function swParty(p){
+  var cls=PSLUG[p];
+  if(cls) return '<span class="sw '+cls+'"></span>';
+  var pv=TERMS[curTerm].prov, col='#9AA3AE';
+  for(var k in pv){ if(pv[k].top===p && pv[k].color){ col=pv[k].color; break; } }
+  return '<span class="sw" style="background:'+col+'"></span>';
+}
+function renderStat(){
+  var e=termEda(), top=e.ranked[0], pct=Math.round(e.dyn/e.tot*100);
+  var html=e.lab+' — <b>'+top+'</b> ครองมากสุด '+e.dom[top]+'/'+e.n+' จังหวัด · '+
+    'บ้านใหญ่ = <b>'+pct+'%</b> ของที่นั่งแบ่งเขต ('+e.dyn+'/'+e.tot+')';
+  if(e.ranked[1]) html+=' · ที่สอง '+e.ranked[1]+' '+e.dom[e.ranked[1]]+' จังหวัด';
+  document.getElementById('mapstat').innerHTML=html;
+}
+function renderLegend(){
+  var e=termEda();
+  document.getElementById('legend').innerHTML=e.ranked.map(function(p){
+    return '<span class="li">'+swParty(p)+p+' '+e.dom[p]+'</span>';
+  }).join('')+'<span class="li">น้อย</span><span class="dynscale"></span><span class="li">มาก · บ้านใหญ่</span>';
+  var bits=['ชั้นพรรค: สี = พรรคครองเขต'];
+  if(e.dom['พลังประชารัฐ']) bits.push('ลายทแยง = พลังประชารัฐ (แยกจากภูมิใจไทย)');
+  bits.push('เทา = ไม่มีที่นั่งเขต', 'ชั้นบ้านใหญ่: หมึกเข้ม = สัดส่วน');
+  if(mapLayer==='wipe') bits.push('เลื่อนแถบเทียบจังหวัดเดิม');
+  document.getElementById('mapnote').textContent=bits.join(' · ');
+  var k=document.getElementById('mapeda-k');
+  if(k) k.textContent='อ่าน '+e.lab;
+  var eda=document.getElementById('mapeda');
+  if(!eda) return;
+  var keys=[];
+  e.ranked.slice(0,4).forEach(function(p){
+    keys.push('<span>'+swParty(p)+p+' '+e.dom[p]+' จว.</span>');
+  });
+  keys.push('<span><span class="sw g"></span>ทองเข้ม = สัดส่วนบ้านใหญ่</span>');
+  if(e.dom['พลังประชารัฐ']) keys.push('<span><span class="sw pprp"></span>ลายทแยง = พลังประชารัฐ</span>');
+  keys.push('<span><span class="sw oth"></span>เทา = ไม่มีที่นั่งเขต</span>');
+  if(mapLayer==='wipe') keys.push('<span>เลื่อนแถบ = เทียบจังหวัดเดิม</span>');
+  eda.innerHTML=keys.join('');
+}
+document.getElementById('termseg').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b)return; curTerm=b.dataset.term;
+  [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',x===b);}); renderMap();
+});
+document.getElementById('layerseg').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b)return; mapLayer=b.dataset.layer;
+  [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',x===b);}); applyLayer(); renderLegend();
+});
+document.getElementById('wiper').addEventListener('input',function(){ setWipe(+this.value); });
+(function(){
+  var svg=document.getElementById('map');
+  function pctFromEvent(e){
+    var r=svg.getBoundingClientRect();
+    return (e.clientX-r.left)/r.width*100;
+  }
+  document.getElementById('wipeHit').addEventListener('pointerdown',function(e){
+    if(mapLayer!=='wipe') return;
+    wiping=true; this.setPointerCapture(e.pointerId); setWipe(pctFromEvent(e)); e.preventDefault();
+  });
+  document.getElementById('wipeHit').addEventListener('pointermove',function(e){
+    if(!wiping) return; setWipe(pctFromEvent(e));
+  });
+  document.getElementById('wipeHit').addEventListener('pointerup',function(){ wiping=false; });
+})();
+
+/* ---- NETWORK: layout นิ่ง · interaction แบบ dynasty_network (คลิกไฮไลต์เพื่อนบ้าน) ---- */
+var netSel=null;
+function rad(d){return 4+Math.sqrt(d)*3.2;}
+function netAt(x,y){
+  for(var i=0;i<NET.nodes.length;i++){
+    var n=NET.nodes[i]; if(n.x===x && n.y===y) return n;
+  }
+  return null;
+}
+function netNbr(id){
+  var out={};
+  NET.edges.forEach(function(e){
+    var a=netAt(e[0],e[1]), b=netAt(e[2],e[3]); if(!a||!b) return;
+    if(a.id===id) out[b.id]=1; if(b.id===id) out[a.id]=1;
+  });
+  return out;
+}
+function netTipHTML(n){
+  var h='<div class="pv">'+n.th+'</div>'+
+    '<div class="row"><span class="mono">เชื่อม</span><span class="mono">'+n.deg+' ตระกูล</span></div>'+
+    '<div class="row"><span class="mono">ยุค</span><span>'+(ERA_LAB[n.era]||n.era||'—')+'</span></div>';
+  if(netSel===n.id) h+='<a class="go" href="network_closed.html?f='+encodeURIComponent(n.id)+'">ดูคนในกราฟรายคน</a>';
+  return h;
+}
+function paintNet(){
+  var svg=document.getElementById('net');
+  var nbr=netSel?netNbr(netSel):{};
+  svg.classList.toggle('picked', !!netSel);
+  [].forEach.call(svg.querySelectorAll('.edge'),function(el){
+    var a=netAt(+el.getAttribute('x1'),+el.getAttribute('y1'));
+    var b=netAt(+el.getAttribute('x2'),+el.getAttribute('y2'));
+    var on=netSel && a && b && (a.id===netSel || b.id===netSel);
+    el.classList.toggle('on', !!on);
+  });
+  [].forEach.call(svg.querySelectorAll('[data-id]'),function(el){
+    var id=el.getAttribute('data-id');
+    el.classList.toggle('on', netSel===id);
+    el.classList.toggle('nbr', !!nbr[id]);
+    el.classList.toggle('dim', !!(netSel && netSel!==id && !nbr[id]));
+  });
+}
+function pickNet(id,anchor,toggle){
+  netSel=(toggle!==false && netSel===id)?null:id;
+  paintNet();
+  if(!netSel){ tip.classList.remove('pinned'); hideTip(); return; }
+  var n=NET.nodes.filter(function(x){return x.id===netSel;})[0];
+  if(!n) return;
+  tip.classList.add('pinned');
+  tip.innerHTML=netTipHTML(n);
+  if(anchor){var r=anchor.getBoundingClientRect(); placeTip(r.left+r.width/2, r.top+r.height+8);}
+}
+function renderNet(){
+  var svg=document.getElementById('net'), h='';
+  NET.edges.forEach(function(e){
+    h+='<line class="edge" x1="'+e[0]+'" y1="'+e[1]+'" x2="'+e[2]+'" y2="'+e[3]+'"/>';
+  });
+  NET.nodes.forEach(function(n){
+    var er=ERA_CLASS[n.era]||'era-old';
+    h+='<circle class="'+er+'" data-id="'+n.id+'" cx="'+n.x+'" cy="'+n.y+
+       '" r="'+rad(n.deg).toFixed(1)+'" tabindex="0" role="button" aria-label="'+n.th+'"></circle>';
+  });
+  NET.nodes.forEach(function(n){
+    var ty=(n.y-rad(n.deg)-4).toFixed(1);
+    h+='<text class="'+(n.deg>=4?'hub':'')+'" data-id="'+n.id+'" x="'+n.x+'" y="'+ty+'" text-anchor="middle">'+n.th+'</text>';
+  });
+  svg.innerHTML=h;
+  svg.addEventListener('click',function(e){
+    var id=e.target.getAttribute('data-id');
+    if(id) pickNet(id, e.target);
+    else {netSel=null; paintNet(); tip.classList.remove('pinned'); hideTip();}
+  });
+  svg.addEventListener('mousemove',function(e){
+    if(netSel) return;
+    var id=e.target.getAttribute('data-id'); if(!id){if(!netSel) hideTip(); return;}
+    var n=NET.nodes.filter(function(x){return x.id===id;})[0]; if(!n) return;
+    tip.innerHTML=netTipHTML(n); placeTip(e.clientX+14, e.clientY+14);
+  });
+  svg.addEventListener('mouseleave',function(){ if(!netSel) hideTip(); });
+  [].forEach.call(svg.querySelectorAll('circle'),function(c){
+    c.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pickNet(c.getAttribute('data-id'), c); }
+    });
+    c.addEventListener('focus',function(){
+      if(netSel) return;
+      var id=c.getAttribute('data-id');
+      var n=NET.nodes.filter(function(x){return x.id===id;})[0]; if(!n) return;
+      tip.innerHTML=netTipHTML(n);
+      var r=c.getBoundingClientRect(); placeTip(r.left+r.width/2, r.top+r.height+8);
+    });
+  });
+}
+
+function curTheme(){return document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light'}
+function applyTheme(t){
+  t=t==='dark'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  document.documentElement.style.colorScheme=t;
+  var ic=document.getElementById('themeIcon'), lb=document.getElementById('themeLabel');
+  if(ic) ic.textContent=t==='light'?'◐':'◑';
+  if(lb) lb.textContent=t==='light'?'กระดาษ':'หมึก';
+  try{ localStorage.setItem('viz-theme',t); localStorage.setItem('baanyai-theme',t); localStorage.setItem('houseTheme',t); }catch(e){}
+  document.querySelectorAll('iframe').forEach(function(f){
+    f.style.colorScheme=t;
+    f.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+    pingEmbed(f);
+  });
+}
+function cycleTheme(){ applyTheme(curTheme()==='light'?'dark':'light'); }
+function toggleMenu(){ var d=document.getElementById('vizMenuDropdown'); if(d) d.classList.toggle('open'); }
+function loadHtmlToImage(){
+  if(typeof htmlToImage!=='undefined') return Promise.resolve();
+  return new Promise(function(res,rej){
+    var s=document.createElement('script');
+    s.src='';
+    s.onload=res; s.onerror=rej; document.head.appendChild(s);
+  });
+}
+async function downloadImage(){
+  var m=document.querySelector('.viz-menu'); if(m) m.style.display='none';
+  try{
+    await loadHtmlToImage();
+    var u=await htmlToImage.toPng(document.body,{quality:1,pixelRatio:2,filter:function(n){return !n.classList||!n.classList.contains('viz-menu')}});
+    var a=document.createElement('a'); a.href=u; a.download='baanyai-story.png'; a.click();
+  }catch(e){ console.error(e); window.print(); }
+  if(m) m.style.display='';
+}
+function pingEmbed(f){
+  try{ f.contentWindow.postMessage({type:'house-theme',theme:curTheme()},'*'); }catch(e){}
+}
+function armEmbed(){
+  var box=document.getElementById('flowbox'), frame=document.getElementById('flowframe');
+  if(!box||!frame) return;
+  if(location.protocol==='file:'){ box.classList.add('is-file'); frame.removeAttribute('src'); return; }
+  frame.addEventListener('load', function(){ pingEmbed(frame); });
+  if(frame.getAttribute('src')) return;
+  var base=frame.dataset.base||'party_flow_full.html';
+  frame.src=base;
+}
+document.addEventListener('click',function(e){ if(!e.target.closest('.viz-menu')){ var d=document.getElementById('vizMenuDropdown'); if(d) d.classList.remove('open'); }});
+(function(){
+  try{ var s=localStorage.getItem('viz-theme')||localStorage.getItem('baanyai-theme'); if(s) applyTheme(s); }catch(e){}
+  try{ renderNet(); }catch(e){ console.error(e); }
+  try{ renderMap(); }catch(e){ console.error(e); }
+  armEmbed();
+})();
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var d=document.getElementById('vizMenuDropdown'); if(d) d.classList.remove('open');
+    if(!netSel) return;
+    netSel=null; paintNet(); tip.classList.remove('pinned'); hideTip();
+  }
+});
+</script>
+</body>
+</html>

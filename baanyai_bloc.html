@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บ้านใหญ่ × การโหวต — 10 มติคัด ชุด 25–26</title>
+<link href="house.css?v=story1" rel="stylesheet">
+<style>
+:root{--maxw:960px}
+.kick{display:flex; flex-wrap:wrap; gap:0; margin:28px 0 4px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.kick .k{flex:1; min-width:150px; padding:16px 20px 16px 0; border-right:1px solid var(--border)}
+.kick .k:last-child{border-right:none}
+.kick .kn{font-family:'Trirong',serif; font-weight:700; font-size:38px; line-height:1; color:var(--gold-loud)}
+.kick .kl{margin-top:6px; font-size:14px; color:var(--text-secondary); line-height:1.4}
+@media(max-width:680px){.kick .k{flex-basis:100%; border-right:none; border-bottom:1px solid var(--border); padding-right:0}
+  .kick .k:last-child{border-bottom:none}}
+
+.jump{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 0}
+.jump a{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.06em;
+  text-transform:uppercase; background:var(--surface); color:var(--text-secondary);
+  border:1px solid var(--border); border-radius:6px; padding:7px 12px; text-decoration:none; border-bottom:none}
+.jump a:hover{color:var(--text); border-color:var(--gold-loud)}
+
+/* กุญแจนอกกราฟ */
+.key{margin:0 0 20px; padding:14px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  display:flex; flex-wrap:wrap; gap:10px 22px; align-items:center;
+  font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--text-secondary)}
+.key .sw{display:inline-block; width:12px; height:12px; border-radius:2px; vertical-align:-1px; margin-right:6px; border:1px solid var(--border)}
+.key .sw.gov{background:var(--gold-dim); border-color:var(--gold-dim)}
+.key .sw.gov-pale{background:color-mix(in srgb, var(--gold-dim) 40%, var(--surface)); border-color:var(--gold-dim)}
+.key .sw.opp{background:var(--dissent); border-color:var(--dissent)}
+.key .sw.opp-pale{background:color-mix(in srgb, var(--dissent) 40%, var(--surface)); border-color:var(--dissent)}
+
+#heat table{width:100%; border-collapse:collapse}
+#heat th{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--text-secondary); font-weight:500;
+  padding:6px 8px; text-align:center; border-bottom:1px solid var(--border)}
+#heat th.bill-col{text-align:left; color:var(--text); width:28%}
+#heat th.gov-h{color:var(--gold-dim)}
+#heat th.opp-h{color:var(--dissent)}
+#heat .grp-head th{border-bottom:2px solid var(--rule); padding-bottom:5px}
+#heat .sess-row td{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold-dim); padding:14px 8px 6px;
+  border-bottom:1px solid var(--border)}
+#heat .data-row td{border-bottom:1px solid var(--border)}
+#heat .bill-name{padding:10px 12px 10px 0; font-size:15px; font-weight:600; line-height:1.35}
+#heat .cell{width:18%; padding:0; text-align:center; vertical-align:middle}
+#heat .cell-inner{margin:4px 5px; border-radius:3px; height:46px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:500; position:relative}
+#heat .cell-inner .sub{position:absolute; bottom:5px; right:7px; font-size:9px; font-weight:400; opacity:.7}
+#heat .gap-col{width:10px}
+
+.scale-wrap{display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin:0 0 18px;
+  font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-secondary)}
+.scale-pair{display:inline-flex; align-items:center; gap:8px}
+.scale-bar{width:110px; height:10px; border:1px solid var(--border); border-radius:2px}
+.scale-bar.gov{background:linear-gradient(to right, var(--surface), var(--gold-dim))}
+.scale-bar.opp{background:linear-gradient(to right, var(--surface), var(--dissent))}
+
+/* ตอน 02 — แท่งเทียบ + สัดส่วน · ป้ายอยู่นอกแท่ง */
+.sess{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gold-dim); padding:22px 0 8px;
+  border-bottom:1px solid var(--rule); margin-bottom:18px}
+.bill{margin-bottom:32px; padding-bottom:28px; border-bottom:1px solid var(--border)}
+.bill:last-child{border-bottom:none; padding-bottom:0}
+.bill-title{font-family:'Trirong',serif; font-weight:600; font-size:20px; line-height:1.3; margin:0 0 6px}
+.bill-note{font-size:14.5px; color:var(--text-secondary); line-height:1.5; margin:0 0 16px; max-width:62ch}
+
+.brows{display:grid; gap:8px}
+.brow{display:grid; grid-template-columns:132px minmax(0,1fr) 88px; gap:12px; align-items:center}
+.brow.has-mp{cursor:pointer}
+.brow.has-mp:hover .btrack{outline:1px solid var(--gold-loud); outline-offset:2px; border-radius:4px}
+.blab{font-size:13.5px; font-weight:600; line-height:1.25; min-width:0}
+.blab small{display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:400;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--text-secondary); margin-top:2px}
+.btrack{height:18px; border-radius:3px; background:var(--bg); border:1px solid var(--border); overflow:hidden}
+.bfill{height:100%; border-radius:2px}
+.brow.gov .bfill{background:var(--gold-dim)}
+.brow.gov.pale .bfill{background:color-mix(in srgb, var(--gold-dim) 42%, var(--surface))}
+.brow.opp .bfill{background:var(--dissent)}
+.brow.opp.pale .bfill{background:color-mix(in srgb, var(--dissent) 42%, var(--surface))}
+.bmeta{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--text-secondary); text-align:right; line-height:1.3}
+.bmeta b{display:block; font-family:'Trirong',serif; font-size:18px; font-weight:700; color:var(--text)}
+.brow.gov .bmeta b{color:var(--gold-dim)}
+.brow.opp .bmeta b{color:var(--dissent)}
+.brow.pale .bmeta b{color:var(--text-secondary)}
+
+.share{margin-top:14px}
+.share-k{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--text-secondary); margin-bottom:6px}
+.share-bar{display:flex; height:22px; border-radius:4px; overflow:hidden; border:1px solid var(--border); gap:2px; background:var(--bg)}
+.share-bar > button{display:block; height:100%; min-width:0; border:0; padding:0; margin:0;
+  cursor:pointer; appearance:none; -webkit-appearance:none; position:relative}
+.share-bar > button:hover,.share-bar > button:focus-visible{outline:2px solid var(--gold-loud); outline-offset:-2px; z-index:1}
+.share-bar > button.on{outline:2px solid var(--text); outline-offset:-2px; z-index:1}
+.share-bar .g{background:var(--gold-dim)}
+.share-bar .gp{background:color-mix(in srgb, var(--gold-dim) 40%, var(--surface))}
+.share-bar .o{background:var(--dissent)}
+.share-bar .op{background:color-mix(in srgb, var(--dissent) 40%, var(--surface))}
+.share-cap{margin-top:6px; font-family:'IBM Plex Mono',monospace; font-size:11.5px;
+  color:var(--text-secondary); display:flex; flex-wrap:wrap; gap:4px 14px}
+
+#tip{position:fixed; pointer-events:none; z-index:80; background:var(--surface);
+  border:1px solid var(--rule); border-radius:8px; padding:10px 13px; font-size:14px;
+  box-shadow:0 6px 22px rgba(0,0,0,.14); min-width:220px; max-width:320px; opacity:0; transition:opacity .1s}
+#tip.show{opacity:1}
+#tip .pv{font-family:'Trirong',serif; font-weight:600; font-size:16px; margin-bottom:8px;
+  padding-bottom:6px; border-bottom:1px solid var(--border)}
+#tip .mp-row{display:flex; align-items:baseline; gap:8px; padding:3px 0; border-bottom:1px solid var(--border)}
+#tip .mp-row:last-child{border:none}
+#tip .mp-name{font-weight:600; flex:1; font-size:13px}
+#tip .mp-fam{font-family:'IBM Plex Mono',monospace; font-size:10px; padding:1px 6px;
+  border:1px solid var(--border); color:var(--text-secondary); white-space:nowrap}
+#tip .mp-vote{font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:500}
+.vote-yes{color:var(--gold-dim)} .vote-no{color:var(--dissent)} .vote-abs{color:var(--text-secondary)}
+#tip .tip-more{font-size:11px; color:var(--text-secondary); padding-top:6px; text-align:right}
+
+.more{margin-top:22px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.more a{display:block; background:var(--surface); border:1px solid var(--border); border-radius:9px;
+  padding:16px 18px; font-family:'Sarabun',sans-serif; font-weight:400}
+.more a::after{content:none}
+.more a .t{font-family:'Trirong',serif; font-weight:600; font-size:17px; color:var(--text)}
+.more a .t::after{content:" →"; color:var(--gold-dim)}
+.more a .d{font-size:13.5px; color:var(--text-secondary); margin-top:4px}
+.mapnote{font-size:13.5px; color:var(--text-secondary); margin-top:22px; max-width:64ch}
+
+@media(max-width:640px){
+  #heat .cell-inner{height:40px; font-size:12px}
+  .brow{grid-template-columns:1fr; gap:4px}
+  .bmeta{text-align:left; display:flex; gap:10px; align-items:baseline}
+  .bmeta b{display:inline}
+}
+</style>
+</head>
+<body>
+<button class="toggle mono" onclick="toggleTheme()" aria-label="สลับธีม">◐ ธีม</button>
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">ฐานข้อมูลตระกูลการเมืองไทย</div>
+    <h1>บ้านใหญ่โหวตเป็นก้อนของตัวเอง</h1>
+    <p class="lede">10 มติคัด ชุด 25–26 — เทียบ <b>บ้านใหญ่ × ทั่วไป</b> ในฝั่งรัฐบาลและฝ่ายค้าน
+      ไม่ใช่ HHI และไม่ใช่ทั้ง 216 มติในหน้ารวม</p>
+    <div class="kick">
+      <div class="k"><div class="kn">10</div><div class="kl">มติคัด · ไม่ใช่ทั้ง 216</div></div>
+      <div class="k"><div class="kn">4</div><div class="kl">ช่องต่อมติ · บ้านใหญ่/ทั่วไป × รัฐ/ค้าน</div></div>
+      <div class="k"><div class="kn">3–10</div><div class="kl">n ค้านชุด 26 — อย่าอ่าน % เป็นก้อนใหญ่</div></div>
+    </div>
+    <div class="jump">
+      <a href="#heat">01 ตาราง</a>
+      <a href="#bars">02 แท่งเทียบ</a>
+    </div>
+  </header>
+
+  <section id="heat">
+    <div class="slabel">01 — ตาราง</div>
+    <h2>% เห็นด้วยรายมติ</h2>
+    <p class="sub">สี่ช่องต่อกฎหมาย · ทอง = ฝั่งรัฐบาล · เขียว = ฝ่ายค้าน · ยิ่งเข้มยิ่งเห็นด้วยสูง</p>
+    <div class="key" role="group" aria-label="กุญแจสีตาราง">
+      <span><span class="sw gov"></span>ทอง = ฝั่งรัฐบาล</span>
+      <span><span class="sw opp"></span>เขียว = ฝ่ายค้าน</span>
+      <span>ยิ่งเข้ม = % เห็นด้วยสูง · ตัวเลขเล็ก = n · คอลัมน์แยกบ้านใหญ่/ทั่วไป</span>
+    </div>
+    <div class="scale-wrap">
+      <div class="scale-pair"><span>รัฐ 0%</span><div class="scale-bar gov"></div><span>100%</span></div>
+      <div class="scale-pair"><span>ค้าน 0%</span><div class="scale-bar opp"></div><span>100%</span></div>
+    </div>
+    <table id="tbl"></table>
+  </section>
+
+  <section id="bars">
+    <div class="slabel">02 — แท่งเทียบ</div>
+    <h2>เทียบ % เห็นด้วยรายมติ</h2>
+    <p class="sub">ความยาวแท่ง = % เห็นด้วย · แถบล่าง = สัดส่วนจำนวนคน (กดช่วงสีได้) · ชี้แถวบ้านใหญ่ดูรายชื่อ</p>
+    <div class="key" role="group" aria-label="กุญแจแท่งเทียบ">
+      <span><span class="sw gov"></span>รัฐบาล · บ้านใหญ่</span>
+      <span><span class="sw gov-pale"></span>รัฐบาล · ทั่วไป</span>
+      <span><span class="sw opp"></span>ค้าน · บ้านใหญ่</span>
+      <span><span class="sw opp-pale"></span>ค้าน · ทั่วไป</span>
+      <span>ป้ายซ้าย / ตัวเลขขวา = นอกแท่ง</span>
+    </div>
+    <div id="app"></div>
+  </section>
+
+  <section>
+    <div class="more">
+      <a href="baanyai_story.html"><span class="t">หน้ารวมบ้านใหญ่</span><span class="d">เครือข่าย · แผนที่ · ส่วนต่าง 216 มติ</span></a>
+      <a href="baanyai_story.html#vd25"><span class="t">ส่วนต่างจากสภา</span><span class="d">216 มติ ชุด 25–26 · เฉลี่ย 10.1%</span></a>
+    </div>
+    <p class="mapnote">
+      10 มติคัด ไม่ใช่ทั้ง 216 · สังกัด ณ วันลงมติ · ชุด 26 ค้าน n=3–10 อย่าอ่าน % เป็นก้อนใหญ่ · ไม่ใช่ HHI
+    </p>
+  </section>
+  <footer>ฐานข้อมูลตระกูลการเมืองไทย · CC BY 4.0 · 10 มติคัดชุด 25–26 · Pariment Vote API</footer>
+</main>
+<div id="tip" role="status" aria-live="polite"></div>
+<script src="baanyai_vote_data.js?v=1"></script>
+<script>
+function toggleTheme(){
+  var c=document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme',c==='dark'?'light':'dark');
+  try{localStorage.setItem('baanyai-theme',c==='dark'?'light':'dark')}catch(e){}
+}
+(function(){try{var s=localStorage.getItem('baanyai-theme');if(s)document.documentElement.setAttribute('data-theme',s);}catch(e){}})();
+
+(function(){
+  var BILLS = window.BAANYAI_BILLS || [];
+  var ORDER = ['baan_gov','gen_gov','baan_opp','gen_opp'];
+  var META = {
+    baan_gov:{ name:'บ้านใหญ่', side:'รัฐบาล', cls:'gov', hasMPs:true },
+    gen_gov: { name:'ทั่วไป', side:'รัฐบาล', cls:'gov pale', hasMPs:false },
+    baan_opp:{ name:'บ้านใหญ่', side:'ฝ่ายค้าน', cls:'opp', hasMPs:true },
+    gen_opp: { name:'ทั่วไป', side:'ฝ่ายค้าน', cls:'opp pale', hasMPs:false }
+  };
+  var TAG = {
+    baan_gov:'รัฐบาล · บ้านใหญ่', gen_gov:'รัฐบาล · ทั่วไป',
+    baan_opp:'ค้าน · บ้านใหญ่', gen_opp:'ค้าน · ทั่วไป'
+  };
+  var VOTE_OPTS = {
+    'เห็นด้วย':'<span class="mp-vote vote-yes">เห็นด้วย</span>',
+    'ไม่เห็นด้วย':'<span class="mp-vote vote-no">ไม่เห็นด้วย</span>',
+    'งดออกเสียง':'<span class="mp-vote vote-abs">งด</span>',
+    'ไม่ลงคะแนนเสียง':'<span class="mp-vote vote-abs">ไม่ลง</span>',
+    'ลา / ขาดลงมติ':'<span class="mp-vote vote-abs">ลา/ขาด</span>'
+  };
+
+  function mix(side, pct){
+    var ink = side==='opp' ? 'var(--dissent)' : 'var(--gold-dim)';
+    return 'color-mix(in srgb, '+ink+' '+Math.max(10,pct)+'%, var(--surface))';
+  }
+  function cellFg(pct){ return pct>=48 ? 'var(--bg)' : 'var(--text)'; }
+  function cell(side, pct, n){
+    return '<td class="cell"><div class="cell-inner" style="background:'+mix(side,pct)+';color:'+cellFg(pct)+'">'
+      +'<span>'+pct+'%</span><span class="sub">n='+n+'</span></div></td>';
+  }
+  function sessLabel(s){
+    return s===25 ? 'สส.ชุด 25 · 2562–2566' : 'สส.ชุด 26 · 2566–2568';
+  }
+
+  var s25 = BILLS.filter(function(b){ return b.sess===25; });
+  var s26 = BILLS.filter(function(b){ return b.sess===26; });
+  var h = '<thead><tr class="grp-head"><th class="bill-col">กฎหมาย</th>'
+    +'<th class="gov-h" colspan="2">รัฐบาล</th><th class="gap-col"></th><th class="opp-h" colspan="2">ฝ่ายค้าน</th></tr>'
+    +'<tr><th class="bill-col"></th><th class="gov-h">บ้านใหญ่</th><th class="gov-h">ทั่วไป</th><th class="gap-col"></th>'
+    +'<th class="opp-h">บ้านใหญ่</th><th class="opp-h">ทั่วไป</th></tr></thead><tbody>';
+  function rows(bills, lab){
+    h += '<tr class="sess-row"><td colspan="6">'+lab+'</td></tr>';
+    bills.forEach(function(b){
+      h += '<tr class="data-row"><td class="bill-name">'+b.label+'</td>'
+        +cell('gov', b.baan_gov.yes_pct, b.baan_gov.tot)
+        +cell('gov', b.gen_gov.yes_pct, b.gen_gov.tot)
+        +'<td class="gap-col"></td>'
+        +cell('opp', b.baan_opp.yes_pct, b.baan_opp.tot)
+        +cell('opp', b.gen_opp.yes_pct, b.gen_opp.tot)
+        +'</tr>';
+    });
+  }
+  rows(s25, sessLabel(25));
+  rows(s26, sessLabel(26));
+  document.getElementById('tbl').innerHTML = h+'</tbody>';
+
+  var tip = document.getElementById('tip');
+  function moveTip(e){
+    var tw=tip.offsetWidth, th=tip.offsetHeight;
+    var x=e.clientX+14, y=e.clientY-10;
+    if(x+tw>window.innerWidth-10) x=e.clientX-tw-14;
+    if(y+th>window.innerHeight-10) y=window.innerHeight-th-10;
+    tip.style.left=x+'px'; tip.style.top=y+'px';
+  }
+  var tipPinned = null;
+  function hideTip(){
+    if(tipPinned) return;
+    tip.classList.remove('show');
+    document.querySelectorAll('.share-bar > button.on').forEach(function(el){ el.classList.remove('on'); });
+  }
+  function clearPin(){
+    tipPinned = null;
+    tip.classList.remove('show');
+    document.querySelectorAll('.share-bar > button.on').forEach(function(el){ el.classList.remove('on'); });
+  }
+  function showTip(e, g, tag, pinEl){
+    var names = g.names||[];
+    var head = '<div class="pv">'+tag+' — n='+g.tot+' · เห็นด้วย '+g.yes_pct+'%</div>';
+    var body;
+    if(names.length){
+      var rank = function(o){ return o==='เห็นด้วย'?0:o==='ไม่เห็นด้วย'?1:2; };
+      var sorted = names.slice().sort(function(a,b){ return rank(a.o)-rank(b.o); });
+      var MAX=20;
+      body = sorted.slice(0,MAX).map(function(mp){
+        return '<div class="mp-row"><span class="mp-name">'+mp.n+'</span>'
+          +(mp.f?'<span class="mp-fam">'+mp.f+'</span>':'')
+          +(VOTE_OPTS[mp.o]||('<span class="mp-vote">'+mp.o+'</span>'))
+          +'</div>';
+      }).join('');
+      if(names.length>MAX) body += '<div class="tip-more">+'+(names.length-MAX)+' คน</div>';
+    } else {
+      body = '<div class="tip-more">กลุ่มทั่วไป — ไม่มีรายชื่อในชุดนี้</div>';
+    }
+    tip.innerHTML = head+body;
+    tip.classList.add('show');
+    if(e) moveTip(e);
+    document.querySelectorAll('.share-bar > button.on').forEach(function(el){ el.classList.remove('on'); });
+    if(pinEl){ tipPinned = pinEl; pinEl.classList.add('on'); }
+  }
+  document.addEventListener('mousemove', function(e){ if(tip.classList.contains('show')) moveTip(e); });
+  document.addEventListener('click', function(e){
+    if(tipPinned && !e.target.closest('.share-bar') && !e.target.closest('#tip') && !e.target.closest('.brow.has-mp')) clearPin();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') clearPin(); });
+
+  function bindTip(el, b, key, clickable){
+    el.addEventListener('mouseenter', function(e){
+      if(tipPinned) return;
+      showTip(e, b[key], TAG[key]);
+    });
+    el.addEventListener('mouseleave', hideTip);
+    if(clickable){
+      el.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(tipPinned===el){ clearPin(); return; }
+        tipPinned = null;
+        showTip(e, b[key], TAG[key], el);
+      });
+    }
+  }
+
+  function renderRow(b, key){
+    var g=b[key], m=META[key], pct=g.yes_pct||0;
+    var mp = m.hasMPs ? ' has-mp' : '';
+    return '<div class="brow '+m.cls+mp+'" data-key="'+key+'" data-bill="'+b.label+'">'
+      +'<div class="blab">'+m.name+'<small>'+m.side+'</small></div>'
+      +'<div class="btrack"><div class="bfill" style="width:'+pct+'%"></div></div>'
+      +'<div class="bmeta"><b>'+pct+'%</b><span>n='+g.tot+'</span></div>'
+      +'</div>';
+  }
+  function renderShare(b){
+    var tot = ORDER.reduce(function(s,k){ return s+(b[k].tot||0); },0) || 1;
+    var parts = [
+      {k:'baan_gov', c:'g'}, {k:'gen_gov', c:'gp'},
+      {k:'baan_opp', c:'o'}, {k:'gen_opp', c:'op'}
+    ];
+    var segs = parts.map(function(p){
+      var w = Math.max(0.8, (b[p.k].tot/tot)*100);
+      return '<button type="button" class="'+p.c+'" style="width:'+w+'%"'
+        +' data-key="'+p.k+'" data-bill="'+b.label+'"'
+        +' aria-label="'+TAG[p.k]+' n='+b[p.k].tot+' กดดูรายละเอียด"></button>';
+    }).join('');
+    var govN=(b.baan_gov.tot||0)+(b.gen_gov.tot||0);
+    var oppN=(b.baan_opp.tot||0)+(b.gen_opp.tot||0);
+    return '<div class="share">'
+      +'<div class="share-k">สัดส่วนจำนวนคน · กดช่วงสีดูรายชื่อ</div>'
+      +'<div class="share-bar">'+segs+'</div>'
+      +'<div class="share-cap">'
+      +'<span>รัฐบาล '+Math.round(govN/tot*100)+'% (n='+govN+')</span>'
+      +'<span>ค้าน '+Math.round(oppN/tot*100)+'% (n='+oppN+')</span>'
+      +'<span>รวม n='+tot+'</span>'
+      +'</div></div>';
+  }
+  function renderBill(b){
+    return '<div class="bill">'
+      +'<div class="bill-title">'+b.label+'</div>'
+      +(b.note?'<p class="bill-note">'+b.note+'</p>':'')
+      +'<div class="brows">'+ORDER.map(function(k){ return renderRow(b,k); }).join('')+'</div>'
+      +renderShare(b)
+      +'</div>';
+  }
+  function renderSession(bills, lab){
+    return '<div class="sess">'+lab+'</div>'+bills.map(renderBill).join('');
+  }
+  document.getElementById('app').innerHTML =
+    renderSession(s25, sessLabel(25))+renderSession(s26, sessLabel(26));
+
+  document.querySelectorAll('.brow.has-mp').forEach(function(el){
+    var key=el.dataset.key, billLabel=el.dataset.bill;
+    var b=BILLS.find(function(x){ return x.label===billLabel; });
+    if(!b) return;
+    bindTip(el, b, key, false);
+  });
+  document.querySelectorAll('.share-bar > button').forEach(function(el){
+    var key=el.dataset.key, billLabel=el.dataset.bill;
+    var b=BILLS.find(function(x){ return x.label===billLabel; });
+    if(!b) return;
+    bindTip(el, b, key, true);
+  });
+})();
+</script>
+</body>
+</html>

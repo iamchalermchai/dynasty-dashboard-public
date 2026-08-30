@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this database or site, please cite it as below."
+type: dataset
+title: "Thai Political Dynasty Database (ฐานข้อมูลตระกูลการเมืองไทย)"
+authors:
+  - family-names: Chalermchai
+    alias: iamchalermchai
+repository-code: "https://github.com/iamchalermchai/dynasty-dashboard-public"
+url: "https://iamchalermchai.github.io/dynasty-dashboard-public/"
+license: "CC-BY-4.0"
+license-url: "https://creativecommons.org/licenses/by/4.0/"
+version: "0.1.0"
+date-released: "2026-08-30"
+abstract: >-
+  Open research database and narrative visualizations on Thai political
+  dynasties (บ้านใหญ่) and related public-interest case reporting on the
+  2024 Senate election allegations. Names shown follow a published mask
+  rule; allegations are not findings of guilt.
+keywords:
+  - Thailand
+  - political dynasties
+  - Senate
+  - open data
+preferred-citation:
+  type: generic
+  title: "Thai Political Dynasty Database (ฐานข้อมูลตระกูลการเมืองไทย)"
+  authors:
+    - family-names: Chalermchai
+      alias: iamchalermchai
+  year: 2026
+  url: "https://iamchalermchai.github.io/dynasty-dashboard-public/"
