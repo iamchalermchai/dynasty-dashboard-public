@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ถึง iLaw — สิ่งที่เราจะนำเสนอ</title>
+<style>
+/* Hallmark · macrostructure: Letter + Catalogue exhibits · tone: editorial-austere
+ * theme: Almanac · audience: iLaw · use: see planned presentation + answer scope
+ * pre-emit critique: P4 H4 E4 S5 R4 V4 · enrichment: none
+ * differs from Conversational FAQ/Newsprint on: macrostructure + theme display
+ */
+:root{
+  --color-paper: #efe8dc;
+  --color-ink: #1c1914;
+  --color-mute: #5c564c;
+  --color-rule: #c4b9a6;
+  --color-accent: #6b2d1a;
+  --color-write: #fffdf7;
+  --color-chip: #e5dccb;
+  --color-gold: #8a6a12;
+  --font-display: "Trirong", "Noto Serif Thai", Georgia, serif;
+  --font-body: "Sarabun", "Noto Sans Thai", Thonburi, sans-serif;
+  --font-mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px;
+}
+@page{ size: A4; margin: 12mm 12mm; }
+*{ box-sizing: border-box; }
+html,body{ overflow-x: clip; }
+body{
+  margin: 0 auto; max-width: 740px;
+  background: var(--color-paper); color: var(--color-ink);
+  font-family: var(--font-body); font-size: 10.5pt; line-height: 1.5;
+  padding: var(--space-5) var(--space-4) var(--space-7);
+}
+h1,h2,h3{ font-family: var(--font-display); font-style: normal; font-weight: 600; line-height: 1.25; margin: 0; overflow-wrap: anywhere; min-width: 0; }
+.meta{ font-family: var(--font-mono); font-size: 8pt; color: var(--color-mute); margin-bottom: var(--space-4); }
+.greeting{ font-size: 11pt; max-width: 58ch; margin: 0 0 var(--space-5); }
+h1{ font-size: 20pt; margin: 0 0 var(--space-3); max-width: 16ch; }
+.lede{ color: var(--color-mute); max-width: 54ch; margin: 0 0 var(--space-5); }
+.plan{ background: var(--color-write); border: 1px solid var(--color-rule); padding: var(--space-4); margin: 0 0 var(--space-6); }
+.plan h2{ font-size: 13pt; margin-bottom: var(--space-3); }
+.plan ol{ margin: 0; padding-left: 1.25em; }
+.plan li{ margin: 4px 0; }
+.kicker{ font-family: var(--font-mono); font-size: 8pt; letter-spacing: .07em; color: var(--color-mute); margin: var(--space-6) 0 var(--space-3); }
+.card-wrap{ margin: 0 0 var(--space-5); break-inside: avoid; }
+.card-wrap figcaption{ font-family: var(--font-mono); font-size: 7.5pt; color: var(--color-mute); margin-top: 6px; }
+.pv-card{ background: var(--color-write); border: 1.5px solid var(--color-ink); }
+.pv-hd{ padding: 6px 10px; background: var(--color-ink); color: var(--color-paper); font: 600 8.5px var(--font-mono); letter-spacing: .04em; }
+.pv-bd{ display: grid; grid-template-columns: 14px 1fr; padding: 10px; }
+.pv-rail{ writing-mode: vertical-rl; transform: rotate(180deg); font: 700 8px var(--font-mono); letter-spacing: .1em; color: var(--color-accent); }
+.pv-nm{ font-family: var(--font-display); font-size: 17px; font-weight: 700; margin: 0 0 6px; }
+.pv-badges{ display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+.pv-badge{ font: 600 8px var(--font-mono); padding: 1px 6px; border: 1px solid var(--color-rule); color: var(--color-mute); }
+.pv-badge.gold{ border-color: var(--color-gold); color: var(--color-gold); }
+.pv-sec{ font: 600 8px var(--font-mono); color: var(--color-gold); margin: 8px 0 4px; letter-spacing: .04em; }
+.pv-li{ font-size: 11.5px; line-height: 1.4; padding: 5px 0; border-bottom: 1px solid var(--color-chip); }
+.pv-li b{ font-family: var(--font-display); font-size: 12.5px; }
+.pv-meta{ font: 500 9.5px var(--font-mono); color: var(--color-mute); margin-top: 1px; }
+.pv-claim{ color: var(--color-mute); margin-top: 2px; font-size: 11px; }
+.pv-note{ font-size: 10px; color: var(--color-mute); margin-top: 8px; }
+.tier{ display: inline-block; font: 600 7.5px var(--font-mono); padding: 0 5px; border: 1px solid #999; margin-right: 4px; }
+.tier.h{ border-color: var(--color-gold); color: var(--color-gold); }
+.tier.d{ border-color: var(--color-accent); color: var(--color-accent); }
+.case-file{ background: var(--color-write); border: 1.5px solid var(--color-ink); border-left: 3px solid var(--color-accent); }
+.case-file.venue{ border-left-color: #1a6b5c; }
+.pc-head{ padding: 6px 10px; background: #1a3330; color: var(--color-paper); font: 600 8.5px var(--font-mono); }
+.pc-body{ display: grid; grid-template-columns: 16px 1fr; padding: 10px; background: #f0f6f4; }
+.pc-rail{ writing-mode: vertical-rl; transform: rotate(180deg); font: 700 8px var(--font-mono); letter-spacing: .1em; color: #1a6b5c; }
+.pc-name{ font-family: var(--font-display); font-size: 15px; font-weight: 700; margin: 0 0 4px; text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+.badge{ display: inline-block; font: 600 8.5px var(--font-mono); padding: 1px 6px; border: 1px solid rgba(28,25,20,.28); color: var(--color-mute); margin: 0 4px 4px 0; }
+.pc-claim{ font-size: 11.5px; line-height: 1.45; margin-top: 6px; }
+.pc-src{ font-size: 9.5px; color: var(--color-mute); margin-top: 6px; }
+.ballot-box{ background: var(--color-write); border: 1px dashed var(--color-gold); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-5); }
+.ballot-box h3{ font-size: 12pt; margin-bottom: 8px; }
+.ballot-list{ margin: 0; padding-left: 1.2em; }
+.ballot-list li{ margin: 4px 0; font-size: 11.5px; }
+hr.rule{ border: 0; border-top: 1px solid var(--color-rule); margin: var(--space-6) 0; }
+.ask{ margin: 0 0 var(--space-5); padding: 0 0 var(--space-4); border-bottom: 1px solid var(--color-rule); break-inside: avoid; }
+.ask .n{ font-family: var(--font-mono); font-size: 8pt; color: var(--color-accent); margin-bottom: 4px; }
+.ask h2{ font-size: 12.5pt; margin-bottom: 6px; }
+.ask .hint{ color: var(--color-mute); font-size: 9.5pt; margin: 0 0 10px; max-width: 58ch; }
+.lanes{ display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.lane{ border: 1px solid var(--color-rule); background: var(--color-write); padding: 8px; min-height: 56px; }
+.lane .t{ font-family: var(--font-mono); font-size: 7.5pt; margin-bottom: 4px; }
+.lane.g .t{ color: #2d5a2d; }
+.lane.y .t{ color: #7a5a10; }
+.lane.r .t{ color: var(--color-accent); }
+.lane .lines{ border-bottom: 1px dotted var(--color-rule); height: 12px; margin-top: 8px; }
+.write{ background: var(--color-write); border: 1px solid var(--color-rule); padding: 10px; }
+.write .prompt{ font-family: var(--font-mono); font-size: 7.5pt; color: var(--color-mute); }
+.write .lines{ border-bottom: 1px dotted var(--color-rule); height: 14px; margin-top: 10px; }
+.chk{ display: inline-block; width: 11px; height: 11px; border: 1px solid var(--color-ink); margin-right: 6px; vertical-align: -1px; }
+.foot{ margin-top: var(--space-6); padding-top: var(--space-3); border-top: 1px solid var(--color-rule); font-size: 8pt; color: var(--color-mute); }
+@media (max-width: 640px){ .lanes{ grid-template-columns: 1fr; } }
+@media print{
+  body{ background: #fff; padding: 0; }
+  .card-wrap, .ask{ break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<p class="meta" style="background:#1c1914;color:#efe8dc;padding:8px 10px;margin:0 0 16px">
+ฉบับ 13 ก.ย. 2569 · 12:55 · ตัวอย่างคลิกเปิด: ชื่อคน + โรงแรม 4 แห่ง · ถาม 01–05 (ตัดถาม 06)
+</p>
+<p class="meta">ปรึกษา · 13 ก.ย. 2569 · ไม่ใช่คำแนะนำทางกฎหมาย<br>
+จาก: ฐานข้อมูลตระกูลการเมืองไทย (ทุติยภูมิ) → ถึง: iLaw</p>
+
+<p class="greeting">สวัสดีครับ — เรากำลังทำหน้า scrollytelling คดีฮั้ว ส.ว. 2567
+โดยอ้างงานและบทความของ iLaw เป็นหลัก · เอกสารนี้โชว์ <b>สิ่งที่ตั้งใจนำเสนอ</b>
+พร้อม <b>ตัวอย่างตอนคลิกเปิดแฟ้ม</b> (ชื่อคน + โรงแรม) แล้วขอความเห็นว่าเปิดได้ขนาดไหน</p>
+
+<h1>เราจะนำเสนออะไรบ้าง</h1>
+<p class="lede">รายการสิ่งที่จะขึ้นบนหน้า · ด้านล่างคือตัวอย่างการ์ดชื่อคนและโรงแรมตอนผู้ใช้คลิกเปิด</p>
+
+<div class="plan">
+  <h2>ขอบเขตเรื่องบนหน้า</h2>
+  <ol>
+    <li>บัตรลงคะแนนชุดเลขซ้ำ + ความน่าจะเป็น + สถิติครบ 20 กลุ่มอาชีพ</li>
+    <li>แผนที่จังหวัด → <b>คลิกเปิดแฟ้ม</b> มีชื่อคนในคดี + ข้อกล่าวหา + tier (document/hearsay)</li>
+    <li>ศูนย์ทำโพย/นัดที่ <b>โรงแรม</b> (กรุงศรีริเวอร์ · ธาราแกรนด์ · มารวย · พูลแมน) ± ชื่อคนที่แหล่งระบุบทบาท</li>
+    <li>หลังได้ตำแหน่ง: พฤติกรรมลงมติ · กรอบ «สีน้ำเงิน» ตามงาน iLaw</li>
+    <li>ไทม์ไลน์ กกต./ดีเอสไอ · สถานะคดียังไม่จบ · disclaimer ข้อกล่าวหา ≠ คำพิพากษา</li>
+    <li><b>ยังไม่ใส่</b> กราฟดอกเครือข่าย 229 คลิกรายคนทั้งก้อน</li>
+  </ol>
+</div>
+
+<p class="kicker">ตัวอย่างตอนคลิกเปิด — ชื่อคนในแฟ้มจังหวัด + โรงแรม</p>
+<figure class="card-wrap">
+<div class="pv-card">
+  <div class="pv-hd">แฟ้ม · จังหวัด · 5 ข้อกล่าวหา</div>
+  <div class="pv-bd"><div class="pv-rail">จังหวัด</div><div>
+    <div class="pv-nm">ศรีสะเกษ</div>
+    <div class="pv-badges">
+      <span class="pv-badge">139.8 /แสน</span><span class="pv-badge">คนในคดี 5</span><span class="pv-badge">ข้อกล่าวหา 5</span>
+    </div>
+    <div class="pv-sec">ชั้นหลักฐาน — hearsay 3 · document 2</div>
+    <div class="pv-sec">คนในคดี</div><div class="pv-li"><b>นิรันดร์ บัวศิริ</b><div class="pv-meta">H097 · ผู้สมัคร</div></div><div class="pv-li"><b>วีระ สุดสังข์</b><div class="pv-meta">H098 · ผู้สมัคร</div></div><div class="pv-li"><b>วิวัฒน์ รุ้งแก้ว</b><div class="pv-meta">P1615 · สว.ศรีสะเกษ · ผู้โอนเงินให้ผู้สมัคร สว.</div></div><div class="pv-li"><b>สิริพงศ์ อังคสกุลเกียรติ</b><div class="pv-meta">P554 · ผู้ถูกชุด26 เห็นควรสั่งฟ้อง ม.76 (#189) · รองหน.พรรค · ในทีมวางแผน 7 คน</div></div><div class="pv-li"><b>ไตรศุลี ไตรสรณกุล</b><div class="pv-meta">P275 · ผู้ถูกชุด26 เห็นควรสั่งฟ้อง ม.76 (#194) · นายทะเบียนสมาชิกพรรค</div></div>
+    <div class="pv-sec">ข้อกล่าวหา</div><div class="pv-li"><span class="tier h">hearsay</span><b>นิรันดร์ บัวศิริ</b><div class="pv-meta">ผู้รับโอนเงิน (ผู้สมัคร สว.ศรีสะเกษ, จากวิวัฒน์ P1615)</div><div class="pv-claim">รับโอนจากวิวัฒน์ รุ้งแก้ว(P1615) 10,000 บาท (8 มิ.ย.67) อ้างมัดจำงานวันเกิดหลานสาว · ชุด26ไม่พบหลักฐานจัดงานจริง</div></div><div class="pv-li"><span class="tier h">hearsay</span><b>วีระ สุดสังข์</b><div class="pv-meta">ผู้รับโอนเงิน (ผู้สมัคร สว.ศรีสะเกษ, จากวิวัฒน์ P1615)</div><div class="pv-claim">รับโอนจากวิวัฒน์ รุ้งแก้ว(P1615) 1,000 บาท · ทั้งสองฝ่ายปฏิเสธตอนแรกก่อนพบมีโอน</div></div><div class="pv-li"><span class="tier h">hearsay</span><b>วิวัฒน์ รุ้งแก้ว</b><div class="pv-meta">สว.ศรีสะเกษ · ผู้โอนเงินให้ผู้สมัคร สว.</div><div class="pv-claim">โอนให้ นิรันดร์ บัวศิริ(H097) 10,000 บาท (8 มิ.ย.67 อ้างมัดจำงานวันเกิดหลาน) และ วีระ สุดสังข์(H098) 1,000 บาท · ทั้งสองฝ่ายปฏิเสธตอนแรกก่อนพบมีโอน</div></div>
+    <p class="pv-note">ข้อกล่าวหา ≠ คำพิพากษา</p>
+  </div></div>
+</div>
+</figure>
+<figure class="card-wrap">
+<div class="pv-card">
+  <div class="pv-hd">แฟ้ม · จังหวัด · 10 ข้อกล่าวหา</div>
+  <div class="pv-bd"><div class="pv-rail">จังหวัด</div><div>
+    <div class="pv-nm">เพชรบุรี</div>
+    <div class="pv-badges">
+      <span class="pv-badge">145.4 /แสน</span><span class="pv-badge">คนในคดี 11</span><span class="pv-badge">ข้อกล่าวหา 10</span><span class="pv-badge gold">● เส้นเงิน</span>
+    </div>
+    <div class="pv-sec">ชั้นหลักฐาน — document 10</div>
+    <div class="pv-sec">คนในคดี</div><div class="pv-li"><b>วันเพ็ญ ปั้นจั่น</b><div class="pv-meta">H031 · ผู้สมัคร</div></div><div class="pv-li"><b>น้ำผึ้ง ปั้นจั่น</b><div class="pv-meta">H032 · ผู้สมัคร</div></div><div class="pv-li"><b>ปรีชา บรรดาศักดิ์</b><div class="pv-meta">H033 · ผู้สมัคร</div></div><div class="pv-li"><b>อุทุมพร บรรดาศักดิ์</b><div class="pv-meta">H034 · ผู้สมัคร</div></div><div class="pv-li"><b>ปราณี พันไทย</b><div class="pv-meta">H035 · ผู้สมัคร</div></div>
+    <div class="pv-sec">ข้อกล่าวหา</div><div class="pv-li"><span class="tier d">document</span><b>วันเพ็ญ ปั้นจั่น</b><div class="pv-meta">สมัคร สว.พร้อมบุตร(น้ำผึ้ง ปั้นจั่น) ฝ่าฝืน ม.74 พ.ร.ป.สว.</div><div class="pv-claim">ศาลจังหวัดเพชรบุรีไม่รับฟ้อง(16ธ.ค.67) ศาลอุทธรณ์ภาค7กลับคำสั่ง ให้ดำเนินคดีต่อ · คดียังไม่สิ้นสุด[S152]</div></div><div class="pv-li"><span class="tier d">document</span><b>น้ำผึ้ง ปั้นจั่น</b><div class="pv-meta">สมัคร สว.พร้อมมารดา(วันเพ็ญ ปั้นจั่น) ฝ่าฝืน ม.74 พ.ร.ป.สว.</div><div class="pv-claim">ศาลจังหวัดเพชรบุรีไม่รับฟ้อง(16ธ.ค.67) ศาลอุทธรณ์ภาค7กลับคำสั่ง ให้ดำเนินคดีต่อ · คดียังไม่สิ้นสุด[S152]</div></div><div class="pv-li"><span class="tier d">document</span><b>ปรีชา บรรดาศักดิ์</b><div class="pv-meta">สมัคร สว.พร้อมภรรยา(อุทุมพร บรรดาศักดิ์) ฝ่าฝืน ม.74 พ.ร.ป.สว.</div><div class="pv-claim">ศาลจังหวัดเพชรบุรีไม่รับฟ้อง(16ธ.ค.67) ศาลอุทธรณ์ภาค7กลับคำสั่ง ให้ดำเนินคดีต่อ · คดียังไม่สิ้นสุด[S152]</div></div>
+    <p class="pv-note">ข้อกล่าวหา ≠ คำพิพากษา</p>
+  </div></div>
+</div>
+</figure>
+<figure class="card-wrap">
+<div class="case-file venue">
+  <div class="pc-head">แฟ้ม · สถานที่ · 2 ข้อกล่าวหา</div>
+  <div class="pc-body"><div class="pc-rail">VENUE</div><div>
+    <div class="pc-name">กรุงศรีริเวอร์</div>
+    <span class="badge">ศูนย์ทำโพย</span>
+    <span class="badge">24–25 มิ.ย.</span>
+    <span class="badge">อยุธยา</span>
+    <div class="pc-claim"><b>ศุภชัย โพธิ์สุ</b><br><span class="tier d">direct</span> ตั้งวอร์รูมวางแผนและสั่งการการลงคะแนนที่ รร.กรุงศรีริเวอร์ อยุธยา มีผู้สมัครรวมตัวราว 20 คน</div><div class="pc-claim"><b>สมเจตน์ ลิมปะพันธุ์</b><br><span class="tier d">direct</span> พยาน สมนึก สุชัยธนาวนิช (ผู้สมัคร สว.กลุ่ม4 สุโขทัย) ให้การว่าที่ล็อบบี้ รร.กรุงศรีริเวอร์ 24 มิ.ย.67 พบ 'อดีตที่ปรึกษา รมว.มหาดไทย' ซึ่ง iLaw ระบุชื่อ = สมเจต…</div>
+    <div class="pc-src">ถูกชี้เป็นศูนย์ขนาดใหญ่. มีคำให้การเรื่องวอร์รูม / จดโพย / ใบลาออกล่วงหน้า. เช่นศุภชัยตั้งวอร์รูมราว 20 คน</div>
+  </div></div>
+</div>
+</figure>
+<figure class="card-wrap">
+<div class="case-file venue">
+  <div class="pc-head">แฟ้ม · สถานที่ · 2 ข้อกล่าวหา</div>
+  <div class="pc-body"><div class="pc-rail">VENUE</div><div>
+    <div class="pc-name">ธาราแกรนด์</div>
+    <span class="badge">ประชุมทำโพย</span>
+    <span class="badge">24 มิ.ย.</span>
+    <span class="badge">ปทุมธานี</span>
+    <div class="pc-claim"><b>สมเกียรติ เลียงประสิทธิ์</b><br><span class="tier d">direct</span> นั่งคุมการซักซ้อม สั่งให้ผู้สมัครจดโพย 3 ใบลงเอกสาร สว.3 และกล่าวอ้างคำสั่งจากเบื้องบนให้เครือข่ายสกัดอีกฝ่าย</div><div class="pc-claim"><b>วงศกร ชนะกิจ</b><br><span class="tier h">hearsay</span> พยาน(พ.ต.อ.สมยศ สีหาบัว)ให้การว่าทีมงานวงศกรจัดให้ผู้สมัคร สว.3 จังหวัด(ภูเก็ต/พังงา/กระบี่)เดินทางเข้ากรุงเทพฯ 23 มิ.ย.67 ล่องเรือเจ้าพระยา แล้วพาไปประชุมทำโพ…</div>
+    <div class="pc-src">พยานเล่าว่าทีมงานพาผู้สมัครเข้าห้อง. เก็บโทรศัพท์. สมเกียรติถูกระบุว่าคุมการซักซ้อมและสั่งจดโพยลง สว.3</div>
+  </div></div>
+</div>
+</figure>
+<figure class="card-wrap">
+<div class="case-file venue">
+  <div class="pc-head">แฟ้ม · สถานที่ · 1 ข้อกล่าวหา</div>
+  <div class="pc-body"><div class="pc-rail">VENUE</div><div>
+    <div class="pc-name">มารวยการ์เด็น</div>
+    <span class="badge">ที่พัก / จ่ายค่าห้อง</span>
+    <span class="badge">ก่อนเลือก</span>
+    <span class="badge">กทม.</span>
+    <div class="pc-claim"><b>นิทัศน์ อารีย์วงศ์สกุล</b><br><span class="tier d">document</span> ผู้ต้องหาลำดับ69ในคดีโกงเลือก สว. · เป็นผจก.ทั่วไปสโมสรอ่างทองเอฟซี12ปี(สโมสรก่อตั้ง2553 ประธานคือสมศักดิ์ ปริศนานันทกุล(P219) บิดาภราดร/กรวีร์ สส.ภท.; กรวีร์(…</div>
+    <div class="pc-src">โยงเครือข่ายจ้างงานในข้อกล่าวหา. คนละบทบาทกับห้องจดโพย แต่ยังอยู่ในเส้นก่อนวันเลือก</div>
+  </div></div>
+</div>
+</figure>
+<figure class="card-wrap">
+<div class="case-file venue">
+  <div class="pc-head">แฟ้ม · สถานที่ · 2 ข้อกล่าวหา</div>
+  <div class="pc-body"><div class="pc-rail">VENUE</div><div>
+    <div class="pc-name">พูลแมน คิงพาวเวอร์</div>
+    <span class="badge">รวมตัวหลังเลือก</span>
+    <span class="badge">~21 ก.ค.</span>
+    <span class="badge">รางน้ำ · กทม.</span>
+    <div class="pc-claim"><b>อนุทิน ชาญวีรกูล</b><br><span class="tier h">hearsay</span> พยานอ้างพบที่รัฐสภาและมอบเบอร์ผู้ประสานงานให้ และพบที่โรงแรมพร้อมผู้ที่ต่อมาได้เป็น สว. กว่า 100 คน (21 ก.ค.67)</div><div class="pc-claim"><b>นภินทร ศรีสรรพางค์</b><br><span class="tier h">hearsay</span> พริษฐ์แถลง 29ส.ค.69 เสริม A111: พบพิกัดการใช้งานโทรศัพท์ของผู้ได้รับเลือกเป็น สว.ราชบุรี+เพชรบุรี ที่กระทรวงพาณิชย์ วันเดียวกับเหตุการณ์ในห้องทำงานนภินทร (ตามข…</div>
+    <div class="pc-src">พยานอ้างพบอนุทิน ชาญวีรกูลที่โรงแรมพร้อมผู้ที่ต่อมาได้เป็น สว. กว่า 100 คน. แหล่งเดียวกันระบุพูลแมนช่วงเดียวกันพร้อมเนวินและวรพจน์ · คนละห้องกับกรุงศรีวันจดโพย</div>
+  </div></div>
+</div>
+</figure>
+
+<hr class="rule">
+
+<p class="kicker">ขอความเห็น — ตอบในช่องด้านล่าง</p>
+
+<section class="ask">
+  <div class="n">ถาม 01</div>
+  <h2>โรงแรม/สถานที่แบบตัวอย่างด้านบน — เปิดได้ไหม</h2>
+  <p class="hint">เปิดชื่อสถานที่อย่างเดียว หรือเปิดชื่อคนที่บท iLaw เอ่ยควบด้วย</p>
+  <div class="lanes">
+    <div class="lane g"><div class="t">เขียว · เปิดได้</div><div class="lines"></div><div class="lines"></div></div>
+    <div class="lane y"><div class="t">เหลือง · มีเงื่อนไข</div><div class="lines"></div><div class="lines"></div></div>
+    <div class="lane r"><div class="t">แดง · ไม่แนะนำ</div><div class="lines"></div><div class="lines"></div></div>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="n">ถาม 02</div>
+  <h2>แฟ้มจังหวัดแบบศรีสะเกษ/เพชรบุรี (ชื่อคน + ข้อกล่าวหา) — เปิดได้ไหม</h2>
+  <p class="hint">ชื่อ + บทบาท + claim + tier · hearsay ต้องตัด หรือติดป้ายแล้วเปิดได้</p>
+  <div class="lanes">
+    <div class="lane g"><div class="t">เขียว · เปิดได้</div><div class="lines"></div><div class="lines"></div></div>
+    <div class="lane y"><div class="t">เหลือง · มีเงื่อนไข</div><div class="lines"></div><div class="lines"></div></div>
+    <div class="lane r"><div class="t">แดง · ไม่แนะนำ</div><div class="lines"></div><div class="lines"></div></div>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="n">ถาม 03</div>
+  <h2>ชื่อบนบัตร (คนถูกกา) — ชั้นนี้แยกไหม</h2>
+  <div class="write">
+    <div class="prompt">คำตอบ / เงื่อนไข</div>
+    <div class="lines"></div><div class="lines"></div><div class="lines"></div>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="n">ถาม 04</div>
+  <h2>«สีน้ำเงิน» + จุดมติมีชื่อ — reproduce กราฟได้ไหม</h2>
+  <div class="write">
+    <div class="prompt">คำตอบ / attribution ที่ต้องการ</div>
+    <div class="lines"></div><div class="lines"></div><div class="lines"></div>
+  </div>
+</section>
+
+<section class="ask">
+  <div class="n">ถาม 05</div>
+  <h2>ก่อนเผยแพร่กว้าง ควรบังคับมีอะไร</h2>
+  <div class="write">
+    <div class="prompt">ติ๊ก + เติม</div>
+    <p style="margin:8px 0 0;font-size:10.5pt"><span class="chk"></span>disclaimer / presumption</p>
+    <p style="margin:6px 0 0;font-size:10.5pt"><span class="chk"></span>คำปฏิเสธคู่เมื่อมีในแหล่ง</p>
+    <p style="margin:6px 0 0;font-size:10.5pt"><span class="chk"></span>ช่องทางแก้/ลบ</p>
+    <p style="margin:6px 0 0;font-size:10.5pt"><span class="chk"></span>อื่น: _______________</p>
+  </div>
+</section>
+
+<p class="foot">
+  ไม่ได้ขอรับรองตัวเลขทุกตัว · ไม่ได้ขอ co-publisher/โลโก้ (เว้นคุยแยก)<br>
+  ข้อกล่าวหา ≠ คำพิพากษา · ผู้ถูกกล่าวถึงถือว่าบริสุทธิ์จนกว่าศาลจะมีคำวินิจฉัยถึงที่สุด
+</p>
+
+</body>
+</html>
