@@ -980,6 +980,7 @@ function openCard(p){
 function closeCard(){document.getElementById('ov').classList.remove('on');}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCard();});
 </script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <nav id='sat-bar' aria-label='คนนอก ที่สำนวน 229 ยังเอ่ยชื่อ'><span class='sat-lab-bar' title='คนนอก · ที่สำนวน 229 ยังเอ่ยชื่อ'>คนนอก · สำนวน 229</span><button type='button' data-sat='nudge'>ledger ขวา</button><button type='button' data-sat='tier'>tier ขวา</button><button type='button' data-sat='side'>ชิดวง</button><button type='button' data-sat='below'>ใต้ปิรามิด</button><button type='button' data-sat='none'>ซ่อน (dock)</button></nav>
 <nav id='proto-bar' aria-label='สลับแบบ'><button type='button' id='prev'>←</button><div class='lab' id='lab'></div><button type='button' id='next'>→</button></nav>
 <script>
