@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คดีฮั้ว ส.ว. 2567 · จากบัตรถึงเสียงในสภา</title>
+<!--
+  Standalone slide story — โครง A (เลื่อนลงจอเต็ม) + องก์ตัวคนจาก example
+  ไม่พึ่ง support.js · ตัวเลขจาก WIP · ไม่แตะ hua_sv_story_wip.html
+-->
+<style>
+:root{
+  --bg:#E8E5DC;--ink:#1B2430;--paper:#F6F4EE;--gold:#B98B00;--loud:#F2D024;
+  --muted:rgba(27,36,48,.62);--font-d:'Trirong',serif;--font-b:'Sarabun',sans-serif;--font-m:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--font-b)}
+.k{font:600 12px/1 var(--font-m);letter-spacing:.14em;text-transform:uppercase;color:#7A5D00}
+h2{font:700 clamp(26px,4.4vw,46px)/1.15 var(--font-d);letter-spacing:-.01em;text-wrap:balance}
+h3{font:700 clamp(24px,3vw,34px)/1.2 var(--font-d);margin:0 0 14px}
+.nums{display:flex;align-items:center;justify-content:center;gap:clamp(16px,4vw,48px)}
+.nums b{font:700 clamp(52px,12vw,140px)/.85 var(--font-d)}
+.nums .neq{font:300 clamp(40px,9vw,100px)/1 var(--font-m);color:var(--gold)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.card{background:var(--paper);border:1px solid rgba(27,36,48,.1);border-radius:12px;padding:22px 20px}
+.card.ink{background:#1B2430;color:#F6F4EE}
+.card .n{font:700 40px/1 var(--font-d)}
+.muted{color:var(--muted)}
+.num{display:inline-block;min-width:42px;text-align:center;padding:5px 7px;border:1px solid rgba(27,36,48,.16);font:500 14px/1 var(--font-m);margin:0 3px 4px 0}
+.num.hit{background:var(--loud);border-color:var(--gold)}
+.slip{display:flex;gap:2px;margin:2px 0}
+.slip i{display:block;height:6px;flex:1;background:#1B2430;opacity:.16}
+.slip i.hit{background:var(--loud);opacity:1}
+.gbar{height:10px;background:rgba(27,36,48,.08);display:flex;margin-top:4px}
+.gbar u{display:block;height:100%;background:var(--loud)}
+.vhit{display:block;width:100%;text-align:left;border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0 0 16px}
+.vhit h4{font:700 20px/1.2 var(--font-d)}
+.vg{font:600 11px/1 var(--font-m);color:var(--gold);border-bottom:1px solid rgba(185,139,0,.4)}
+.ov{position:fixed;inset:0;background:rgba(27,36,48,.46);display:flex;align-items:center;justify-content:center;z-index:80;padding:24px}
+.ov .box{background:var(--paper);border-radius:14px;max-width:480px;width:100%;padding:24px;position:relative}
+.ov .x{position:absolute;top:8px;right:12px;border:0;background:0;font-size:26px;cursor:pointer}
+.is{color:var(--loud);font-weight:700}
+.slide{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:56px 28px 64px;max-width:880px;margin:0 auto}
+.slide.wide{max-width:1080px}
+.slide.full{max-width:none;align-items:center;text-align:center}
+.dark{background:#1B2430;color:#F6F4EE}
+.dark .k{color:var(--loud)}
+.dark .muted{color:rgba(246,244,238,.62)}
+.bob{animation:bob 1.4s ease infinite alternate;color:rgba(27,36,48,.32);font-size:20px;margin-top:48px}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(10px)}}
+
+/* องก์ตัวคน · จาก example · หุ่นซ้ายติดจอ ข้อความขวาเลื่อน */
+#journey{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
+.svc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.svc-stick{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.svc-stage{width:100%;max-width:420px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:16px}
+.svc-stage svg{max-width:100%;max-height:100%}
+.svc-cap{min-height:40px;text-align:center;max-width:400px;font:500 15px/1.5 var(--font-b)}
+.svc-step{min-height:82vh;display:flex;flex-direction:column;justify-content:center;opacity:.25;transition:opacity .5s ease}
+.svc-step.on{opacity:1}
+.svc-step p{max-width:44ch;color:var(--muted)}
+@media(max-width:720px){
+  .svc-grid{grid-template-columns:1fr}
+  .svc-stick{position:static;height:auto;padding:28px 0 8px}
+  .svc-step{min-height:auto;margin-bottom:40px;opacity:1}
+}
+
+
+/* องก์เพิ่มจาก hua_sv_story.dc.html · หลังได้ที่นั่ง */
+:root{--senate-blue:#24449C;--senate-blue-bright:#6E9BFF}
+.act-break{min-height:72vh;max-width:none;background:#1B2430;color:#F6F4EE;text-align:center;align-items:center}
+.act-break .k{color:var(--loud)}
+.lead{max-width:62ch;margin-top:16px;color:var(--muted)}
+.dark .lead{color:rgba(246,244,238,.68)}
+.bloc-list{margin-top:30px;border-top:1px solid rgba(27,36,48,.2)}
+.bloc{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(220px,2fr) auto;gap:18px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(27,36,48,.2)}
+.bloc-name{font:700 22px/1.25 var(--font-d)}
+.bloc-track{height:18px;background:rgba(27,36,48,.08);overflow:hidden}
+.bloc-track i{display:block;height:100%;width:var(--w);background:var(--gold)}
+.bloc.zero .bloc-track i{width:2px;background:rgba(27,36,48,.25)}
+.bloc-value{text-align:right;font:700 28px/1 var(--font-d);white-space:nowrap}
+.bloc-value small{display:block;margin-top:6px;font:500 11px/1.3 var(--font-m);color:var(--muted)}
+.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-top:34px}
+.compare .metric{padding:24px 0;border-block:1px solid rgba(27,36,48,.2)}
+.compare .big{display:block;font:700 clamp(48px,8vw,88px)/1 var(--font-d)}
+.compare .metric.focus .big{color:#7A5D00}
+.compare .vs{font:500 13px/1 var(--font-m);color:var(--muted)}
+.compare p{max-width:32ch;margin-top:12px;color:var(--muted)}
+.caveat{margin-top:30px;padding-left:18px;border-left:4px solid var(--gold);max-width:70ch}
+.caveat b{color:var(--ink)}
+.motion-list{margin-top:24px;border-top:1px solid rgba(27,36,48,.18)}
+.motion{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid rgba(27,36,48,.18)}
+.motion time{font:600 12px/1.45 var(--font-m);color:#7A5D00}
+.motion p{max-width:60ch}
+.case-split{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch;margin-top:28px}
+.case-side{padding:26px;background:var(--paper);border-top:5px solid var(--ink)}
+.case-side.gold{border-color:var(--gold)}
+.case-side .case-no{font:700 54px/1 var(--font-d)}
+.case-side h3{font-size:24px;margin:12px 0 8px}
+.case-side p{color:var(--muted)}
+.case-split .neq{align-self:center;font:300 58px/1 var(--font-m);color:var(--gold)}
+.standard{display:grid;grid-template-columns:1fr 90px 1fr;gap:22px;align-items:stretch;margin-top:30px}
+.standard .side{padding:26px;background:var(--paper)}
+.standard .quote{font:700 clamp(25px,3.7vw,38px)/1.25 var(--font-d);margin:14px 0}
+.standard .rail{position:relative;min-height:260px}
+.standard .rail:before{content:"";position:absolute;left:50%;top:20px;bottom:20px;width:3px;background:rgba(27,36,48,.15)}
+.standard .mark{position:absolute;left:8px;right:8px;border-top:3px solid var(--gold);font:600 10px/1.25 var(--font-m);padding-top:5px;text-align:center}
+.standard .mark.high{top:30px;border-color:var(--ink)}
+.standard .mark.low{bottom:64px}
+.source-note{font:400 12px/1.65 var(--font-m);color:var(--muted);margin-top:28px}
+.source-note a{color:#6E5300;text-underline-offset:3px}
+.pattern-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.pattern{padding:22px;background:rgba(246,244,238,.96);border:1px solid rgba(27,36,48,.16)}
+.pattern .copies{display:block;font:700 46px/1 var(--font-d);color:#7A5D00}
+.pattern h3{font-size:21px;margin:12px 0 8px}
+.pattern-ballot{margin:18px 0 16px;padding-top:14px;border-top:1px solid rgba(27,36,48,.16)}
+.pattern-ballot figcaption{font:500 10px/1.45 var(--font-m);color:var(--muted);margin-bottom:8px}
+.ballot-numbers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.ballot-numbers .num{min-width:0;margin:0;padding:5px 2px;font-size:11px;background:rgba(246,244,238,.88)}
+.ballot-stack{display:grid;gap:2px;margin-top:10px}
+.ballot-slip{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}
+.ballot-slip i{display:block;height:3px;background:rgba(27,36,48,.18)}
+.ballot-slip i.hit{background:var(--loud)}
+.ballot-note{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font:500 10px/1.4 var(--font-m);color:var(--muted)}
+.pattern .score{display:grid;grid-template-columns:1fr auto;gap:5px 14px;margin-top:18px;font:500 12px/1.4 var(--font-m)}
+.pattern .score span:nth-child(odd){color:var(--muted)}
+.pattern-prob{margin-top:16px;padding-top:14px;border-top:3px solid var(--gold);font:500 11px/1.55 var(--font-m);color:var(--muted)}
+.pattern-prob b{display:block;color:var(--ink);font:700 17px/1.25 var(--font-d);overflow-wrap:anywhere}
+.prob-question{max-width:none}
+.prob-question-copy{max-width:76ch;margin-top:22px;font:500 clamp(19px,2.5vw,28px)/1.65 var(--font-d)}
+.mech-intro{display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(220px,.8fr);gap:28px;align-items:center;margin:28px 0 8px}
+.mech-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:5px;padding:20px;background:rgba(27,36,48,.055)}
+.mech-grid i{aspect-ratio:1;border-radius:50%;background:rgba(27,36,48,.2)}
+.mech-grid i.hit{background:var(--gold);box-shadow:0 0 0 1px #8B6A00}
+.mech-read{font:500 15px/1.65 var(--font-m);color:var(--muted)}
+.mech-read b{display:block;margin-bottom:8px;font:700 25px/1.25 var(--font-d);color:var(--ink)}
+.marker{padding:0 .12em;color:inherit;background:linear-gradient(transparent 54%,rgba(242,208,36,.72) 54% 90%,transparent 90%);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.prob-answer{margin-top:34px;padding:24px 26px;border-left:5px solid var(--gold);background:rgba(246,244,238,.76)}
+.prob-answer .k{margin-bottom:8px}
+.prob-arabic{font:700 clamp(25px,4.1vw,46px)/1.08 var(--font-d);letter-spacing:-.025em;overflow-wrap:anywhere}
+.prob-read{max-width:76ch;margin-top:10px;color:var(--muted)}
+.prob-escalation{max-width:1180px;text-align:center;align-items:center;padding-inline:clamp(28px,6vw,84px)}
+.prob-formula{margin:24px auto 10px;padding:24px;width:min(100%,920px);background:#111820;color:#F6F4EE;border-top:5px solid var(--gold)}
+.prob-formula .formula{font:700 clamp(21px,4.2vw,48px)/1.18 var(--font-d);overflow-wrap:anywhere}
+.prob-formula .spoken{margin-top:12px;color:rgba(246,244,238,.7)}
+.prob-exact{width:min(100%,920px);margin:18px auto 0;text-align:left;font:500 12px/1.65 var(--font-m)}
+.prob-exact summary{cursor:pointer;color:#6E5300;text-align:center}
+.prob-exact code{display:block;max-height:132px;margin-top:12px;padding:14px;background:rgba(27,36,48,.07);white-space:normal;overflow:auto;overflow-wrap:anywhere;color:var(--ink)}
+.prob-assumption{max-width:72ch;margin:20px auto 0;color:var(--muted);text-align:left}
+.prob-ladder{margin-top:28px;border-left:3px solid rgba(27,36,48,.18)}
+.prob-step{position:relative;padding:0 0 26px 26px;max-width:68ch}
+.prob-step:before{content:"";position:absolute;left:-8px;top:3px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--ink)}
+.prob-step.focus:before{background:var(--loud);border-color:var(--gold)}
+.prob-step b{display:block;font:700 22px/1.25 var(--font-d)}
+.prob-step p{color:var(--muted);margin-top:4px}
+.rank-pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:30px}
+.rank-pair h3{font-size:23px}
+.rank-row{display:grid;grid-template-columns:minmax(120px,1fr) 1.4fr auto;gap:12px;align-items:center;margin:12px 0;font:500 12px/1.25 var(--font-m)}
+.rank-bar{height:9px;background:rgba(27,36,48,.08)}
+.rank-bar i{display:block;height:100%;width:var(--w);background:var(--ink)}
+.rank-pair .case .rank-bar i{background:var(--gold)}
+.turnout-strip{display:flex;flex-wrap:wrap;gap:2px 3px;margin:28px 0;padding:20px;background:rgba(27,36,48,.045)}
+.turnout-strip i{display:block;width:2px;height:11px;background:#66717D}
+.turnout-strip i.patterned{background:var(--gold);box-shadow:0 0 0 .2px #806100}
+.turnout-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.turnout-stats article{padding-top:14px;border-top:3px solid #66717D}
+.turnout-stats article:first-child{border-color:var(--gold)}
+.turnout-stats b{display:block;font:700 clamp(30px,5vw,58px)/1 var(--font-d)}
+.turnout-stats p{margin-top:7px;color:var(--muted)}
+.embed-frame{width:100%;border:1px solid rgba(27,36,48,.16);background:var(--paper);display:block}
+.map-frame{height:min(900px,115vh);margin-top:26px}
+.flower-frame{height:min(980px,78vw);margin-top:26px}
+.flower-story{max-width:none;padding-inline:max(28px,calc((100vw - 1360px)/2));margin-block:16vh}
+.flower-story>h2,.flower-story>.lead,.flower-story>.process-steps,.flower-story>h3{width:min(100%,1180px);margin-left:auto;margin-right:auto}
+.flower-story>.flower-key{width:min(100%,1180px);margin-left:auto;margin-right:auto}
+.evidence-chapter{min-height:100vh;max-width:none;padding-inline:max(28px,calc((100vw - 1280px)/2));justify-content:center}
+.evidence-chapter-copy{width:min(100%,1180px)}
+.evidence-chapter-bridge{margin:0 0 clamp(24px,5vh,54px);font:600 clamp(17px,2vw,24px)/1.45 var(--font-b);color:#7A5D00}
+.evidence-chapter h2{max-width:13ch;font-size:clamp(54px,8.2vw,106px);line-height:1.18;letter-spacing:-.025em}
+.evidence-chapter .lead{max-width:52ch;margin-top:clamp(28px,5vh,54px);font-size:clamp(19px,2.2vw,28px);line-height:1.6}
+.evidence-story{max-width:1280px;padding-inline:clamp(24px,5vw,70px);margin:6vh auto 16vh}
+.evidence-story>h2{line-height:1.12}
+.evidence-story>.lead{max-width:70ch}
+.evidence-scrolly{display:grid;grid-template-columns:minmax(270px,.72fr) minmax(520px,1.45fr);gap:clamp(28px,5vw,70px);align-items:start;margin-top:34px}
+.evidence-steps{padding-bottom:24vh}
+.evidence-step{min-height:66vh;padding:8vh 0 12vh;border-top:1px solid rgba(27,36,48,.2);opacity:.3;transition:opacity .35s ease}
+.evidence-step.on{opacity:1}
+.evidence-step .step-no{display:block;margin-bottom:14px;font:600 12px/1 var(--font-m);letter-spacing:.14em;color:#7A5D00}
+.evidence-step h3{font-size:clamp(25px,3vw,38px);margin:0 0 12px}
+.evidence-step p{max-width:38ch;color:var(--muted)}
+.evidence-step .evidence-number{display:block;margin:20px 0 8px;font:700 clamp(42px,6vw,72px)/.95 var(--font-d);color:var(--ink)}
+.evidence-step[data-panel="phone"] .evidence-number{color:#A51C2A}
+.evidence-step[data-panel="venue"] .evidence-number{color:var(--senate-blue)}
+.evidence-stick{position:sticky;top:12vh;height:64vh;display:flex;align-items:center;background:rgba(246,244,238,.84);border:1px solid rgba(27,36,48,.14);overflow:hidden}
+.evidence-frame{width:100%;height:100%;border:0;background:transparent}
+.evidence-cap{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font:500 11px/1.45 var(--font-m);color:var(--muted)}
+.evidence-cap b{color:var(--ink)}
+.flower-key{margin-top:18px;padding:20px 22px;background:var(--paper);border:1px solid rgba(27,36,48,.14)}
+.flower-key .fk-title{font:600 11px/1.3 var(--font-m);letter-spacing:.08em;text-transform:uppercase;color:#7A5D00;margin-bottom:12px}
+.flower-key .fk-read{max-width:70ch;font:500 15px/1.55 var(--font-b);color:var(--ink);margin:0 0 14px}
+.flower-key .fk-layers{display:flex;flex-wrap:wrap;gap:10px 18px;margin:0 0 12px;padding:0;list-style:none}
+.flower-key .fk-layers li{display:flex;align-items:center;gap:8px;font:500 13px/1.35 var(--font-b);color:var(--muted)}
+.flower-key .fk-layers i{flex:none;width:11px;height:11px;border-radius:50%;box-shadow:0 0 0 1px rgba(27,36,48,.25)}
+.flower-key .fk-layers i.core{background:#1B3A93}
+.flower-key .fk-layers i.room{background:#5B79C0}
+.flower-key .fk-layers i.money{background:#8A6B3A}
+.flower-key .fk-layers i.sv{background:#A07A12}
+.flower-key .fk-layers i.cand{background:#3B857A}
+.flower-key .fk-marks{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 12px;font:500 12px/1.45 var(--font-m);color:var(--muted)}
+.flower-key .fk-marks b{color:var(--ink);font-weight:600}
+.flower-key .fk-marks .mk-red{color:#B3261E}
+.flower-key .fk-marks .mk-gold{color:#7A5D00}
+.flower-key .fk-use{margin:0;padding-top:12px;border-top:1px solid rgba(27,36,48,.12);font:500 12px/1.5 var(--font-m);color:var(--muted)}
+.flower-key .fk-use b{color:var(--ink)}
+.party-frame{height:1040px;min-width:1080px}
+.frame-scroll{overflow-x:auto;margin-top:22px;border:1px solid rgba(27,36,48,.16)}
+.process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:28px;background:rgba(27,36,48,.18);border:1px solid rgba(27,36,48,.18)}
+.process-steps article{padding:24px;background:var(--paper)}
+.process-steps .step-no{font:700 40px/1 var(--font-d);color:#7A5D00}
+.process-steps h3{margin:9px 0 6px;font-size:22px}
+.mechanism-section{margin-top:16vh;padding-top:12vh;padding-bottom:12vh}
+.final-status{min-height:92vh;max-width:none;align-items:center;text-align:center;padding-inline:28px}
+.final-status h2{margin-top:16px}
+.final-status-copy{margin-top:clamp(40px,8vh,88px)}
+.final-status-copy .open{display:block;font:600 13px/1 var(--font-m);letter-spacing:.12em;color:#7A5D00}
+.final-status-copy strong{display:block;margin-top:14px;font:700 clamp(48px,9vw,112px)/.98 var(--font-d);letter-spacing:-.035em}
+.final-status-copy p{margin-top:18px;font:500 clamp(18px,2.2vw,28px)/1.4 var(--font-b);color:var(--muted)}
+/* จังหวะหัวเรื่องภาษาไทย: กันสระ/วรรณยุกต์ของหัวใหญ่ชนหัวข้อย่อย */
+.slide>.k{line-height:1.45;margin-bottom:clamp(18px,2.4vw,28px)}
+.slide>.k+h2,.slide>.k+h1{margin-top:0}
+.slide>h2{line-height:1.22}
+.case-rails{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.case-rail{position:relative;padding:24px 24px 24px 38px;background:var(--paper);border-top:5px solid var(--gold)}
+.case-rail.criminal{border-color:#B3261E}
+.case-rail:before{content:"";position:absolute;left:21px;top:30px;bottom:30px;width:2px;background:currentColor;opacity:.25}
+.case-event{position:relative;padding:0 0 20px 18px}
+.case-event:before{content:"";position:absolute;left:-22px;top:5px;width:9px;height:9px;border-radius:50%;background:currentColor}
+.case-event time{display:block;font:600 11px/1.3 var(--font-m);color:var(--muted)}
+.case-event b{display:block;margin-top:3px}
+.gov-bands{display:flex;margin-top:18px;height:24px;font:600 10px/24px var(--font-m);text-align:center;color:#fff}
+.gov-bands span:first-child{width:45%;background:#B3261E}.gov-bands span:last-child{width:55%;background:#1D6D74}
+.legal-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.legal-pair article{padding:26px;background:var(--paper);border-top:5px solid var(--ink)}
+.legal-pair article:last-child{border-color:var(--gold)}
+.legal-pair blockquote{font:700 clamp(22px,3vw,32px)/1.3 var(--font-d);margin:14px 0}
+.committee-rows{margin-top:28px;border-top:1px solid rgba(27,36,48,.18)}
+.committee-row{display:grid;grid-template-columns:1fr minmax(130px,.7fr) 1fr;gap:14px;padding:18px 0;border-bottom:1px solid rgba(27,36,48,.18);align-items:center}
+.committee-row b:last-child{text-align:right}.committee-row span{text-align:center;color:var(--muted);font:500 11px/1.35 var(--font-m)}
+.cycle-diagram{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px;margin-top:28px}
+.cycle-node{padding:22px;background:var(--paper);text-align:center;border-top:4px solid var(--gold)}
+.cycle-node b{display:block;font:700 24px/1.2 var(--font-d)}
+.cycle-arrow{font:700 32px/1 var(--font-d);color:#7A5D00}
+.status-band{display:grid;grid-template-columns:1fr 1.35fr 1fr;border-block:2px solid rgba(27,36,48,.28);margin-block:10vh;padding-block:22px}
+.status-band>div{padding:0 28px;border-right:1px solid rgba(27,36,48,.18)}
+.status-band>div:first-child{padding-left:0}.status-band>div:last-child{padding-right:0;border-right:0}
+.status-band .label{font:500 11px/1.4 var(--font-m);letter-spacing:.08em;color:var(--muted)}
+.status-band .value{display:block;margin-top:5px;font:700 clamp(24px,3vw,36px)/1.18 var(--font-d)}
+.status-band .value.gold{color:var(--gold)}.status-band .value.legal{color:#B3261E}
+.status-band small{display:block;margin-top:5px;color:var(--muted)}
+.venue-timeline{position:relative;margin-top:24px;padding-left:120px;max-width:760px}
+.venue-timeline:before{content:"";position:absolute;left:92px;top:10px;bottom:18px;width:1px;background:rgba(27,36,48,.24)}
+.venue-timeline .vhit{position:relative;padding:0 0 28px 28px}
+.venue-timeline .vhit:before{content:"";position:absolute;left:-33px;top:7px;width:10px;height:10px;border-radius:50%;background:#596572;box-shadow:0 0 0 4px var(--bg)}
+.venue-timeline .vhit:nth-child(2):before,.venue-timeline .vhit:nth-child(3):before{background:#24449C}
+.venue-timeline .vhit:nth-child(4):before{background:var(--gold)}
+.venue-timeline .vhit .k:before{content:attr(data-when);position:absolute;right:calc(100% + 28px);width:92px;text-align:right;color:var(--muted)}
+.venue-detail{max-width:55ch;margin-top:8px;color:var(--muted);font-size:14px}
+.venue-sources{max-width:72ch;margin-top:16px;font-size:13px;color:var(--muted)}
+.venue-sources a{color:#6E5300;text-underline-offset:3px}
+
+/* องค์ประกอบสามชิ้นด้านล่างดึง markup จาก hua_sv_story.dc.html โดยตรง */
+.cyc{width:100%;max-width:680px;margin:26px auto 0;display:block}
+.cyc .arc{fill:none;stroke:rgba(27,36,48,.32);stroke-width:2;vector-effect:non-scaling-stroke}
+.cyc .head{fill:rgba(27,36,48,.32)}.cyc .node{fill:var(--paper);stroke:rgba(27,36,48,.32);stroke-width:1.5}
+.cyc .node.hot{fill:var(--bg);stroke:var(--gold);stroke-width:2.5}
+.cyc .num{font-family:var(--font-d);font-weight:700;font-size:30px;fill:var(--ink);text-anchor:middle}
+.cyc .ttl{font-family:var(--font-d);font-weight:700;font-size:16px;fill:var(--ink);text-anchor:middle}
+.cyc .sub{font-family:var(--font-b);font-size:13.5px;fill:var(--muted);text-anchor:middle}
+.cyc .core{font-family:var(--font-d);font-weight:700;font-size:19px;fill:var(--ink);text-anchor:middle}
+.cyc .coresub{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;fill:#7A5D00;text-anchor:middle}
+.bar62{display:grid;grid-template-columns:1fr 118px 1fr;align-items:stretch;margin-top:24px;border:1px solid rgba(27,36,48,.18)}
+.bar62>.col{padding:24px}.bar62>.col.l{border-right:1px solid rgba(27,36,48,.18)}.bar62>.col.r{border-left:1px solid rgba(27,36,48,.18)}
+.bar62 .who{font:500 11px/1.45 var(--font-m);letter-spacing:.07em;color:var(--muted)}
+.bar62 .std{font:700 clamp(20px,2.6vw,28px)/1.35 var(--font-d);margin:10px 0 12px}
+.bar62 .std .q{box-shadow:inset 0 -.35em 0 rgba(242,208,36,.55)}.bar62 .col.r .std .q{box-shadow:inset 0 -.35em 0 rgba(27,36,48,.14)}
+.bar62 p{font-size:14px;color:var(--muted)}.bar62 p b{color:var(--ink)}
+.bar62 .thr{padding:18px 12px 20px;display:flex;flex-direction:column;background:var(--paper)}
+.bar62 .thr .cap{font:500 10px/1.35 var(--font-m);letter-spacing:.04em;color:var(--muted);text-align:center;margin-bottom:12px}
+.bar62 .thr-body{position:relative;flex:1;min-height:168px;padding-left:28px}.bar62 .thr-rail{position:absolute;left:8px;top:0;bottom:0;width:12px;background:rgba(27,36,48,.06);border:1px solid rgba(27,36,48,.18);border-radius:6px}
+.bar62 .thr-rail:before{content:"";position:absolute;inset:0;border-radius:5px;background:repeating-linear-gradient(to top,transparent 0 13px,rgba(27,36,48,.18) 13px 14px)}
+.bar62 .thr-fill{position:absolute;left:0;right:0;bottom:0;height:40%;border-radius:0 0 5px 5px;background:var(--loud);opacity:.85}
+.bar62 .thr-mark{position:absolute;left:0;right:-6px;border-top:2px solid var(--ink);z-index:2}.bar62 .thr-mark.lo{bottom:40%;border-color:var(--gold)}.bar62 .thr-mark.hi{bottom:90%}
+.bar62 .thr-labs{position:absolute;left:28px;right:0;top:0;bottom:0}.bar62 .thr-labs span{position:absolute;left:0;transform:translateY(50%);font:500 9px/1.25 var(--font-m);color:var(--muted)}
+.bar62 .thr-labs .lo{bottom:40%;color:#7A5D00}.bar62 .thr-labs .hi{bottom:90%;color:var(--ink)}.bar62 .thr-labs .base{bottom:0;transform:none}
+.prec{margin-top:22px;border-top:2px solid rgba(27,36,48,.32);padding-top:16px}.prec>div{display:grid;grid-template-columns:minmax(150px,auto) 1fr;gap:18px;padding:11px 0;border-bottom:1px solid rgba(27,36,48,.18);align-items:baseline}.prec .cid{font:500 12px/1.45 var(--font-m);color:var(--muted)}
+.tw{--rule:rgba(27,36,48,.28);--pt:#D7193F;--bjt:#24449C;--gold-fill:var(--loud);--gold-loud:var(--gold);--text:var(--ink);--text-secondary:var(--muted);position:relative;margin-top:74px}
+.tw .spine{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--rule);transform:translateX(-.5px)}
+.tw .gov{position:absolute;left:0;width:5px;border-radius:3px}.tw .gov.pt{background:var(--pt)}.tw .gov.bjt{background:var(--bjt)}
+.tw .gov span{position:absolute;left:11px;top:1px;font:600 11px/1.3 var(--font-m);color:var(--muted);white-space:nowrap}
+.tw .indep{position:absolute;right:0;top:0;bottom:0;border-right:2px dashed var(--rule)}
+.tw .yr{position:absolute;left:50%;transform:translate(-50%,-50%);background:var(--bg);font:500 11px/1.3 var(--font-m);color:var(--muted);padding:2px 8px}
+.twsvg{position:absolute;left:calc(50% - 42px);top:0;overflow:visible;pointer-events:none}.twsvg path{fill:none;stroke:var(--rule);stroke-width:1}.twsvg path.key{stroke:var(--gold);stroke-width:1.6}
+.tw .pin{position:absolute;left:50%;width:7px;height:7px;border-radius:50%;background:var(--bg);border:1.5px solid var(--rule);transform:translate(-50%,-50%);z-index:2}.tw .pin.key{width:11px;height:11px;background:var(--loud);border:2px solid var(--gold)}
+.tw .ev{position:absolute;width:calc(50% - 64px)}.tw .ev.l{left:22px;text-align:right}.tw .ev.r{right:22px}.tw .ev b{display:block;font:500 12px/1.35 var(--font-m);color:var(--muted);margin-bottom:2px}.tw .ev p{font-size:14px;line-height:1.5}.tw .ev small{display:block;font-size:12px;color:var(--muted);margin-top:3px}.tw .ev.key p{font:700 17px/1.4 var(--font-d)}.tw .ev.key b{color:var(--ink)}
+.tw .trk{position:absolute;top:-58px;font:500 11px/1.35 var(--font-m);letter-spacing:.08em;color:var(--muted)}.tw .trk.l{left:22px}.tw .trk.r{right:22px;text-align:right}.tw .trk em{font-style:normal;display:block;letter-spacing:0;font:400 12px/1.35 var(--font-b);color:var(--ink)}
+.seat-hemicycle{position:relative;width:min(760px,100%);aspect-ratio:2/1;margin:30px auto 0}
+.seat-hemicycle i{position:absolute;width:9px;height:13px;background:#5B6672;clip-path:polygon(35% 0,65% 0,72% 25%,100% 43%,82% 100%,18% 100%,0 43%,28% 25%)}
+.seat-hemicycle i.accused{background:var(--senate-blue)}
+.person-bridge{min-height:70vh}
+.person-mark{width:min(240px,60vw);margin:26px auto 0;display:block}
+.evidence-surface{min-height:auto;margin-block:11vh;padding:clamp(34px,5vw,64px);background:rgba(246,244,238,.97);box-shadow:0 0 0 1px rgba(27,36,48,.12)}
+.person-bridge .unit-rule{display:flex;align-items:center;gap:18px;margin-top:26px;font:600 13px/1.5 var(--font-m)}
+.person-bridge .unit-rule:before,.person-bridge .unit-rule:after{content:"";width:72px;height:1px;background:rgba(246,244,238,.35)}
+.vote-evidence{max-width:none;background:#111820;color:#F6F4EE;padding-inline:max(28px,calc((100vw - 1080px)/2));isolation:isolate}
+.vote-evidence .lead,.vote-evidence .muted,.vote-evidence .source-note{color:rgba(246,244,238,.68)}
+.vote-evidence .k{color:var(--loud)}
+.vote-method{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:28px;background:rgba(246,244,238,.18);border:1px solid rgba(246,244,238,.18)}
+.vote-method article{padding:22px;background:#111820}
+.vote-method b{display:block;font:700 34px/1 var(--font-d);color:var(--loud)}
+.vote-method p{margin-top:8px;color:rgba(246,244,238,.7)}
+.vote-why{margin-top:24px;padding:20px 22px;border-left:4px solid var(--loud);background:rgba(246,244,238,.06);max-width:76ch}
+.vote-why b{color:var(--loud)}
+.unit-legend{display:flex;flex-wrap:wrap;gap:12px 24px;margin:24px 0 14px;font:500 12px/1.4 var(--font-m)}
+.unit-legend span{display:flex;align-items:center;gap:8px}
+.unit-legend i{position:relative;display:block;width:10px;height:12px;margin-top:5px;border-radius:4px 4px 3px 3px;background:#718096}
+.unit-legend i:before{content:"";position:absolute;left:1px;top:-6px;width:8px;height:8px;border-radius:50%;background:inherit}
+.unit-legend .accused i{background:var(--senate-blue-bright);box-shadow:none}
+.unit-chart{display:grid;grid-template-columns:1.6fr .8fr .65fr;gap:18px;align-items:end;margin-top:16px}
+.unit-group{height:100%;padding:20px;border-top:4px solid var(--group-color);background:rgba(246,244,238,.055)}
+.unit-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:18px}
+.unit-head h3{font-size:20px;margin:0;color:#F6F4EE}
+.unit-head b{font:700 32px/1 var(--font-d);color:var(--group-color)}
+.unit-head small{display:block;font:500 10px/1.35 var(--font-m);color:rgba(246,244,238,.58);text-align:right}
+.unit-dots{display:grid;grid-template-columns:repeat(var(--cols),minmax(7px,1fr));gap:5px 4px;align-content:end}
+.unit-person{display:block;width:100%;min-width:0;color:#718096}
+.unit-person.accused{color:var(--senate-blue-bright)}
+.unit-person svg{display:block;width:100%;height:auto;overflow:visible}
+.unit-person circle,.unit-person rect{fill:currentColor}
+.unit-reading{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.unit-reading article{padding-top:14px;border-top:1px solid rgba(246,244,238,.2)}
+.unit-reading b{display:block;font:700 30px/1.15 var(--font-d);color:var(--senate-blue-bright)}
+.unit-reading p{margin-top:7px;color:rgba(246,244,238,.68)}
+.dataset-note{margin-top:24px;padding-top:18px;border-top:1px solid rgba(246,244,238,.2);font:400 12px/1.65 var(--font-m);color:rgba(246,244,238,.62)}
+.vote-evidence .compare .metric{border-color:rgba(246,244,238,.2)}
+.vote-evidence .compare .metric.focus .big,.vote-evidence .compare .big{color:#F6F4EE}
+.vote-evidence .compare p{color:rgba(246,244,238,.68)}
+.vote-evidence .compare .vs{color:var(--loud)}
+.story-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;color:var(--ink);opacity:.22}
+.story-bg .bg-layer{position:absolute;inset:-8vh -8vw;opacity:0;transition:opacity .7s ease,transform .2s linear}
+.slide,#journey{position:relative;z-index:1}
+.bg-route{opacity:.45!important;transform:translateY(calc(var(--scroll-y,0) * -.018px))}
+.bg-route path{fill:none;stroke:currentColor;stroke-width:1;stroke-dasharray:3 7;vector-effect:non-scaling-stroke}
+.bg-route circle{fill:var(--gold)}
+.bg-ballots{transform:translate3d(calc(var(--scroll-y,0) * .012px),calc(var(--scroll-y,0) * -.035px),0) rotate(-4deg)}
+.bg-places{transform:translate3d(calc(var(--scroll-y,0) * -.01px),calc(var(--scroll-y,0) * -.022px),0)}
+.bg-evidence{transform:translate3d(calc(var(--scroll-y,0) * .006px),calc(var(--scroll-y,0) * -.016px),0)}
+.bg-evidence path{fill:none;stroke-width:2.2;vector-effect:non-scaling-stroke;transition:opacity .45s ease,stroke-width .45s ease}
+.bg-evidence circle{transition:opacity .45s ease,transform .45s ease;transform-box:fill-box;transform-origin:center}
+.bg-evidence .ev-money{stroke:var(--gold)}.bg-evidence .ev-phone{stroke:#B3261E}.bg-evidence .ev-place{stroke:var(--senate-blue);stroke-dasharray:5 8}
+.bg-evidence .ev-node{fill:var(--paper);stroke:currentColor;stroke-width:2}.bg-evidence .ev-node.hot{fill:var(--gold)}
+html[data-evidence-beat="money"] .bg-evidence .ev-phone,html[data-evidence-beat="money"] .bg-evidence .ev-place,
+html[data-evidence-beat="phone"] .bg-evidence .ev-money,html[data-evidence-beat="phone"] .bg-evidence .ev-place,
+html[data-evidence-beat="venue"] .bg-evidence .ev-money,html[data-evidence-beat="venue"] .bg-evidence .ev-phone{opacity:.1}
+html[data-evidence-beat] .bg-evidence .ev-node.hot{transform:scale(1.35)}
+.bg-flower{transform:translateY(calc(var(--scroll-y,0) * -.01px)) rotate(calc(var(--scroll-y,0) * .002deg));transform-origin:center}
+.bg-flower path,.bg-flower circle{fill:none;stroke:var(--senate-blue);stroke-width:2;vector-effect:non-scaling-stroke}.bg-flower circle{fill:var(--gold);stroke:var(--paper)}
+.bg-person{transform:translateY(calc(var(--scroll-y,0) * -.012px)) scale(.94)}
+.bg-chamber{transform:translateY(calc(var(--scroll-y,0) * -.009px)) scale(1.04)}
+.bg-case{display:grid;place-items:center;font:700 clamp(72px,18vw,220px)/1 var(--font-d);letter-spacing:-.06em;transform:translateY(calc(var(--scroll-y,0) * -.006px))}
+html[data-bg-scene="intro"] .bg-route,html[data-bg-scene="ballot"] .bg-ballots,html[data-bg-scene="place"] .bg-places,html[data-bg-scene="evidence"] .bg-evidence,html[data-bg-scene="flower"] .bg-flower,html[data-bg-scene="person"] .bg-person,html[data-bg-scene="chamber"] .bg-chamber,html[data-bg-scene="case"] .bg-case{opacity:1}
+html[data-bg-scene="ballot"] .bg-route,html[data-bg-scene="place"] .bg-route,html[data-bg-scene="evidence"] .bg-route,html[data-bg-scene="flower"] .bg-route,html[data-bg-scene="person"] .bg-route,html[data-bg-scene="chamber"] .bg-route,html[data-bg-scene="case"] .bg-route{opacity:.12!important}
+@media(max-width:720px){
+  .status-band{grid-template-columns:1fr;margin-block:5vh}.status-band>div{padding:18px 0;border-right:0;border-bottom:1px solid rgba(27,36,48,.18)}.status-band>div:last-child{border-bottom:0}
+  .venue-timeline{padding-left:72px}.venue-timeline:before{left:56px}.venue-timeline .vhit .k:before{width:52px;right:calc(100% + 28px);font-size:9px}
+  .bloc{grid-template-columns:1fr auto;gap:10px}.bloc-track{grid-column:1/-1;grid-row:2}.bloc-value{grid-column:2;grid-row:1}
+  .compare,.case-split,.standard{grid-template-columns:1fr}.compare .vs,.case-split .neq{transform:rotate(90deg);justify-self:center}
+  .motion{grid-template-columns:1fr;gap:6px}.standard .rail{min-height:90px}.standard .rail:before{left:20px;right:20px;top:50%;bottom:auto;width:auto;height:3px}
+  .standard .mark{top:18px!important;bottom:auto!important;width:42%;left:auto;right:auto}.standard .mark.low{left:0}.standard .mark.high{right:0}
+  .pattern-grid,.rank-pair,.vote-method,.unit-chart,.unit-reading,.turnout-stats,.process-steps,.case-rails,.legal-pair{grid-template-columns:1fr}.rank-pair{gap:18px}.rank-row{grid-template-columns:minmax(108px,1fr) 1fr auto}
+  .committee-row{grid-template-columns:1fr auto 1fr}.cycle-diagram{grid-template-columns:1fr}.cycle-arrow{transform:rotate(90deg);justify-self:center}.map-frame{height:980px}.flower-frame{height:78vh;min-height:620px}.flower-story{padding-inline:16px}.mechanism-section{margin-top:10vh;padding-top:10vh}.evidence-chapter{padding-inline:24px}.evidence-chapter h2{font-size:clamp(48px,14vw,76px)}
+  .bar62{grid-template-columns:1fr}.bar62>.col.l{border-right:0;border-bottom:1px solid rgba(27,36,48,.18)}.bar62>.col.r{border-left:0}.bar62 .thr{width:100%;padding:16px 18px 18px;border-bottom:1px solid rgba(27,36,48,.18)}.bar62 .thr .cap{text-align:left}.bar62 .thr-body{min-height:0;height:52px;padding:20px 0 0}.bar62 .thr-rail{left:0;right:0;top:20px;bottom:auto;width:auto;height:12px}.bar62 .thr-rail:before{background:repeating-linear-gradient(to right,transparent 0 13px,rgba(27,36,48,.18) 13px 14px)}.bar62 .thr-fill{top:0;bottom:0;left:0;right:auto;width:40%;height:auto;border-radius:5px 0 0 5px}.bar62 .thr-mark{top:0;bottom:-6px;left:auto;right:auto;width:0;border-top:0;border-left:2px solid var(--ink)}.bar62 .thr-mark.lo{left:40%;border-color:var(--gold)}.bar62 .thr-mark.hi{left:90%}.bar62 .thr-labs span{top:auto;bottom:100%;transform:none;white-space:nowrap}.bar62 .thr-labs .lo{left:40%;bottom:100%;transform:translateX(-40%)}.bar62 .thr-labs .hi{left:90%;bottom:100%;transform:translateX(-70%)}.bar62 .thr-labs .base{left:0;bottom:100%}.prec>div{grid-template-columns:1fr;gap:4px}
+  .tw .spine{left:14px}.tw .pin{left:14px}.tw .gov{left:0;width:3px}.tw .gov span{left:8px;font-size:9px}.tw .ev,.tw .ev.l,.tw .ev.r{left:34px;right:0;width:auto;text-align:left}.twsvg{display:none}.tw .yr{left:14px}.tw .trk{display:none}.tw .ev:before{content:attr(data-trk);display:block;font:500 9px/1.3 var(--font-m);letter-spacing:.06em;color:var(--muted)}
+  .unit-dots{grid-template-columns:repeat(15,minmax(5px,1fr))}.unit-group{padding:16px}.vote-evidence{padding-inline:20px}
+  .evidence-scrolly{display:block}.evidence-stick{top:0;height:44vh;z-index:2;margin-inline:-16px}.evidence-steps{padding-bottom:0}.evidence-step{position:relative;z-index:3;min-height:68vh;padding:38vh 0 18vh;background:linear-gradient(transparent 0 44%,rgba(246,244,238,.98) 62%)}
+  .prob-answer{padding:18px 16px}.prob-question-copy{font-size:19px}.prob-formula{padding:20px 14px}.prob-arabic{font-size:24px}
+  .mech-intro{grid-template-columns:1fr;gap:16px}.mech-grid{grid-template-columns:repeat(11,1fr);gap:4px;padding:14px}
+  #journey .svc-grid{display:block}
+  #journey .svc-stick{position:sticky;top:0;height:50vh;padding:8px 0;background:linear-gradient(var(--bg) 82%,rgba(232,229,220,0));z-index:2}
+  #journey .svc-stage{max-width:250px;max-height:38vh;padding:6px}
+  #journey .svc-cap{font-size:13px;min-height:28px}
+  #journey .svc-step{position:relative;z-index:3;min-height:68vh;margin:0 0 16vh;padding:38vh 18px 28px;opacity:.28;background:linear-gradient(transparent 0 48%,rgba(232,229,220,.97) 66%)}
+  #journey .svc-step.on{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  .story-bg .bg-layer{transition:none!important;transform:none!important}.bob{animation:none}
+}
+
+</style>
+</head>
+<body>
+
+<div class="story-bg" aria-hidden="true">
+  <svg class="bg-layer bg-route" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice"><path d="M-80 680C130 520 210 690 390 510S710 290 1080 410"/><path d="M-40 170C180 310 300 110 520 230S810 580 1060 620"/><circle cx="390" cy="510" r="7"/><circle cx="720" cy="350" r="7"/></svg>
+  <svg class="bg-layer bg-ballots" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice">
+    <g fill="#F6F4EE" stroke="currentColor" stroke-width="2"><rect x="70" y="160" width="260" height="360" rx="8"/><rect x="390" y="50" width="260" height="360" rx="8"/><rect x="710" y="250" width="260" height="360" rx="8"/></g>
+    <g fill="currentColor" font-family="monospace" font-size="24" opacity=".8"><text x="112" y="220">148 137 126</text><text x="112" y="270">111 107 095</text><text x="112" y="320">084 049 014</text><text x="432" y="110">104 091 076</text><text x="432" y="160">058 035 011</text><text x="752" y="310">144 122 093</text><text x="752" y="360">067 043 020</text></g>
+    <g fill="var(--gold)"><rect x="105" y="340" width="74" height="14"/><rect x="425" y="180" width="74" height="14"/><rect x="745" y="380" width="74" height="14"/></g>
+  </svg>
+  <svg class="bg-layer bg-places" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="210" cy="230" r="90"/><circle cx="505" cy="430" r="150"/><circle cx="815" cy="255" r="70"/><path d="M280 280L390 360M640 380L750 290" stroke-dasharray="7 9"/></g><g fill="var(--gold)"><circle cx="210" cy="230" r="14"/><circle cx="505" cy="430" r="18"/><circle cx="815" cy="255" r="12"/></g></svg>
+  <svg class="bg-layer bg-evidence" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice">
+    <path class="ev-money" d="M70 650H260V520H440V390H650"/><path class="ev-phone" d="M170 190Q470 20 790 260Q620 470 870 590"/><path class="ev-place" d="M120 360C300 250 400 600 580 480S780 190 940 300"/>
+    <g class="ev-node"><circle cx="70" cy="650" r="12"/><circle cx="260" cy="520" r="12"/><circle cx="440" cy="390" r="12"/><circle cx="790" cy="260" r="12"/><circle cx="870" cy="590" r="12"/><circle cx="580" cy="480" r="12"/></g><circle class="ev-node hot" cx="650" cy="390" r="16"/>
+  </svg>
+  <svg class="bg-layer bg-flower" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"><g transform="translate(500 410)"><path d="M0-250C90-245 165-170 160-80C245-80 300 0 250 75C320 155 230 235 145 210C105 300-15 300-55 215C-145 270-245 205-220 115C-315 65-280-50-190-75C-210-170-100-245 0-250Z"/><path d="M0-165C65-165 112-112 105-52C168-45 190 30 145 72C175 135 100 180 42 145C-8 200-85 160-82 95C-150 72-145-12-82-38C-92-105-45-158 0-165Z"/><circle cx="0" cy="0" r="42"/><circle cx="0" cy="-165" r="9"/><circle cx="145" cy="72" r="9"/><circle cx="-82" cy="95" r="9"/></g></svg>
+  <svg class="bg-layer bg-person" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"><circle cx="500" cy="185" r="72" fill="currentColor"/><path d="M500 275q105 0 125 90l20 245H355l20-245q20-90 125-90Z" fill="#B9B2A2"/><rect x="442" y="380" width="116" height="145" rx="8" fill="var(--gold)"/><path d="M460 415h80M460 445h80M460 475h55" stroke="currentColor" stroke-width="9" stroke-linecap="round"/></svg>
+  <svg class="bg-layer bg-chamber" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"><g fill="none" stroke="currentColor" stroke-width="3"><path d="M155 650A345 345 0 0 1 845 650"/><path d="M215 650A285 285 0 0 1 785 650"/><path d="M280 650A220 220 0 0 1 720 650"/><path d="M345 650A155 155 0 0 1 655 650"/></g><g fill="var(--gold)"><circle cx="232" cy="458" r="8"/><circle cx="350" cy="365" r="8"/><circle cx="500" cy="335" r="8"/><circle cx="650" cy="365" r="8"/><circle cx="768" cy="458" r="8"/></g></svg>
+  <div class="bg-layer bg-case"><span>229 ≠ 229</span></div>
+</div>
+
+
+<section class="slide full">
+  <div class="k">คดีฮั้ว ส.ว. 2567</div>
+  <div class="nums" style="margin:28px 0 20px"><b>229</b><span class="neq">≠</span><b>229</b></div>
+  <p>เลขเท่ากันทั้งสองฝั่ง · แต่คำตอบไม่เท่ากัน</p>
+  <div class="bob">↓</div>
+</section>
+
+<section class="slide">
+  <h2>สำนวนเดียวกัน<br>ทำไมได้สองคำตอบ</h2>
+  <p class="muted">วันหนึ่ง คณะกรรมการชุดหนึ่งชี้มูลคน 229 คน · อีกวันหนึ่ง คณะกรรมการอีกชุดยกคำร้องคนกลุ่มเดียวกันทั้ง 229 · คนเดิม สำนวนเดิม</p>
+</section>
+
+
+<section class="slide wide" id="case-status">
+  <div class="status-band" aria-label="สถานะสำนวนล่าสุด">
+    <div><span class="label">ผู้ถูกกล่าวหา</span><b class="value gold">229 คน</b><small>ส.ว. 138 · เครือข่าย 91</small></div>
+    <div><span class="label">สถานะทางกฎหมาย</span><b class="value legal">ยังไม่มีคำพิพากษา</b><small>ทุกชื่อในหน้านี้อยู่ในสถานะถูกกล่าวหา</small></div>
+    <div><span class="label">ขั้นต่อไป</span><b class="value">กกต. เจ็ดคน</b><small>นัดชี้ขาด 14 ก.ย. 2569</small></div>
+  </div>
+</section>
+
+
+<section class="slide">
+  <div class="nums" style="gap:24px;flex-wrap:wrap">
+    <div class="card"><div class="k">กกต.</div><h2 style="font-size:28px">อันควรเชื่อได้</h2></div>
+    <span class="neq">≠</span>
+    <div class="card"><div class="k">ศาล</div><h2 style="font-size:28px">พิสูจน์แล้ว</h2></div>
+  </div>
+  <p class="muted" style="margin-top:22px;text-align:center">ชื่อที่ปรากฏคือผู้ที่ถูกกาในบัตร ไม่ใช่ผู้ที่กาบัตร</p>
+</section>
+
+<section class="slide full dark">
+  <div class="k">เริ่มจากบัตร</div>
+  <h2>วันนับคะแนน ใบแล้วใบเล่า<br>เขียนเลขชุดเดิม</h2>
+</section>
+
+
+<section class="slide wide evidence-surface prob-question" id="two-ballot-probability">
+  <div class="k">บังเอิญได้ไหม</div>
+  <h2>ก่อนจะตอบ ต้องเห็นก่อนว่า<br>บัตรใบหนึ่งทำงานอย่างไร</h2>
+  <div class="mech-intro">
+    <div class="mech-grid" id="ballot-mechanism" role="img" aria-label="ผู้สมัคร 154 คน จุดสีเหลืองสิบจุดคือสิบคนที่ถูกเลือกในบัตรหนึ่งใบ"></div>
+    <p class="mech-read"><b>หนึ่งบัตร เลือกสิบคน</b>ผู้สมัครหนึ่งคนเขียนได้สิบหมายเลข จากผู้สมัคร 154 คนในกลุ่มเดียวกัน จุดทองคือสิบคนที่ถูกเลือก</p>
+  </div>
+  <h2 style="margin-top:44px">เป็นไปได้ไหม<br>ที่บัตรสองใบจะเหมือนกัน?</h2>
+  <p class="prob-question-copy">กำหนดให้บัตรใบแรกเลือกอะไรก็ได้ แล้ว <mark class="marker">ใบที่สอง</mark> จะ <mark class="marker">เลือกคนสิบคนเดิมตามใบแรก</mark> และ <mark class="marker">เขียนตรงตำแหน่งเดิมให้ครบ</mark> ทั้งหมด</p>
+  <div class="prob-answer">
+    <div class="k">แค่สองใบ ต้องใช้ความน่าจะเป็น</div>
+    <div class="prob-arabic">1 ใน 5,566,857,732,147,162,528,000</div>
+    <p class="prob-read"><b>อ่านว่า</b> หนึ่งในห้าพันห้าร้อยหกสิบหกล้านล้านล้าน แปดแสนห้าหมื่นเจ็ดพันเจ็ดร้อยสามสิบสองล้านล้าน หนึ่งแสนสี่หมื่นเจ็ดพันหนึ่งร้อยหกสิบสองล้าน ห้าแสนสองหมื่นแปดพัน</p>
+    <p style="margin-top:12px">จึงจะเกิดการซ้ำแบบนี้ขึ้นหนึ่งครั้ง ภายใต้แบบจำลองการสุ่ม</p>
+  </div>
+</section>
+
+
+<section class="slide">
+  <div class="k">กลุ่ม 01</div>
+  <h2>บัตรยี่สิบใบนี้<br>เขียนเลขเหมือนกันทุกตัว</h2>
+  <p class="muted">ช่องทองคือหมายเลข 84 · มงคล สุระสัจจะ</p>
+  <div style="margin:12px 0 8px">
+    <span class="num">148</span><span class="num">137</span><span class="num">126</span><span class="num">111</span><span class="num">107</span>
+    <span class="num">95</span><span class="num hit">84</span><span class="num">49</span><span class="num">14</span><span class="num">7</span>
+  </div>
+  <div id="slips"></div>
+</section>
+
+
+<section class="slide wide prob-escalation" id="twenty-ballot-probability">
+  <div class="k">แต่ภาพเมื่อกี้มี 20 ใบ</div>
+  <h2>อีกสิบเก้าใบ<br>ต้องซ้ำใบแรกทั้งหมด</h2>
+  <p class="lead">เมื่อแต่ละใบมีโอกาสตรงกับใบแรก 1 ใน 5,566,857,732,147,162,528,000 โอกาสที่อีก 19 ใบจะตรงพร้อมกันจึงต้องคูณโอกาสเดิม 19 ครั้ง</p>
+  <div class="prob-formula">
+    <div class="formula">(1 ÷ 5,566,857,732,147,162,528,000)<sup>19</sup><br>≈ 1 ใน 1.468 × 10<sup>413</sup></div>
+    <div class="spoken"><b>อ่านว่า</b> ประมาณหนึ่งในหนึ่งจุดสี่หกแปด คูณสิบยกกำลังสี่ร้อยสิบสาม</div>
+  </div>
+  <details class="prob-exact"><summary>ดูตัวส่วนเต็ม 414 หลัก</summary><code>146,754,804,405,549,292,253,828,302,657,095,168,308,726,708,107,829,650,067,265,414,287,702,503,511,064,915,461,383,017,540,773,650,306,318,052,394,913,478,352,795,668,262,682,289,282,815,260,950,328,283,886,676,956,125,270,718,051,872,769,220,236,143,898,146,822,484,175,017,644,136,198,104,559,874,754,590,412,185,239,220,226,818,730,556,368,781,374,812,565,814,382,523,140,222,635,759,825,047,932,819,207,989,259,987,545,770,609,118,443,622,921,635,586,896,611,080,404,992,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000</code></details>
+  <p class="prob-assumption"><b>สมมติฐานของตัวเลขนี้:</b> ผู้เลือก 20 คนสุ่มอย่างเป็นอิสระ ทุกแบบมีโอกาสเท่ากัน เลือกจากผู้สมัคร 154 คน และนับตำแหน่งของเลขทั้งสิบเป็นส่วนหนึ่งของผลลัพธ์ นี่คือความน่าจะเป็นภายใต้แบบจำลองสุ่ม ไม่ใช่คำพิสูจน์โดยลำพังว่ามีการนัดหมาย</p>
+</section>
+
+
+
+<section class="slide wide evidence-surface" id="more-ballots">
+  <div class="k">เลขครบสิบ · ที่เปิดเผยสี่กลุ่ม</div>
+  <h2>และไม่ใช่กลุ่มเดียว</h2>
+  <p class="lead">อีกสามกลุ่มที่เปิดเลขครบ พบชุดเดิมซ้ำโดยไม่สลับตำแหน่งแม้แต่ครั้งเดียว ตัวเลขด้านล่างคือคะแนนที่มาจากบัตรชุดเดียวกัน เทียบกับคะแนนทั้งหมดของบุคคลตัวอย่าง</p>
+  <div class="pattern-grid">
+    <article class="pattern"><span class="copies">23 ใบ</span><h3>กลุ่ม 11 · ท่องเที่ยว</h3><p>หมายเลข 104 · วุฒิชาติ กัลยาณมิตร</p><figure class="pattern-ballot" data-ballot-group="11" role="img" aria-label="บัตร 23 ใบเขียนเลขชุดเดียวกัน 141 131 130 104 83 81 76 75 53 10 โดยเน้นหมายเลข 104"></figure><div class="score"><span>เลือกกันเอง</span><b>31/35</b><span>เลือกไขว้</span><b>58/73</b></div><div class="pattern-prob">ถ้าสุ่มอย่างเป็นอิสระและนับตำแหน่ง<b>23 ใบ ≈ 1 ใน 2.532 × 10<sup>478</sup></b></div></article>
+    <article class="pattern"><span class="copies">21 ใบ</span><h3>กลุ่ม 19 · อาชีพอิสระ</h3><p>หมายเลข 3 · เกศกมล เปลี่ยนสมัย</p><figure class="pattern-ballot" data-ballot-group="19" role="img" aria-label="บัตร 21 ใบเขียนเลขชุดเดียวกัน 152 123 122 108 49 22 10 5 3 2 โดยเน้นหมายเลข 3"></figure><div class="score"><span>เลือกกันเอง</span><b>31/35</b><span>เลือกไขว้</span><b>45/79</b></div><div class="pattern-prob">ถ้าสุ่มอย่างเป็นอิสระและนับตำแหน่ง<b>21 ใบ ≈ 1 ใน 8.170 × 10<sup>434</sup></b></div></article>
+    <article class="pattern"><span class="copies">21 ใบ</span><h3>กลุ่ม 20 · อื่น ๆ</h3><p>หมายเลข 144 · อลงกต วรกี</p><figure class="pattern-ballot" data-ballot-group="20" role="img" aria-label="บัตร 21 ใบเขียนเลขชุดเดียวกัน 144 133 106 100 91 85 65 37 31 4 โดยเน้นหมายเลข 144"></figure><div class="score"><span>เลือกกันเอง</span><b>26/43</b><span>เลือกไขว้</span><b>58/67</b></div><div class="pattern-prob">ถ้าสุ่มอย่างเป็นอิสระและนับตำแหน่ง<b>21 ใบ ≈ 1 ใน 8.170 × 10<sup>434</sup></b></div></article>
+  </div>
+</section>
+
+
+<section class="slide">
+  <div class="k">ถ้าไม่นับตำแหน่งของเลข</div>
+  <h2>เหลือ 1,534 ล้านล้าน<br>ชุดที่เป็นไปได้</h2>
+  <p class="lead">ค่านี้นับเพียงการเลือกคนสิบคนจากผู้สมัคร 154 คน โดยถือว่าการเขียนคนชุดเดียวกันในลำดับต่างกันเป็นผลลัพธ์เดียวกัน จึงเป็นตัวเลขที่ระวังกว่าค่าแบบนับตำแหน่ง</p>
+</section>
+
+
+<section class="slide evidence-surface" id="probability-context">
+  <div class="k">ทำไมตัวเลขความน่าจะเป็นมีสองค่า</div>
+  <h2>ใช้ค่าที่ระวังที่สุด<br>ข้อสรุปก็ยังไม่เปลี่ยน</h2>
+  <div class="prob-ladder">
+    <div class="prob-step"><b>1,534 ล้านล้านวิธี</b><p>นับเพียงว่าเลือกคนสิบคนชุดเดียวกันจากผู้สมัคร 154 คน โดยไม่ถือว่าลำดับที่เขียนเป็นหลักฐานเพิ่ม</p></div>
+    <div class="prob-step focus"><b>1,341 ล้านล้านวิธี</b><p>ถ้าใช้จำนวนผู้สมัครจริงของกลุ่ม 1 คือ 152 คน จำนวนวิธีลดลงราว 14% แต่ยังอยู่ในระดับเดียวกัน</p></div>
+    <div class="prob-step"><b>5,567 ล้านล้านล้านวิธี</b><p>ค่าที่แหล่งระบุเมื่อนับลำดับการเขียนด้วย สูงกว่าค่าแบบระวังราว 3.6 ล้านเท่า</p></div>
+  </div>
+</section>
+
+
+
+<section class="slide wide evidence-surface" id="how-many-people">
+  <div class="k">มีมากแค่ไหน</div>
+  <h2>ทุกขีดคือหนึ่งคน<br>ที่มารายงานตัวระดับประเทศ</h2>
+  <p class="lead">ขีดทองคือคนที่เขียนเลขเป็นชุดเดียวกัน ขีดเข้มคือคนที่ลงคะแนนอิสระหรือเกาะกลุ่มเล็ก</p>
+  <div class="turnout-strip" id="turnout-strip" role="img" aria-label="ผู้มารายงานตัว 2,988 คน แบ่งเป็นผู้ลงคะแนนเป็นชุดเดียวกัน 1,157 คน และลงคะแนนอิสระหรือเกาะกลุ่มเล็ก 1,831 คน"></div>
+  <div class="turnout-stats">
+    <article><b>1,157 คน · 39%</b><p>ลงคะแนนเป็นชุดเดียวกัน</p></article>
+    <article><b>1,831 คน</b><p>ลงคะแนนอิสระหรือเกาะกลุ่มเล็ก</p></article>
+  </div>
+  <div class="caveat"><b>ครบทั้งยี่สิบกลุ่มอาชีพ ไม่มีข้อยกเว้น</b> ความน่าจะเป็นด้านบนคำนวณต่อ “ชุดบัตรที่เหมือนกัน” ไม่ได้นำคน 1,157 คนไปยกกำลังรวมกัน เพราะแต่ละกลุ่มมีจำนวนผู้สมัครและขนาดชุดซ้ำต่างกัน</div>
+</section>
+
+
+<section class="slide wide">
+  <h2>ครบทั้งยี่สิบกลุ่มอาชีพ</h2>
+  <p class="muted" style="margin-bottom:14px">แถบทอง = สัดส่วนบัตรชุด A ในกลุ่ม</p>
+  <div id="groups"></div>
+</section>
+
+
+<section class="slide wide evidence-surface" id="province-context">
+  <div class="k">สองชั้นบนแผนที่เดียวกัน</div>
+  <h2>ความเข้มข้นผู้สมัคร × คนในคดี<br>รายจังหวัด</h2>
+  <p class="lead"><b>น้ำตาล</b>คือผู้สมัครในเอกสารพีระมิดต่อประชากรหนึ่งแสนคน <b>วงทอง</b>คือจังหวัดที่ฐานมีเส้นเงินหรือคำให้การ ความเข้มข้นผู้สมัครไม่ใช่แผนที่การว่าจ้าง</p>
+  <iframe class="embed-frame map-frame" src="hua_province_compare_embed.html?v=51" loading="lazy" title="แผนที่ประเทศไทยสำหรับสลับดูความเข้มข้นผู้สมัครและจำนวนคนในคดีรายจังหวัด"></iframe>
+  <h3 style="margin-top:34px">อ่านสองชั้นแยกกัน</h3>
+  <div class="rank-pair">
+    <div><h3>ผู้สมัครต่อประชากรหนึ่งแสนคน</h3>
+      <div class="rank-row"><span>อ่างทอง</span><span class="rank-bar"><i style="--w:100%"></i></span><b>222.5</b></div>
+      <div class="rank-row"><span>สตูล</span><span class="rank-bar"><i style="--w:94%"></i></span><b>209.5</b></div>
+      <div class="rank-row"><span>มุกดาหาร</span><span class="rank-bar"><i style="--w:90%"></i></span><b>201.1</b></div>
+      <div class="rank-row"><span>พระนครศรีอยุธยา</span><span class="rank-bar"><i style="--w:75%"></i></span><b>166.1</b></div>
+      <div class="rank-row"><span>เพชรบุรี</span><span class="rank-bar"><i style="--w:65%"></i></span><b>145.4</b></div>
+    </div>
+    <div class="case"><h3>คนในคดีที่ระบุจังหวัดในฐาน</h3>
+      <div class="rank-row"><span>สุราษฎร์ธานี</span><span class="rank-bar"><i style="--w:100%"></i></span><b>19</b></div>
+      <div class="rank-row"><span>บุรีรัมย์</span><span class="rank-bar"><i style="--w:84%"></i></span><b>16</b></div>
+      <div class="rank-row"><span>เพชรบุรี</span><span class="rank-bar"><i style="--w:58%"></i></span><b>11</b></div>
+      <div class="rank-row"><span>อ่างทอง</span><span class="rank-bar"><i style="--w:42%"></i></span><b>8</b></div>
+      <div class="rank-row"><span>สงขลา</span><span class="rank-bar"><i style="--w:37%"></i></span><b>7</b></div>
+    </div>
+  </div>
+  <div class="caveat"><b>ความเข้มข้นผู้สมัครไม่ใช่แผนที่การว่าจ้าง</b> และจำนวนคนที่ระบุจังหวัดได้ขึ้นกับขอบเขตข้อมูลในฐาน ไม่ใช่จำนวนผู้เกี่ยวข้องทั้งหมด</div>
+</section>
+
+
+
+<section class="slide full evidence-chapter" id="evidence-intro">
+  <div class="evidence-chapter-copy">
+    <p class="evidence-chapter-bridge">แผนที่พาเราเห็นว่าพื้นที่ไหนมีความเข้มข้นผิดสังเกต</p>
+    <h2>จากพื้นที่<br>สู่สิ่งที่สำนวน<br>ใช้เชื่อมคน</h2>
+    <p class="lead">แต่ตำแหน่งบนแผนที่ยังไม่บอกว่าใครทำอะไร เรื่องจึงต้องเปลี่ยนจากการมองพื้นที่ มาอ่านร่องรอยที่วางคน เงิน การติดต่อ และสถานที่ไว้บนเวลาเดียวกัน</p>
+  </div>
+</section>
+
+
+
+<section class="slide wide evidence-story" id="evidence-board">
+  <div class="k">หลักฐานสามชั้น</div>
+  <h2>แผนที่บอกว่าควรมองที่ไหน<br>แต่ยังไม่บอกว่าเกิดอะไรขึ้น</h2>
+  <p class="lead">สำนวนจึงต้องอาศัยหลักฐานคนละชนิดมาประกอบกัน เลื่อนอ่านทีละแผ่น: รายการโอนบอกเส้นทางเงิน ประวัติโทรบอกการติดต่อ และสถานที่วางคำให้การกับโพยลงบนเวลาเดียวกัน</p>
+  <div class="evidence-scrolly">
+    <div class="evidence-steps">
+      <article class="evidence-step on" data-panel="money">
+        <span class="step-no">01 · รายการโอน</span><h3>เงินเดินเป็นสองสาย</h3>
+        <span class="evidence-number">2.17 ล้าน</span>
+        <p>วรพจน์โอนให้เจ็ดคนในเส้นใต้ 31 รายการ ขณะอีกสายหนึ่ง ญาณีโอนให้สุรชัยรวม 860,000 บาท 13 ครั้ง ความหนาของเส้นในกราฟแทนยอดเงิน</p>
+        <div class="caveat"><b>รายการโอนยืนยันว่าเงินเคลื่อน</b> แต่ยังไม่ยืนยันว่าเป็นค่าจ้างลงคะแนน</div>
+      </article>
+      <article class="evidence-step" data-panel="phone">
+        <span class="step-no">02 · ประวัติโทร</span><h3>บางคนกลายเป็นจุดรวมของสาย</h3>
+        <span class="evidence-number">76 ครั้ง</span>
+        <p>ชื่อภราดรปรากฏในกราฟการติดต่ออย่างน้อยเจ็ดคู่สาย ภายในหน้าต่าง 16 มิถุนายน–15 กันยายน 2567 และมีฮับอื่นปรากฏอยู่ในช่วงเดียวกัน</p>
+        <div class="caveat"><b>ประวัติโทรบอกว่าใครติดต่อใคร</b> ไม่ได้บอกเนื้อหาที่คุยกัน</div>
+      </article>
+      <article class="evidence-step" data-panel="venue">
+        <span class="step-no">03 · สถานที่และโพย</span><h3>ชื่อคนกลับมาอยู่ในห้องและช่วงเวลา</h3>
+        <span class="evidence-number">140 เลข</span>
+        <p>แผ่นสุดท้ายโยงคนกับห้องแจกซอง สนามฟุตบอล โรงแรม และโพยที่ปรากฏในนิทรรศการ หลักฐานแต่ละชิ้นไม่ได้อยู่ชั้นเวลาเดียวกัน จึงต้องอ่านต่อกับเส้นเวลาสถานที่ด้านล่าง</p>
+        <div class="caveat"><b>โพยที่แสดงคือแพตเทิร์นซ้ำ</b> ไม่ใช่สำเนาบัตรลงคะแนนใบใดใบหนึ่ง</div>
+      </article>
+    </div>
+    <div>
+      <div class="evidence-stick"><iframe id="evidence-board-frame" class="evidence-frame" src="hv_connect_board.html?embed=1&amp;panel=money&amp;v=3" loading="lazy" title="กราฟสามแผ่นหลักฐาน แสดงรายการโอน ประวัติโทร และความเชื่อมโยงกับสถานที่"></iframe></div>
+      <p class="evidence-cap"><span><b>ทอง</b> รายการโอน</span><span><b style="color:#A51C2A">แดง</b> ประวัติโทร</span><span><b style="color:#24449C">น้ำเงิน</b> สถานที่</span></p>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide">
+  <div class="k">เส้นเวลาสถานที่</div>
+  <h2>ห้องที่จดโพย<br>กับโรงที่รวมตัวหลังเลือก</h2>
+  <p class="lead">ก่อนเลือกมีห้องจดโพย หลังเลือกมีโรงรวมตัว คนละชั้นเวลาแต่อยู่ในเส้นเดียวกัน กดชื่อโรงเพื่อเปิดแฟ้มชื่อคนในสำนวน</p>
+  <div id="hotels" class="venue-timeline"></div><p class="venue-sources">อ้างอิง: <a href="https://www.ilaw.or.th/articles/58992" target="_blank" rel="noopener">iLaw · สีน้ำเงิน</a> · <a href="https://www.ilaw.or.th/articles/59104" target="_blank" rel="noopener">กรุงศรีริเวอร์</a> · <a href="https://www.ilaw.or.th/articles/58889" target="_blank" rel="noopener">ธาราแกรนด์</a> · <a href="https://www.ilaw.or.th/articles/59166" target="_blank" rel="noopener">มารวย / อ่างทอง</a> · <a href="https://thestandard.co/ilaw-bhumjaithai-senator-collusion/" target="_blank" rel="noopener">พูลแมน</a></p>
+</section>
+
+<section class="slide wide mechanism-section" id="collusion-mechanism">
+  <div class="k">กลไก</div>
+  <h2>ทำยังไงถึง ฮั้วได้</h2>
+  <div id="collusion" style="display:flex;justify-content:center;margin:8px 0 18px"></div>
+  <div class="cards">
+    <div class="card"><div class="k">①</div><b>จัดหา / ดีลเลอร์</b><p class="muted">ชวนผู้สมัครเข้าสาย</p></div>
+    <div class="card"><div class="k">②</div><b>ศูนย์ทำโพย</b><p class="muted">จดหมายเลขลง สว.3</p></div>
+    <div class="card"><div class="k">③</div><b>วันเลือก</b><p class="muted">คืนโพย + เครื่องแบบ</p></div>
+  </div>
+</section>
+
+
+<section class="slide wide flower-story" id="hua-flower">
+  <div class="k">จากกลไกสู่คนในสำนวน</div>
+  <h2>จากสามขั้น<br>สู่วงในของสำนวน</h2>
+  <p class="lead">คำให้การหลายพื้นที่เล่าทิศทางเดียวกัน: มีคนจัด มีห้องทำโพย และมีคนถือหมายเลขเข้าไปลงคะแนน โดยไม่จำเป็นต้องรู้ว่าเลขนั้นเป็นของใคร</p>
+  <div class="process-steps">
+    <article><span class="step-no">①</span><h3>จัดหา / ดีลเลอร์</h3><p>สส. พื้นที่หรือเครือข่ายใกล้ชิดชวนผู้สมัครเข้าสาย</p></article>
+    <article><span class="step-no">②</span><h3>ศูนย์ทำโพย</h3><p>รวมตัวก่อนเลือกระดับประเทศ เก็บโทรศัพท์ และจดหมายเลขลงเอกสาร สว.3</p></article>
+    <article><span class="step-no">③</span><h3>วันเลือก</h3><p>คืนโพย สวมเครื่องแบบ และเข้าห้องโหวตตามหมายเลขที่จดไว้</p></article>
+  </div>
+  <h3 style="margin-top:42px">ดอกฮั้ว ส.ว. · 229 คน</h3>
+  <p class="lead">ยิ่งอยู่ใกล้แกนกลาง ยิ่งอยู่ในชั้นที่สำนวนชุดที่ 26 อ้างว่าใกล้การจัดโพย ภาพนี้เป็นโครงสร้างข้อกล่าวหา ไม่ใช่คำพิพากษา</p>
+  <iframe id="hua-flower-frame" class="embed-frame flower-frame" src="bloom_closed.html?variant=morph&amp;sat=nudge&amp;embed=1&amp;interact=1&amp;captions=e1&amp;layout=d3&amp;cam=close&amp;zoom=B&amp;v=116" loading="lazy" title="ดอกฮั้ว สว. แสดงผู้ถูกกล่าวหา 229 คนตามชั้นในสำนวน"></iframe>
+  <aside class="flower-key" aria-label="คำอธิบายกราฟดอกฮั้ว">
+    <div class="fk-title">คำอธิบายกราฟ</div>
+    <p class="fk-read">แต่ละจุดคือผู้ถูกกล่าวหา 1 คนในสำนวน กกต. ชุดที่ 26 · พื้นน้ำเงินกลาง = พรรคภูมิใจไทย · จุดกระจายในพื้น ไม่เรียงเป็นวง · กลีบนอก = ชั้นปฏิบัติการ · ล้อเลื่อนจะมอร์ฟเป็นพีระมิด 3 ชั้น (ภท. · สว. · ผู้สมัคร)</p>
+    <ul class="fk-layers">
+      <li><i class="core" aria-hidden="true"></i>แกน ภท. · นายก/รมต./สส. (24)</li>
+      <li><i class="room" aria-hidden="true"></i>วอร์รูม · ผู้จัดพื้นที่ (12)</li>
+      <li><i class="money" aria-hidden="true"></i>โพย · เงิน (14)</li>
+      <li><i class="sv" aria-hidden="true"></i>สว. ผู้ได้ประโยชน์ (131)</li>
+      <li><i class="cand" aria-hidden="true"></i>ผู้สมัคร / สว.สำรอง (48)</li>
+    </ul>
+    <div class="fk-marks">
+      <span><b class="mk-red">ขอบแดง</b> = iLaw ยื่นตรง</span>
+      <span><b class="mk-gold">ขอบทอง</b> = มีบทบาทคดีเจาะจง</span>
+      <span><b>*</b> = จากเอกสารรั่วไหล (ยังไม่ใช่มติบอร์ด)</span>
+      <span>คนนอกคอลัมน์ขวา = ถูกเอ่ยในสำนวนแต่ไม่อยู่ในลิสต์ 229</span>
+    </div>
+    <p class="fk-use"><b>คลิกจุด</b> เปิดแฟ้มคน · <b>ล้อเลื่อน</b> มอร์ฟดอก→พีระมิด · <b>ลากพื้น</b> แพน · Shift+ล้อ แพน · ดับเบิลคลิกพื้น รีเซ็ตแพน</p>
+  </aside>
+</section>
+
+
+<div id="journey">
+  <div class="svc-grid">
+    <div class="svc-stick">
+      <div class="svc-stage" id="svc-stage"></div>
+      <div class="svc-cap" id="svc-cap"></div>
+    </div>
+    <div>
+      <div class="svc-step" data-svc="0"><div class="k">01 · ผู้สมัคร</div><h3>เริ่มจากคนธรรมดา</h3><p>ทุกคนที่จะเป็น ส.ว. เริ่มต้นเหมือนกันหมด — คนหนึ่งคน ยังไม่มีตำแหน่ง ยังไม่มีของในมือ</p></div>
+      <div class="svc-step" data-svc="1"><div class="k">02 · ห้องโพย</div><h3>เข้าห้องโพย จดเลขลงแผ่น</h3><p>มีเอกสารในมือ เริ่มเป็นส่วนหนึ่งของกระบวนการ ทุกอย่างยังดูเป็นทางการและเงียบ</p></div>
+      <div class="svc-step" data-svc="2"><div class="k">03 · วันเลือก</div><h3>วันเลือก — สวมเครื่องแบบ</h3><p>แถบน้ำเงินพาดตัว บอกว่าเขาผ่านเข้ามาแล้ว จากคนธรรมดากลายเป็นตัวเลือกในระบบ</p></div>
+      <div class="svc-step" data-svc="3"><div class="k">04 · ได้ที่นั่ง</div><h3>ได้ที่นั่ง ลงมติในสภา</h3><p>สีเข้มขึ้น มีม้านั่งรองรับ เขากลายเป็นหนึ่งเสียงที่ตัดสินใจแทนคนอื่นได้แล้ว</p></div>
+      <div class="svc-step" data-svc="4"><div class="k">05 · ถอยออกมามอง</div><h3>แต่เขาไม่ใช่คนเดียว</h3><p>ถอยกล้องออกมา ตัวคนหนึ่งกลายเป็นหลายร้อย — ทุกคนเดินเส้นทางเดียวกันมาจนถึงห้องนี้</p></div>
+      <div class="svc-step" data-svc="5"><div class="k">06 · เต็มสภา</div><h3>200 ที่นั่ง · หนึ่งผัง</h3><p>สีน้ำเงินอยู่ต่อกันด้านเดียว: ส.ว. 138 คน (69%) อยู่ในรายชื่อผู้ถูกกล่าวหา เทียบกับสีเข้ม 62 คน (31%) ที่เหลือ</p></div>
+    </div>
+  </div>
+</div>
+
+
+<section class="slide act-break dark">
+  <div class="k">แล้วพอได้ที่นั่ง</div>
+  <h2>จากรายชื่อในคดี<br>สู่พฤติกรรมในสภา</h2>
+  <p class="lead">คำถามต่อไปไม่ใช่แค่ว่าใครได้ที่นั่ง แต่คือเมื่อเข้ามาแล้ว สมาชิกลงมติเป็นก้อนเดียวกันหรือไม่</p>
+</section>
+
+<section class="slide vote-evidence" id="after-seat">
+  <div class="k">หลักฐานหลังรับตำแหน่ง · ข้อมูลสองชุด</div>
+  <h2>สภานี้แบ่งเป็นสามกลุ่ม</h2>
+  <p class="lead">iLaw แกะกลุ่มสมาชิกจากผลลงมติที่เปิดเผย 189 ครั้ง รวมการประชุมร่วมรัฐสภา แต่ไม่นับการเห็นชอบผู้ดำรงตำแหน่งซึ่งลงมติลับ แล้วเทียบสมาชิกแต่ละกลุ่มกับรายชื่อผู้ถูกกล่าวหาในคดี</p>
+  <div class="vote-method">
+    <article><b>189 ครั้ง</b><p>ชุดข้อมูลของ iLaw ใช้จัดสมาชิกเป็นสามกลุ่มตามรูปแบบการลงมติ</p></article>
+    <article><b>52 ครั้ง · แตกเสียง 34</b><p>ชุดตรวจซ้ำจาก Politigraph ช่วงสิงหาคม 2567–เมษายน 2568 ใช้คำนวณความเหมือนรายคู่ด้านล่าง</p></article>
+  </div>
+  <div class="vote-why"><b>ทำไมการลงมติจึงเกี่ยวกับคดี</b><br>คณะกรรมการชุดที่ 26 อ้างรัฐธรรมนูญ มาตรา 113 ซึ่งห้ามสมาชิกวุฒิสภาฝักใฝ่หรือยอมอยู่ใต้อาณัติพรรคการเมือง พฤติกรรมหลังรับตำแหน่งจึงเป็นหลักฐานอีกชุดหนึ่ง แยกจากหลักฐานวันเลือกและยังไม่ใช่คำตัดสินความผิด</div>
+  <div class="unit-legend" aria-label="คำอธิบายสี"><span class="accused"><i></i>ตัวคนสีน้ำเงิน = อยู่ในรายชื่อผู้ถูกกล่าวหา</span><span><i></i>สีเทา = ไม่อยู่ในรายชื่อที่จับคู่ได้</span></div>
+  <div class="unit-chart" id="vote-unit-chart" role="img" aria-label="สมาชิก 197 คน หนึ่งตัวคนแทนหนึ่งคน แบ่งเป็นกลุ่มข้างมาก 147 คน มีผู้ถูกกล่าวหา 132 คน กลุ่มคาดหมายไม่ได้ 33 คน มีผู้ถูกกล่าวหา 2 คน และกลุ่มข้างน้อย 17 คน ไม่มีผู้ถูกกล่าวหา"></div>
+  <div class="unit-reading">
+    <article><b>89.8%</b><p>132 จาก 147 คนในกลุ่มข้างมากอยู่ในรายชื่อผู้ถูกกล่าวหา</p></article>
+    <article><b>2 คน</b><p>กลุ่มคาดหมายไม่ได้: ประไม หอมเทียม และยะโก๊ป หีมละ</p></article>
+    <article><b>0 จาก 17</b><p>กลุ่มข้างน้อยซึ่งลงมติสวนเสียงข้างมากเป็นประจำ ไม่มีใครอยู่ในรายชื่อคดี</p></article>
+  </div>
+  <div class="compare">
+    <div class="metric focus"><span class="big">97.1%</span><p>ความเห็นตรงกันเฉลี่ย เมื่อจับคู่คนที่ถูกระบุในคดีด้วยกัน 7,370 คู่</p></div>
+    <div class="vs">เทียบ</div>
+    <div class="metric"><span class="big">79.0%</span><p>ความเห็นตรงกันเฉลี่ย เมื่อจับคู่คนในคดีกับคนที่ไม่ถูกระบุ 11,128 คู่</p></div>
+  </div>
+  <div class="dataset-note"><b>ตัวส่วนไม่ใช่ 229:</b> กราฟนี้แสดงสมาชิก 197 คนที่อยู่ในชุดวิเคราะห์พฤติกรรมลงมติของ iLaw ในจำนวนนี้จับคู่กับรายชื่อผู้ถูกกล่าวหาได้ 134 คน (132 + 2 + 0) จึงห้ามอ่านว่าอีก 95 คนจากบัญชี 229 เป็นผู้บริสุทธิ์หรือไม่มีข้อมูล และการอยู่ในเสียงข้างมากไม่ผิดในตัวเอง</div>
+</section>
+
+<section class="slide wide" id="vote-motions">
+  <div class="k">เสียงข้างมากใช้อำนาจกับเรื่องใด</div>
+  <h2>เรื่องที่แตกเสียงหนัก<br>แตะกติกาและองค์กรตรวจสอบ</h2>
+  <div class="motion-list">
+    <div class="motion"><time>2 ก.ย. 2567</time><p>ญัตติขอตรวจสอบจริยธรรมตุลาการศาลรัฐธรรมนูญ ตกไป 117 ต่อ 38</p></div>
+    <div class="motion"><time>18 มี.ค. 2568</time><p>ที่ประชุมไม่เปิดเผยบันทึกและรายงานลับของกรรมาธิการตรวจประวัติผู้ได้รับการเสนอชื่อเป็นตุลาการศาลรัฐธรรมนูญ</p></div>
+    <div class="motion"><time>30 พ.ค. 2568</time><p>ญัตติขอชะลอการตั้งกรรมาธิการตรวจประวัติผู้ได้รับการเสนอชื่อเป็นกรรมการ กกต. และตุลาการศาลรัฐธรรมนูญถูกตีตก</p></div>
+  </div>
+  <p class="source-note">ส่วนนี้อธิบายพฤติกรรมหลังรับตำแหน่ง ไม่ใช่หลักฐานว่ากระบวนการเลือกมิชอบ และไม่พิสูจน์ว่าการลงมติใดเกิดจากการสั่งการ</p>
+</section>
+
+
+<section class="slide">
+  <h2>แล้วใครตรวจสอบ<br>และตัดสินว่าอย่างไร</h2>
+  <div class="nums" style="gap:20px;flex-wrap:wrap;margin-top:20px">
+    <div class="card"><div class="k">ชุด 26</div><h2 style="font-size:28px">ชี้มูล 229</h2><p class="muted">17 ก.ค. 2568</p></div>
+    <span class="neq">≠</span>
+    <div class="card"><div class="k">ชุด 36</div><h2 style="font-size:28px">ยกคำร้อง 229</h2><p class="muted">12 มี.ค. 2569 · 5 ต่อ 2</p></div>
+  </div>
+</section>
+
+
+<section class="slide wide" id="case-detail">
+  <div class="k">สำนวนเดียวกัน · กระบวนการคนละชั้น</div>
+  <h2>ก่อนจะเป็น 229 ≠ 229<br>เกิดอะไรขึ้นในสองชุด</h2>
+  <div class="case-split">
+    <article class="case-side gold">
+      <div class="case-no">26</div><h3>รวบรวมแล้วชี้มูล</h3>
+      <p>ตั้ง 18 มี.ค. 2568 ทำงานร่วมกับดีเอสไอ ประชุมทุกวันราวสี่เดือน ไต่สวนคนหลักร้อย และรวบรวมเอกสารกว่า 80,000 หน้า ก่อนเสนอให้ดำเนินคดี 229 คน</p>
+    </article>
+    <div class="neq">≠</div>
+    <article class="case-side">
+      <div class="case-no">36</div><h3>วินิจฉัยแล้วยกคำร้อง</h3>
+      <p>ตั้ง 16 ก.ย. 2568 และมีมติ 5 ต่อ 2 เมื่อ 12 มี.ค. 2569 ว่าคนกลุ่มเดียวกันทั้ง 229 คนไม่มีมูลความผิด</p>
+    </article>
+  </div>
+  <p class="lead">229 คนชุดเดียวกัน ไม่ใช่คนละสำนวน และไม่ใช่คนละข้อกล่าวหา</p>
+  <div class="committee-rows">
+    <div class="committee-row"><b>20 คน</b><span>จำนวนคนในคณะ</span><b>7 คน</b></div>
+    <div class="committee-row"><b>ประมาณ 90 ครั้ง</b><span>จำนวนครั้งที่ประชุม</span><b>ประมาณ 10 ครั้ง</b></div>
+    <div class="committee-row"><b>เอกสาร 80,000+ หน้า</b><span>เอกสารในสำนวน</span><b>ยังไม่เปิดเผย</b></div>
+    <div class="committee-row"><b>ประมาณ 250 บาท/คน</b><span>ค่าตอบแทนโดยประมาณ</span><b>ประมาณ 25,000 บาท/คน</b></div>
+  </div>
+  <p class="source-note">ข้อเปรียบเทียบจาก สมชัย ศรีสุทธิยากร หลังตัวแทน กกต. ชี้แจงเมื่อ 18 มิ.ย. 2569 ตัวเลขชุดที่ 36 ใช้จำนวนประชุมประมาณการ เพราะ กกต. ยังไม่เปิดเผยจำนวนครั้งและความยาวรายงานจริง</p>
+</section>
+
+<section class="slide wide evidence-surface" id="why-dismissed">
+  <div class="k">เขายกคำร้องด้วยเหตุผลอะไร</div>
+  <h2>“พกโพยไม่ผิด”<br>ไม่เท่ากับ “ฮั้วไม่ผิด”</h2>
+  <div class="legal-pair">
+    <article><div class="k">ฐานของฝ่ายเสียงข้างมาก</div><blockquote>“พกโพยเข้าไป ไม่มีกฎหมายห้ามไว้โดยตรง”</blockquote><p>คำพิพากษาคดีหมายเลขแดง อท 13/2568 วินิจฉัยว่า การนำเอกสารที่จดหมายเลขเข้าไปในสถานที่เลือกไม่มีข้อห้ามโดยตรงใน พ.ร.ป. ว่าด้วยการได้มาซึ่ง ส.ว. 2561</p></article>
+    <article><div class="k">คำพิพากษาที่ตอบอีกคำถาม</div><blockquote>ขอคะแนนกันทางไลน์ = เลือกโดยไม่สุจริต</blockquote><p>คดีหมายเลขแดง 53/2568 เพิกถอนสิทธิเลือกตั้งสิบปี เพราะผู้สมัครตกลงขอคะแนนกันล่วงหน้า สิ่งที่ศาลวินิจฉัยจึงไม่ใช่ตัวกระดาษ แต่คือการตกลงกัน</p></article>
+  </div>
+  <div class="caveat"><b>สองคำพิพากษาตอบคนละคำถาม</b> คดีแรกถามว่ากระดาษในมือผิดหรือไม่ คดีหลังถามว่าการนัดกันล่วงหน้าผิดหรือไม่ ส่วนรูปแบบบัตรที่ตรงกันเป็นหลักฐานที่ต้องนำไปชั่งร่วมกับพฤติการณ์อื่น</div>
+</section>
+
+<section class="slide wide" id="closed-cycle">
+  <div class="k">แล้วบอร์ดที่สั่งการล่ะ</div>
+  <h2>ผู้ถูกกล่าวหาอยู่ในวุฒิสภา<br>ที่เห็นชอบ กกต. ผู้ชี้ขาดคดีนี้</h2>
+  <p class="lead">วุฒิสภาเป็นผู้ให้ความเห็นชอบกรรมการการเลือกตั้ง และวุฒิสภาชุดนี้คือชุดที่ถูกกล่าวหา</p>
+  <svg class="cyc" viewBox="0 0 680 535" role="img" aria-label="วงจรปิด · ส.ว. ชุด 2567 จำนวน 138 จาก 200 คนถูกตั้งข้อกล่าวหา วุฒิสภาชุดเดียวกันโหวตเห็นชอบกรรมการ กกต. และ กกต. 4 ใน 7 คนที่ผ่านความเห็นชอบนั้น เป็นผู้ชี้ขาดคดี"><path class="arc" d="M 442.9 122.4 A 175 175 0 0 1 514.0 245.7"/><path class="head" d="M 0 -6 L 11 0 L 0 6 Z" transform="translate(514.0,245.7) rotate(84.0)"/><path class="arc" d="M 411.2 423.9 A 175 175 0 0 1 268.8 423.9"/><path class="head" d="M 0 -6 L 11 0 L 0 6 Z" transform="translate(268.8,423.9) rotate(204.0)"/><path class="arc" d="M 166.0 245.7 A 175 175 0 0 1 237.1 122.4"/><path class="head" d="M 0 -6 L 11 0 L 0 6 Z" transform="translate(237.1,122.4) rotate(324.0)"/><circle class="node hot" cx="340.0" cy="89.0" r="84"/><text class="num" x="340.0" y="73">138 / 200</text><text class="ttl" x="340.0" y="105">ส.ว. ชุด 2567</text><text class="sub" x="340.0" y="125">ที่ถูกตั้งข้อกล่าวหา</text><circle class="node" cx="491.6" cy="351.5" r="84"/><text class="ttl" x="491.6" y="356">วุฒิสภาชุดเดียวกัน</text><text class="sub" x="491.6" y="376">โหวตเห็นชอบ</text><text class="sub" x="491.6" y="392">กรรมการ กกต.</text><circle class="node hot" cx="188.4" cy="351.5" r="84"/><text class="num" x="188.4" y="336">4 / 7</text><text class="ttl" x="188.4" y="368">กกต. ชุดปัจจุบัน</text><text class="sub" x="188.4" y="388">ที่ชี้ขาดคดีนี้</text><text class="coresub" x="340" y="248">วงจรปิด</text><text class="core" x="340" y="274">ผู้ถูกกล่าวหา</text><text class="core" x="340" y="298">เลือกผู้ตัดสิน</text></svg>
+  <p class="lead"><b>18 ก.พ. 2569</b> เทวฤทธิ์ มณีฉาย ยื่นญัตติขอชะลอการเห็นชอบ กกต. อีกสองคนเพื่อป้องกันการขัดกันแห่งผลประโยชน์ ประธานวุฒิสภาไม่บรรจุญัตติ ต่อมา 26 ก.พ. ที่ประชุมเห็นชอบจิรุตม์ วิศาลจิตร 144 ต่อ 1 และไม่เห็นชอบมณฑล สุดประเสริฐ 9 ต่อ 102</p>
+  <div class="caveat"><b>นี่คือโครงสร้างความสัมพันธ์ ไม่ใช่ข้อพิสูจน์ว่ามีการแทรกแซง</b> การเห็นชอบ กกต. เป็นอำนาจตามรัฐธรรมนูญของวุฒิสภา แผนภาพนี้แสดงว่าใครอยู่ตรงไหนของวงจรเท่านั้น</div>
+</section>
+
+<section class="slide wide evidence-surface" id="evidence-threshold">
+  <div class="k">มาตรฐานหลักฐาน</div>
+  <h2>แล้วต้องมีหลักฐานแค่ไหน<br>กกต. ถึงจะส่งฟ้อง</h2>
+  <p class="lead">คำถามนี้ตอบได้จากตัวบท และคำตอบคือเกณฑ์ของ กกต. กับของศาลไม่ใช่เกณฑ์เดียวกัน</p>
+  <div class="bar62" role="img" aria-label="เกณฑ์หลักฐานสองระดับ: กกต. อันควรเชื่อได้ว่า ส่งศาล · ศาลฎีกา พิสูจน์แล้วว่า พิพากษา">
+ <div class="col l">
+ <p class="who">กกต. พ.ร.ป. การเลือก ส.ว. มาตรา 62</p>
+ <p class="std">มีหลักฐาน<br><span class="q">“อันควรเชื่อได้ว่า”</span> มีการทุจริต</p>
+ <p>ถ้าถึงเกณฑ์นี้ กกต. <b>มีหน้าที่ต้องส่งเรื่องไปที่ศาล</b>. ไม่ใช่ตัดสินเองว่าผิดหรือไม่ผิด</p>
+ </div>
+ <div class="thr" aria-hidden="true">
+ <div class="cap">ความสูงของเกณฑ์<br>ที่ต้องข้าม</div>
+ <div class="thr-body">
+ <div class="thr-rail">
+ <span class="thr-fill"></span>
+ <i class="thr-mark lo"></i>
+ <i class="thr-mark hi"></i>
+ </div>
+ <div class="thr-labs">
+ <span class="hi">พิสูจน์แล้ว<br>→ พิพากษา</span>
+ <span class="lo">อันควรเชื่อได้<br>→ ส่งศาล</span>
+ <span class="base">เริ่มต้น</span>
+ </div>
+ </div>
+ </div>
+ <div class="col r">
+ <p class="who">ศาลฎีกา</p>
+ <p class="std">มีหลักฐาน<br><span class="q">“ที่พิสูจน์แล้วว่า”</span> มีการทุจริต</p>
+ <p>เกณฑ์ที่สูงกว่า และเป็นขั้นที่<b>ตัดสินว่าใครผิดจริง</b></p>
+ </div>
+ </div>
+  <p class="lead">ความต่างนี้สำคัญ เพราะคำว่า “หลักฐานยังไม่พอ” ต้องวัดกับเกณฑ์ของ กกต. ไม่ใช่มาตรฐานการพิพากษา</p>
+  <div class="prec">
+    <div><span class="cid">คดี ลต.สว. 53/2568</span><span>นครราชสีมา ส่งศาลด้วยข้อความไลน์แลกคะแนนไม่กี่ข้อความ โดยไม่มีหลักฐานเรื่องเงิน ตำแหน่ง หรือผลประโยชน์อื่น</span></div>
+    <div><span class="cid">คดี ลต.สว. 47/2568</span><span>ชลบุรี ลักษณะเดียวกัน</span></div>
+  </div>
+  <p class="source-note">ส่วนหลักฐานในคดีนี้ที่ปรากฏต่อสาธารณะแล้ว มีทั้งรูปแบบการลงคะแนนที่ตรงกัน เส้นทางการเงินที่ดีเอสไอรับเป็นคดีพิเศษฐานฟอกเงิน และคำให้การของพยานหลายปาก การเปรียบเทียบเกณฑ์นี้ไม่ใช่คำวินิจฉัยว่าบุคคลใดผิด</p>
+</section>
+
+<section class="slide">
+  <div class="k">ที่มาและข้อควรระวัง</div>
+  <h2>อ่านตัวเลขพร้อมข้อจำกัด</h2>
+  <div class="motion-list">
+    <div class="motion"><time>บัตรเลือก</time><p>ดีเอสไอใช้ภาพจากกล้องบันทึกการนับคะแนน ไม่ได้เปิดหีบนับใหม่ ชุดเลขเต็มสิบหมายเลขเปิดเผยเพียงสี่กลุ่ม</p></div>
+    <div class="motion"><time>การลงมติ</time><p>ข้อมูลหลังรับตำแหน่งเป็นหลักฐานคนละชุดกับหลักฐานวันเลือก แสดงความเหมือนของพฤติกรรม แต่ไม่ระบุสาเหตุ</p></div>
+    <div class="motion"><time>สถานะบุคคล</time><p>ทุกชื่อในเรื่องนี้ยังเป็นผู้ถูกกล่าวหา ยังไม่มีคำพิพากษาถึงที่สุด</p></div>
+  </div>
+  <p class="source-note">อ้างอิงหลักจาก <a href="https://www.ilaw.or.th/articles/53462" target="_blank" rel="noopener">iLaw · ดีเอสไอใช้ AI อ่านภาพบัตร</a>, <a href="https://www.ilaw.or.th/articles/53964" target="_blank" rel="noopener">iLaw · 1 ปี ส.ว. 67</a> และข้อมูลคำนวณซ้ำใน <b>code/sv_vote_bloc.py</b> ตามที่ระบุใน hua_sv_story.dc.html</p>
+</section>
+
+
+
+<section class="slide wide evidence-surface" id="case-tracks">
+  <div class="k">ตอนนี้เรื่องอยู่ตรงไหน</div>
+  <h2>คดีเดินอยู่สองราง<br>และขึ้นกับคนละโครงสร้าง</h2>
+  <p class="lead"><b>ดีเอสไออยู่ใต้กระทรวงยุติธรรม</b> และคณะกรรมการคดีพิเศษมีรองนายกรัฐมนตรีเป็นประธาน รัฐมนตรีว่าการกระทรวงยุติธรรมเป็นรองประธาน สีรัฐบาลจึงมีความหมายกับรางนี้</p>
+  <p class="lead"><b>กกต. เป็นองค์กรอิสระตามรัฐธรรมนูญ</b> นายกรัฐมนตรีไม่ได้แต่งตั้งและสั่งการไม่ได้ รางขวาจึงไม่มีสีพรรคและใช้เส้นประแทน</p>
+  <div class="tw" style="height:2053px" role="img" aria-label="ไทม์ไลน์สองราง ดีเอสไอกับ กกต. ตั้งแต่การเลือก ส.ว. มิถุนายน 2567 ถึงกันยายน 2569"><div class="spine"></div><div class="gov pt" style="top:0px;height:924px"><span>เพื่อไทย</span></div><div class="gov bjt" style="top:924px;height:1129px"><span>ภูมิใจไทย</span></div><span class="trk l">ดีเอสไอ / กคพ.<em>อยู่ใต้กระทรวงยุติธรรม</em></span><span class="trk r">กกต.<em>องค์กรอิสระ · ไม่ขึ้นกับรัฐบาล</em></span><div class="indep"></div><svg class="twsvg" width="84" height="1993" viewBox="0 0 84 1993"><path class="" d="M 42 51 H 58 Q 78 51 84 51"/><path class="" d="M 42 186 H 26 Q 6 186 0 186"/><path class="" d="M 42 505 H 26 Q 6 505 0 505"/><path class="key" d="M 42 557 H 26 Q 6 557 0 593"/><path class="" d="M 42 582 H 58 Q 78 582 84 582"/><path class="" d="M 42 685 H 26 Q 6 685 0 685"/><path class="" d="M 42 695 H 26 Q 6 695 0 773"/><path class="key" d="M 42 823 H 58 Q 78 823 84 823"/><path class="key" d="M 42 940 H 58 Q 78 940 84 940"/><path class="" d="M 42 942 H 58 Q 78 942 84 1028"/><path class="" d="M 42 1127 H 26 Q 6 1127 0 1127"/><path class="" d="M 42 1196 H 26 Q 6 1196 0 1215"/><path class="key" d="M 42 1299 H 58 Q 78 1299 84 1299"/><path class="" d="M 42 1473 H 58 Q 78 1473 84 1473"/><path class="" d="M 42 1494 H 58 Q 78 1494 84 1561"/><path class="" d="M 42 1560 H 58 Q 78 1560 84 1649"/><path class="key" d="M 42 1629 H 58 Q 78 1629 84 1737"/><path class="" d="M 42 1629 H 26 Q 6 1629 0 1629"/><path class="" d="M 42 1660 H 58 Q 78 1660 84 1825"/><path class="key" d="M 42 1668 H 58 Q 78 1668 84 1913"/></svg><i class="pin" style="top:51px"></i><i class="pin" style="top:186px"></i><i class="pin" style="top:505px"></i><i class="pin key" style="top:557px"></i><i class="pin" style="top:582px"></i><i class="pin" style="top:685px"></i><i class="pin" style="top:695px"></i><i class="pin key" style="top:823px"></i><i class="pin key" style="top:940px"></i><i class="pin" style="top:942px"></i><i class="pin" style="top:1127px"></i><i class="pin" style="top:1196px"></i><i class="pin key" style="top:1299px"></i><i class="pin" style="top:1473px"></i><i class="pin" style="top:1494px"></i><i class="pin" style="top:1560px"></i><i class="pin key" style="top:1629px"></i><i class="pin" style="top:1629px"></i><i class="pin" style="top:1660px"></i><i class="pin key" style="top:1668px"></i><div class="yr" style="top:426px">2568</div><div class="yr" style="top:1155px">2569</div><div class="ev r" data-trk="กกต." data-i="0" style="top:31px"><b>26 มิ.ย. 67</b><p>เลือก ส.ว. ระดับประเทศ ที่อิมแพ็คฟอรั่ม</p><small>ผู้สมัครมารายงานตัว 2,988 คน</small></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="1" style="top:166px"><b>3 ก.ย. 67</b><p>ดีเอสไอรับคำร้องขอให้สอบทุจริตการเลือก ส.ว. สามกรณี</p></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="2" style="top:485px"><b>10 ก.พ. 68</b><p><nobr>พล.ต.ท.คำรบ ปัญญาแก้ว</nobr> และคณะ ยื่นขอให้รับเป็นคดีพิเศษ</p><small>ในฐานะ ส.ว.สำรอง และผู้สมัคร ส.ว. · ฝ่ายผู้ร้อง ไม่ใช่ผู้ถูกกล่าวหา</small></div><div class="ev l key" data-trk="ดีเอสไอ / กคพ." data-i="3" style="top:573px"><b>6 มี.ค. 68</b><p>คณะกรรมการคดีพิเศษรับเป็นคดีพิเศษ ฐานฟอกเงิน</p><small>พบเงินหมุนเวียนในขบวนการจัดตั้งผู้สมัครกว่า 300 ล้านบาท · ประธานที่ประชุมคือรองนายกฯ <nobr>ภูมิธรรม เวชยชัย</nobr></small></div><div class="ev r" data-trk="กกต." data-i="4" style="top:562px"><b>18 มี.ค. 68</b><p>กกต. ตั้งคณะกรรมการสืบสวนและไต่สวน ชุดที่ 26</p><small>20 คน จาก กกต.+ดีเอสไอ · ประชุมทุกวันสี่เดือน ~90 ครั้ง · เอกสารกว่า 80,000 หน้า</small></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="5" style="top:665px"><b>9 พ.ค. 68</b><p>ดีเอสไอออกหมายเรียก ส.ว. ชุดแรกหกคน</p></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="6" style="top:753px"><b>14 พ.ค. 68</b><p>ศาลรัฐธรรมนูญสั่ง รมว.ยุติธรรม หยุดปฏิบัติหน้าที่</p><small>เฉพาะในฐานะผู้กำกับดูแลดีเอสไอ หลัง ส.ว. 92 คนยื่นคำร้อง</small></div><div class="ev r key" data-trk="กกต." data-i="7" style="top:803px"><b>17 ก.ค. 68</b><p>ชุดที่ 26 ชี้มูล 229 คน</p><small>ส.ว. 138 คน + กรรมการบริหารพรรคภูมิใจไทยและเครือข่าย 91 คน · อ้างรัฐธรรมนูญ ม.113</small></div><div class="ev r key" data-trk="กกต." data-i="8" style="top:920px"><b>15 ก.ย. 68</b><p>รองเลขาฯ กกต. ลงนามความเห็นเสนอเพิกถอนสิทธิ ส.ว. ≥136 คน</p><small><nobr>ครรชิต เจริญอินทร์</nobr> ทำการแทนเลขาฯ · ยังไม่ใช่มติบอร์ดเจ็ดคน · เอกสารฉบับนี้เปิดสู่สาธารณะ 24–25 ส.ค. 69 ผ่าน iLaw</small></div><div class="ev r" data-trk="กกต." data-i="9" style="top:1008px"><b>16 ก.ย. 68</b><p>กกต. ตั้งคณะอนุกรรมการวินิจฉัยชี้ขาดฯ ชุดที่ 36</p><small>คำสั่งที่ 2633/2568 · 7 คน บุคคลภายนอกที่บอร์ด กกต. เสนอชื่อคนละหนึ่ง · ~10 ครั้ง</small></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="10" style="top:1107px"><b>17 ธ.ค. 68</b><p>ดีเอสไอสรุปสำนวนคดีพิเศษ 24/2568 ส่งอัยการล็อตแรก</p><small>8 ราย (ส.ว.ตัวจริง 2 + เครือข่าย 6) · คดีอาญาคู่ขนาน ไม่ใช่ขั้นตอนเดียวกับที่ กกต. ชี้ขาด</small></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="11" style="top:1195px"><b>21 ม.ค. 69</b><p>ศาลรัฐธรรมนูญวินิจฉัย ไม่ปรากฏหลักฐานว่ารัฐมนตรีสองคนแทรกแซง</p></div><div class="ev r key" data-trk="กกต." data-i="12" style="top:1279px"><b>12 มี.ค. 69</b><p>ชุดที่ 36 มีมติ 5 ต่อ 2 ว่าทั้ง 229 คน ไม่มีมูลความผิด</p><small>คนกลุ่มเดียวกันกับที่ชุดที่ 26 ชี้มูล · ไม่ใช่คนละสำนวน</small></div><div class="ev r" data-trk="กกต." data-i="13" style="top:1453px"><b>8 มิ.ย. 69</b><p>บอร์ด กกต. เริ่มพิจารณาสำนวนอย่างเป็นทางการ</p><small>ประชุมทุกวันจันทร์เป็นวาระเฉพาะ</small></div><div class="ev r" data-trk="กกต." data-i="14" style="top:1541px"><b>18 มิ.ย. 69</b><p>กกต. ชี้แจงต่อคณะอนุกรรมาธิการศาลและองค์กรอิสระ</p><small><nobr>สมชัย ศรีสุทธิยากร</nobr> เปิดข้อเปรียบเทียบการทำงานของกรรมการสองชุด</small></div><div class="ev r" data-trk="กกต." data-i="15" style="top:1629px"><b>21 ก.ค. 69</b><p>iLaw ยื่นหลักฐาน 9 นักการเมืองภูมิใจไทยต่อวิปฝ่ายค้าน</p><small>รวมอนุทิน · ชั้นองค์กรภาคประชาสังคม กดดันก่อนบอร์ดลงมติ ไม่ใช่คำวินิจฉัย</small></div><div class="ev r key" data-trk="กกต." data-i="16" style="top:1717px"><b>25 ส.ค. 69</b><p>เอกสารความเห็นรองเลขาฯ กกต. หลุดสู่สาธารณะ</p><small>ลงนาม 15 ก.ย. 68 · The Standard 24 ส.ค. / ประชาไท 25 ส.ค. · ยังไม่ใช่มติบอร์ด</small></div><div class="ev l" data-trk="ดีเอสไอ / กคพ." data-i="17" style="top:1609px"><b>25 ส.ค. 69</b><p>ดีเอสไอแจ้งความหาคนทำเอกสารคดีพิเศษหลุด</p><small>แจ้งกองปราบฯ ข้อหา ม.164/322/323 · คนละฉบับกับบันทึกความเห็น กกต.</small></div><div class="ev r" data-trk="กกต." data-i="18" style="top:1805px"><b>10 ก.ย. 69</b><p>iLaw เปิดเหตุผลชุดที่ 26 เห็นควรสั่งฟ้อง กบห.ภูมิใจไทย 22 คน</p><small>ชั้นความเห็นคณะไต่สวน ไม่ใช่มติบอร์ด กกต. · เทียบชุด 36 ที่เสนอให้ยก</small></div><div class="ev r key" data-trk="กกต." data-i="19" style="top:1893px"><b>14 ก.ย. 69</b><p>นัดมติบอร์ด กกต. เจ็ดคน ชี้ขาดสำนวน 229 คน</p><small>เลื่อนจากปลายสิงหาคม · ครบกรอบเก้าสิบวันนับจาก 8 มิ.ย. 69</small></div></div>
+  <p class="source-note"><b>มีสายบังคับบัญชา ไม่ได้แปลว่ามีการสั่งการ</b> วันที่ 21 ม.ค. 2569 ศาลรัฐธรรมนูญวินิจฉัยว่าไม่ปรากฏหลักฐานว่ารัฐมนตรีสองคนสั่งการหรือแทรกแซงการทำงานของ กกต. ในคดีนี้ และวันที่ตั้งชุดที่ 36 คณะรัฐมนตรีใหม่ยังไม่ได้ถวายสัตย์</p>
+</section>
+
+<section class="slide wide evidence-surface" id="party-moves">
+  <div class="k">ระหว่างคดีค้าง</div>
+  <h2>พรรคและองค์กร<br>ขยับอะไรก่อนมติ 14 ก.ย.</h2>
+  <p class="lead">หลังตัวคนได้ที่นั่งและสำนวนเดินสองราง คำถามถัดไปคือใครรุก ใครตั้งรับ ระหว่างที่บอร์ด กกต. ยังไม่ชี้ขาด</p>
+  <p class="lead">อัปเดต 13 ก.ย. 2569: <b>เพื่อไทย</b> ภูมิธรรมโต้ส้ม · <b>ปชน.</b> วิโรจน์สวน + เท้งเดินกับ iLaw · <b>iLaw</b> กิจกรรมหอศิลป์สั่งฟ้อง 229 · <b>ภท.</b> อนุทินรับว่าเป็นสิทธิประชาชน</p>
+  <div class="frame-scroll"><iframe class="embed-frame party-frame" src="hua_party_timeline.html?embed&amp;v=49" loading="lazy" title="ไทม์ไลน์การดำเนินการของพรรคการเมืองและองค์กรระหว่างคดีฮั้ว สว."></iframe></div>
+  <p class="source-note">กราฟรายพรรค 9 เลน · ▲ รุก / ▼ ตั้งรับ / ● กระบวนการ · แหล่ง S229–S231 สำหรับจุด 13 ก.ย.</p>
+</section>
+
+
+
+<section class="slide full final-status" id="final-status">
+  <div class="k">คดียังไม่สิ้นสุดที่หน้านี้</div>
+  <h2>ตอนนี้เรื่องอยู่ตรงไหน</h2>
+  <div class="final-status-copy">
+    <span class="open">ยังไม่จบ</span>
+    <strong>กกต. เจ็ดคน</strong>
+    <p>นัดชี้ขาด 14 ก.ย. 2569</p>
+  </div>
+</section>
+
+
+<section class="slide full">
+  <p style="font:400 clamp(28px,5vw,52px)/1.3 var(--font-d);letter-spacing:.03em;text-align:center">the cycle <span class="is">is</span> continued&nbsp;…?</p>
+</section>
+
+<script>
+var GROUPS=[
+  [1,'บริหารราชการ',152,58,24],[2,'กฎหมาย',146,48,22],[3,'การศึกษา',147,41,15],
+  [4,'สาธารณสุข',154,49,21],[5,'ทำนา ทำไร่',153,63,28],[6,'ทำสวน ประมง',154,58,22],
+  [7,'ลูกจ้างเอกชน',153,51,23],[8,'สิ่งแวดล้อม',154,52,24],[9,'SMEs',153,53,19],
+  [10,'กิจการอื่น',147,55,23],[11,'ท่องเที่ยว',152,58,25],[12,'อุตสาหกรรม',149,21,18],
+  [13,'วิทยาศาสตร์',149,40,19],[14,'กลุ่มสตรี',129,60,25],[15,'ผู้สูงอายุ',154,46,20],
+  [16,'ศิลปะ กีฬา',154,60,28],[17,'ประชาสังคม',154,59,11],[18,'สื่อ',138,40,23],
+  [19,'อาชีพอิสระ',154,54,28],[20,'อื่นๆ',154,48,21]
+];
+var HOTELS=[
+  {k:'maruay',when:'ก่อนเลือก',role:'ที่พัก / จ่ายค่าห้อง',th:'มารวยการ์เด็น',where:'กทม.',who:'นิทัศน์ อารีย์วงศ์สกุล · A078',detail:'โยงเครือข่ายจ้างงานในข้อกล่าวหา คนละบทบาทกับห้องจดโพย แต่ยังอยู่ในเส้นก่อนวันเลือก'},
+  {k:'krungsri',when:'24–25 มิ.ย.',role:'ศูนย์ทำโพย',th:'กรุงศรีริเวอร์',where:'อยุธยา',who:'ศุภชัย โพธิ์สุ · A004 · สมเจตน์ ลิมปะพันธุ์ · A109',detail:'ถูกชี้เป็นศูนย์ขนาดใหญ่ มีคำให้การเรื่องวอร์รูม การจดโพย และใบลาออกล่วงหน้า'},
+  {k:'thara',when:'24 มิ.ย.',role:'ประชุมทำโพย',th:'ธาราแกรนด์',where:'ปทุมธานี',who:'สมเกียรติ เลียงประสิทธิ์ · A003 · วงศกร ชนะกิจ · A061',detail:'พยานเล่าว่าทีมงานพาผู้สมัครเข้าห้อง เก็บโทรศัพท์ และสั่งจดหมายเลขลงเอกสาร สว.3'},
+  {k:'pullman',when:'~21 ก.ค.',role:'รวมตัวหลังเลือก',th:'พูลแมน คิงพาวเวอร์',where:'รางน้ำ · กทม.',who:'อนุทิน ชาญวีรกูล · A016 · วรพจน์ ตั้งพันธุ์เพียร · H009',detail:'พยานอ้างพบผู้ที่ต่อมาได้เป็น ส.ว. กว่า 100 คน คนละสถานที่และคนละช่วงเวลากับห้องจดโพยก่อนวันเลือก'}
+];
+
+(function slips(){
+  var h='';
+  for(var i=0;i<20;i++){
+    h+='<div class="slip">';
+    for(var j=0;j<10;j++) h+='<i'+(j===6?' class="hit"':'')+'></i>';
+    h+='</div>';
+  }
+  document.getElementById('slips').innerHTML=h;
+})();
+
+document.getElementById('groups').innerHTML=GROUPS.map(function(g){
+  var pct=Math.round(g[3]/g[2]*100);
+  return '<div style="margin:0 0 8px"><div style="display:flex;justify-content:space-between;font:500 12px/1.3 var(--font-m)"><span>'+g[0]+' '+g[1]+'</span><span>ซ้ำสุด '+g[4]+' ใบ</span></div><div class="gbar"><u style="width:'+pct+'%"></u></div></div>';
+}).join('');
+
+document.getElementById('hotels').innerHTML=HOTELS.map(function(v){
+  return '<button type="button" class="vhit" data-hotel="'+v.k+'" data-when="'+v.when+'"><div class="k">'+v.role+'</div><h4>'+v.th+'</h4><p class="muted">'+v.where+'</p><p class="venue-detail">'+v.detail+'</p><span class="vg">เปิดแฟ้มหลักฐาน</span></button>';
+}).join('');
+document.querySelectorAll('[data-hotel]').forEach(function(btn){
+  btn.onclick=function(){
+    var v=HOTELS.find(function(h){return h.k===btn.getAttribute('data-hotel')});
+    if(!v) return;
+    var ov=document.createElement('div');
+    ov.className='ov';
+    ov.innerHTML='<div class="box"><button type="button" class="x" aria-label="ปิด">×</button><div class="k">แฟ้ม · สถานที่</div><h2 style="font-size:26px;margin:8px 0">'+v.th+'</h2><p class="muted">'+v.who+'</p><p class="muted" style="margin-top:12px">ข้อกล่าวหา · ยังไม่ใช่ข้อสรุปทางกฎหมาย</p></div>';
+    ov.onclick=function(e){ if(e.target===ov||e.target.classList.contains('x')) ov.remove(); };
+    document.body.appendChild(ov);
+  };
+});
+
+/* ตัวคน + หุ่นกลไก — พอร์ตจาก hua_sv_story_example / character · ไม่ใช้ React */
+(function people(){
+  var NS='http://www.w3.org/2000/svg';
+  var ink='#1B2430',taupe='#B9B2A2',seated='#3A4657',gold='#B98B00',blue='#1B3A93',paper='#F6F4EE';
+  function el(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);return e;}
+  function svg(w,h,vb){return el('svg',{width:w,height:h,viewBox:vb});}
+  function figure(stage){
+    var hold=stage>=1&&stage<=2,sit=stage>=3;
+    var s=svg(260,380,'0 0 260 380');
+    if(sit){
+      s.appendChild(el('rect',{x:74,y:300,width:112,height:18,rx:6,fill:taupe}));
+      s.appendChild(el('rect',{x:80,y:205,width:12,height:98,rx:6,fill:taupe}));
+    }
+    s.appendChild(el('circle',{cx:130,cy:58,r:32,fill:ink}));
+    s.appendChild(el('rect',{x:90,y:96,width:80,height:104,rx:30,fill:ink}));
+    s.appendChild(el('rect',{x:72,y:108,width:17,height:78,rx:8.5,fill:ink}));
+    s.appendChild(el('rect',{x:171,y:108,width:17,height:78,rx:8.5,fill:ink}));
+    s.appendChild(el('rect',{x:103,y:194,width:22,height:112,rx:10,fill:ink}));
+    s.appendChild(el('rect',{x:135,y:194,width:22,height:112,rx:10,fill:ink}));
+    if(hold){
+      s.appendChild(el('rect',{x:184,y:130,width:42,height:54,rx:4,fill:gold}));
+      [145,156,167].forEach(function(y,i){s.appendChild(el('line',{x1:193,y1:y,x2:i<2?216:208,y2:y,stroke:paper,'stroke-width':3,'stroke-linecap':'round'}));});
+    }
+    if(stage===2)s.appendChild(el('polygon',{points:'91,100 112,96 169,188 148,199',fill:blue}));
+    if(sit)s.appendChild(el('rect',{x:90,y:145,width:80,height:13,rx:2,fill:blue}));
+    return s;
+  }
+  function smallFig(g,x,y,fill){
+    var t=el('g',{transform:'translate('+x+','+y+')'});
+    t.appendChild(el('circle',{cx:11,cy:7,r:6,fill:fill}));
+    t.appendChild(el('rect',{x:4,y:15,width:14,height:18,rx:6,fill:fill}));
+    t.appendChild(el('rect',{x:6,y:31,width:4,height:15,rx:2,fill:fill}));
+    t.appendChild(el('rect',{x:12,y:31,width:4,height:15,rx:2,fill:fill}));
+    g.appendChild(t);
+  }
+  function crowd(){
+    var s=svg(288,380,'0 0 288 380');
+    for(var i=0;i<88;i++){var m=(i*41)%100,f=m<12?blue:m<46?seated:taupe;smallFig(s,(i%11)*24+6,Math.floor(i/11)*46+6,f);}
+    return s;
+  }
+  function hemicycle(){
+    var s=svg(512,320,'-16 0 512 320');
+    var rows=[[76,20],[108,26],[140,32],[174,38],[210,40],[248,44]],cx=240,cy=300;
+    var seats=[],idx=0;
+    rows.forEach(function(r){
+      for(var j=0;j<r[1];j++){
+        var side=j/(r[1]-1),a=Math.PI-side*Math.PI;
+        seats.push({id:idx++,side:side,radius:r[0],x:cx+r[0]*Math.cos(a),y:cy-r[0]*Math.sin(a)});
+      }
+    });
+    var accused={};
+    seats.slice().sort(function(a,b){return a.side-b.side||a.radius-b.radius;}).slice(0,138).forEach(function(d){accused[d.id]=true;});
+    seats.forEach(function(d){s.appendChild(el('circle',{cx:d.x,cy:d.y,r:5,fill:accused[d.id]?blue:seated}));});
+    return s;
+  }
+  function collusion(){
+    var s=svg(560,300,'0 0 560 300');
+    s.setAttribute('style','max-width:100%;height:auto');
+    var centers=[140,280,420],src={x:280,y:60};
+    s.appendChild(el('circle',{cx:src.x,cy:src.y,r:13,fill:blue,stroke:ink,'stroke-width':3}));
+    centers.forEach(function(cx){s.appendChild(el('line',{x1:src.x,y1:src.y+12,x2:cx,y2:150,stroke:blue,'stroke-width':2.5,'stroke-dasharray':'6 6'}));});
+    centers.forEach(function(cx){
+      var topY=150;
+      s.appendChild(el('rect',{x:cx-24,y:topY+26,width:48,height:56,rx:18,fill:taupe}));
+      s.appendChild(el('rect',{x:cx-15,y:topY+80,width:11,height:34,rx:5,fill:ink}));
+      s.appendChild(el('rect',{x:cx+4,y:topY+80,width:11,height:34,rx:5,fill:ink}));
+      s.appendChild(el('circle',{cx:cx,cy:topY+16,r:16,fill:ink}));
+      s.appendChild(el('rect',{x:cx-13,y:topY+40,width:26,height:30,rx:3,fill:gold}));
+    });
+    return s;
+  }
+  document.getElementById('collusion').appendChild(collusion());
+
+  var caps=['1 คน · ยังไม่มีตำแหน่ง','มีเอกสารในมือ','สวมเครื่องแบบ · เป็นตัวเลือกแล้ว','ได้ที่นั่ง · ลงมติได้','ตัวคนหนึ่ง → หลายร้อย','น้ำเงิน 138 คน (69%) · สีเข้ม 62 คน (31%)'];
+  var stage=document.getElementById('svc-stage'),cap=document.getElementById('svc-cap');
+  function draw(step){
+    stage.innerHTML='';
+    cap.textContent=caps[step]||'';
+    stage.appendChild(step<=3?figure(step):step===4?crowd():hemicycle());
+  }
+  draw(0);
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('on');
+        draw(+e.target.getAttribute('data-svc'));
+      }
+    });
+  },{rootMargin:'-45% 0px -45% 0px'});
+  document.querySelectorAll('[data-svc]').forEach(function(n){io.observe(n);});
+})();
+</script>
+
+<script>
+(function voteUnitChart(){
+  var mechanism=document.getElementById('ballot-mechanism');
+  if(mechanism){
+    var selected={6:1,13:1,28:1,47:1,63:1,84:1,101:1,119:1,137:1,148:1}, mh='';
+    for(var mi=0;mi<154;mi++) mh+='<i class="'+(selected[mi]?'hit':'')+'" aria-hidden="true"></i>';
+    mechanism.innerHTML=mh;
+  }
+  var turnout=document.getElementById('turnout-strip');
+  if(turnout){
+    var th='';
+    for(var ti=0;ti<2988;ti++) th+='<i class="'+(ti<1157?'patterned':'')+'" aria-hidden="true"></i>';
+    turnout.innerHTML=th;
+  }
+  var ballots={
+    '11':{numbers:[141,131,130,104,83,81,76,75,53,10],hit:104,copies:23},
+    '19':{numbers:[152,123,122,108,49,22,10,5,3,2],hit:3,copies:21},
+    '20':{numbers:[144,133,106,100,91,85,65,37,31,4],hit:144,copies:21}
+  };
+  document.querySelectorAll('[data-ballot-group]').forEach(function(node){
+    var d=ballots[node.getAttribute('data-ballot-group')];
+    if(!d) return;
+    var nums=d.numbers.map(function(n){return '<span class="num'+(n===d.hit?' hit':'')+'">'+n+'</span>';}).join('');
+    var slips='';
+    for(var r=0;r<d.copies;r++){
+      slips+='<span class="ballot-slip">'+d.numbers.map(function(n){return '<i class="'+(n===d.hit?'hit':'')+'"></i>';}).join('')+'</span>';
+    }
+    node.innerHTML='<figcaption>เลขสิบตัวที่ปรากฏซ้ำบนทุกใบ</figcaption><div class="ballot-numbers">'+nums+'</div>'
+      +'<div class="ballot-stack" aria-hidden="true">'+slips+'</div><div class="ballot-note"><span>หนึ่งแถว = หนึ่งบัตร</span><span>'+d.copies+' แถว</span></div>';
+  });
+  var root=document.getElementById('vote-unit-chart');
+  if(!root) return;
+  var groups=[
+    {name:'กลุ่มข้างมาก',total:147,accused:132,cols:15,color:'#6E9BFF'},
+    {name:'คาดหมายไม่ได้',total:33,accused:2,cols:7,color:'#B9B2A2'},
+    {name:'กลุ่มข้างน้อย',total:17,accused:0,cols:5,color:'#49B7AB'}
+  ];
+  root.innerHTML=groups.map(function(g){
+    var people='';
+    for(var i=0;i<g.total;i++) people+='<span class="unit-person'+(i<g.accused?' accused':'')+'" aria-hidden="true"><svg viewBox="0 0 14 26"><circle cx="7" cy="4.5" r="4.5"></circle><rect x="2" y="10" width="10" height="11" rx="4"></rect><rect x="3" y="19" width="3" height="7" rx="1.5"></rect><rect x="8" y="19" width="3" height="7" rx="1.5"></rect></svg></span>';
+    return '<section class="unit-group" style="--group-color:'+g.color+';--cols:'+g.cols+'">'
+      +'<div class="unit-head"><h3>'+g.name+'</h3><div><b>'+g.total+'</b><small>ถูกกล่าวหา '+g.accused+'</small></div></div>'
+      +'<div class="unit-dots">'+people+'</div></section>';
+  }).join('');
+})();
+</script>
+
+
+<script>
+(function evidenceStory(){
+  var root=document.documentElement;
+  var frame=document.getElementById('evidence-board-frame');
+  var steps=[].slice.call(document.querySelectorAll('#evidence-board .evidence-step'));
+  if(!frame||!steps.length) return;
+  function activate(step){
+    if(!step) return;
+    var panel=step.getAttribute('data-panel')||'money';
+    steps.forEach(function(el){el.classList.toggle('on',el===step);});
+    root.setAttribute('data-evidence-beat',panel);
+    try{frame.contentWindow.postMessage({type:'hua-evidence-panel',panel:panel},'*');}catch(e){}
+  }
+  frame.addEventListener('load',function(){activate(steps.find(function(el){return el.classList.contains('on');})||steps[0]);});
+  addEventListener('message',function(ev){
+    var d=ev.data||{};
+    if(ev.source===frame.contentWindow && d.type==='hua-evidence-ready'){
+      activate(steps.find(function(el){return el.classList.contains('on');})||steps[0]);
+    }
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      var hit=entries.filter(function(e){return e.isIntersecting;}).sort(function(a,b){return b.intersectionRatio-a.intersectionRatio;})[0];
+      if(hit) activate(hit.target);
+    },{rootMargin:'-28% 0px -42% 0px',threshold:[0,.15,.35,.6]});
+    steps.forEach(function(el){io.observe(el);});
+  }else{
+    addEventListener('scroll',function(){
+      var line=innerHeight*.48,best=steps[0];
+      steps.forEach(function(el){if(el.getBoundingClientRect().top<=line) best=el;});
+      activate(best);
+    },{passive:true});
+  }
+  activate(steps[0]);
+})();
+</script>
+
+
+<script>
+(function storyBackground(){
+  var root=document.documentElement, ticking=false;
+  var markers=[
+    ['body','intro'],['more-ballots','ballot'],['province-context','place'],
+    ['evidence-board','evidence'],['hua-flower','flower'],['person-bridge','person'],['after-seat','chamber'],['case-detail','case']
+  ];
+  function update(){
+    var y=window.scrollY||0, scene='intro', line=window.innerHeight*.58;
+    root.style.setProperty('--scroll-y',String(y));
+    markers.forEach(function(m){
+      var el=m[0]==='body'?document.body:document.getElementById(m[0]);
+      if(el && el.getBoundingClientRect().top<=line) scene=m[1];
+    });
+    root.setAttribute('data-bg-scene',scene); ticking=false;
+  }
+  function request(){if(!ticking){requestAnimationFrame(update);ticking=true;}}
+  addEventListener('scroll',request,{passive:true}); addEventListener('resize',request); update();
+})();
+</script>
+
+</body>
+</html>

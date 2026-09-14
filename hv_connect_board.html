@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>กระดานโยงหลักฐาน · โอน · โทร · สถานที่</title>
+<link href="house.css" rel="stylesheet">
+<link rel="stylesheet" href="prototype/hua_case_cards.css?v=board2">
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+(function(){
+  try{
+    var q=new URLSearchParams(location.search);
+    if(q.get('embed')==='1') document.documentElement.classList.add('v-embed');
+    var t=localStorage.getItem('viz-theme')||localStorage.getItem('baanyai-theme')||'light';
+    document.documentElement.setAttribute('data-theme',t);
+    document.documentElement.classList.toggle('theme-dark',t==='dark');
+  }catch(e){}
+})();
+</script>
+<style>
+/* ภาษาภาพ = โต๊ะคลี่สำนวนใต้โคมไฟ · กระดาษ แฟ้ม หมุด และเส้นโยง */
+:root{
+  --maxw:1040px;
+  --paper:#E8D7B7;
+  --ink:#20211E;
+  --board:#202722;
+  --paper-pale:#F3E8D0;
+  --paper-rule:rgba(63,48,28,.2);
+  --yarn-phone:#B73932;
+  --yarn-poy:#5b3a8c;
+  --mark:#B73932;
+  --navy:#284D66;
+  --doc-paper:#F3E8D0;
+  --doc-ink:rgba(45,35,22,.5);
+  --doc-fold:#C8B78F;
+  --card-paper:#F3E8D0;
+  --card-ink:#20211E;
+  --board-text:#F3E8D0;
+  --board-muted:#BDB7A9;
+}
+[data-theme="dark"]{
+  --paper:#191D1A;--ink:#F0E8D8;--board:#111714;--paper-pale:#20241F;
+  --paper-rule:rgba(231,220,197,.16);--yarn-phone:#E45B58;--doc-paper:#252823;
+  --doc-ink:rgba(231,220,197,.42);--card-paper:#252823;--card-ink:#F0E8D8;
+}
+
+body{
+  background-color:var(--paper);
+  background-image:linear-gradient(rgba(80,59,29,.035) 1px,transparent 1px),
+    radial-gradient(circle at 16% 0,rgba(255,247,219,.24),transparent 36%);
+  background-size:100% 28px,auto;
+}
+
+.tempflag{background:#BDAA77;color:#20211E;font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:.04em;text-align:center;padding:7px 54px 7px 12px;font-weight:600}
+
+.slide{max-width:var(--maxw);margin:28px auto;padding:56px 48px 38px;position:relative;
+  background:var(--board);color:var(--board-text);border:9px solid #3B3024;
+  box-shadow:0 18px 44px rgba(28,20,12,.2),inset 0 0 0 1px rgba(255,255,255,.07)}
+.slide:before{content:"แฟ้มคดี · HV / 2567";position:absolute;top:18px;right:22px;padding:6px 9px;
+  color:#D8B7AE;border:2px solid rgba(190,68,56,.65);font:600 10px/1 'IBM Plex Mono',monospace;
+  letter-spacing:.08em;transform:rotate(2deg)}
+.slide.wide{max-width:1120px}
+.k{font:600 12px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#7C2D28;margin:0 0 14px}
+.slide .k{color:#D2B66F}
+.slide h1,.board-block h2{font:700 clamp(28px,4.6vw,46px)/1.15 Trirong,serif;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px;color:var(--ink)}
+.slide h1{color:var(--board-text);max-width:18ch}
+.lead{margin:0 0 18px;font-size:clamp(17px,2vw,20px);font-weight:400;color:#4D493F;max-width:56ch;line-height:1.55}
+.lead b{font-weight:600;color:#6C2B28}
+.slide .lead{color:var(--board-muted);max-width:58ch}
+.slide .caveat{background:rgba(243,232,208,.07);color:var(--board-muted);border-color:rgba(243,232,208,.2);border-left-color:#C5A54B;border-radius:1px}
+.slide .caveat b,.slide .caveat a{color:#E0C47A}
+[data-theme="dark"] .lead{color:#BDB7A9}
+.read-path{display:flex;align-items:center;gap:10px;margin:24px 0 4px;padding:12px 14px;
+  border:1px solid rgba(243,232,208,.26);background:rgba(6,10,8,.24);font-size:14px;color:var(--board-text)}
+.read-path b{font-family:Trirong,serif;font-weight:600}.read-path i{color:#C75A50;font-style:normal}
+.tools{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin:22px 0 0;padding-top:16px;border-top:1px solid var(--border)}
+.slide .tools{border-top-color:rgba(243,232,208,.22)}
+.tools a{color:var(--board-text);font:600 16px/1.2 Trirong,serif;text-decoration:none;border-bottom:1.5px solid transparent}
+.tools a:hover{border-bottom-color:var(--gold-loud);color:var(--gold-dim)}
+.slide .tools a:hover{color:#E0C47A}
+
+.board-block{padding:54px 0 24px;border-top:1px solid rgba(57,43,25,.22)}
+.board-block .intro{max-width:var(--maxw);margin:0 auto;padding:0 24px 18px;display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;column-gap:38px;align-items:start}
+.board-block .intro>.k,.board-block .intro>h2,.board-block .intro>.lead,.board-block .intro>.key{grid-column:1}
+.board-block .intro>.callout{grid-column:2;grid-row:2/span 3}
+.board-block .lead{margin-bottom:8px}
+.callout{
+  display:grid;grid-template-columns:auto 1fr;gap:8px 12px;align-items:start;
+  max-width:54ch;margin:0 0 12px;padding:15px 16px;position:relative;
+  background:var(--paper-pale);border:1px solid var(--paper-rule);border-left:4px solid #9E7925;
+  box-shadow:2px 5px 14px rgba(55,40,20,.09);transform:rotate(.35deg);
+}
+.callout:before{content:"";position:absolute;top:-7px;left:42%;width:58px;height:14px;background:rgba(200,183,143,.78);transform:rotate(-2deg)}
+.callout .n{font:700 clamp(28px,4vw,36px)/.95 Trirong,serif;color:var(--ink);white-space:nowrap}
+.callout .t{font:600 15px/1.35 Trirong,serif;color:var(--ink);margin:0 0 4px}
+.callout .d{font:400 13px/1.45 Sarabun,sans-serif;color:#5D564A;margin:0}
+[data-theme="dark"] .callout .d{color:#BDB7A9}
+.callout.phone{border-left-color:var(--yarn-phone)}
+.callout.venue{border-left-color:var(--navy)}
+
+.stage{max-width:1120px;margin:0 auto;padding:0 16px 4px}
+.embed-frame{
+  position:relative;overflow:hidden;
+  border:10px solid #3B3024;background-color:var(--board);
+  background-image:radial-gradient(circle at 18% 28%,rgba(255,255,255,.026) 0 1px,transparent 2px),
+    radial-gradient(circle at 72% 62%,rgba(0,0,0,.08) 0 1px,transparent 2px);
+  background-size:25px 23px,31px 29px;
+  box-shadow:0 14px 32px rgba(45,32,16,.18),inset 0 0 42px rgba(0,0,0,.26);
+}
+[data-theme="dark"] .embed-frame{border-color:#30271F}
+.embed-frame svg{display:block;width:100%;height:auto}
+.frame-cap{
+  width:max-content;max-width:calc(100% - 18px);margin:-7px 0 0 18px;padding:6px 10px;position:relative;
+  background:#D8C9A7;color:#39352D;font:500 11px/1.4 'IBM Plex Mono',monospace;
+  box-shadow:1px 2px 5px rgba(53,38,20,.12);transform:rotate(-.25deg);
+}
+.a11y-mini{max-width:1120px;margin:0 auto;padding:20px 16px 8px}
+.a11y-mini button{
+  display:inline-block;width:auto;margin:0 6px 6px 0;padding:7px 11px;
+  background:var(--surface);color:var(--text);border:1px solid var(--border);
+  border-radius:2px;cursor:pointer;font:500 12px/1.3 'IBM Plex Mono',monospace;text-align:left;
+}
+.a11y-mini button:hover{border-color:var(--gold-loud)}
+.a11y-mini button.on{outline:2px solid var(--gold-loud);outline-offset:1px;background:color-mix(in srgb,var(--gold-fill) 35%,var(--surface))}
+.a11y-mini button.chip-doc.on{
+  outline:2px solid var(--ink);outline-offset:1px;
+  background:var(--doc-paper);border-color:var(--doc-ink);
+}
+.a11y-mini button.chip-place.on{
+  outline:2px solid var(--navy);outline-offset:1px;
+  background:color-mix(in srgb,var(--navy) 8%,var(--surface));
+}
+.dossier{display:grid;gap:18px;margin-top:4px}
+.dossier section{border-top:1px solid var(--rule);padding:10px 0 4px}
+.dossier h3{
+  margin:0 0 8px;font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.12em;
+  text-transform:uppercase;display:flex;align-items:center;gap:8px;
+}
+.dossier h3.k-person{color:var(--mark)}
+.dossier h3.k-place{color:var(--navy)}
+.dossier h3.k-doc{color:var(--text-secondary)}
+.dossier h3 i{display:inline-block;width:10px;height:10px;border-radius:1px}
+.dossier h3.k-person i{background:#FFFEF9;border:1px solid rgba(27,36,48,.3);border-left:3px solid var(--mark)}
+.dossier h3.k-place i{background:var(--navy)}
+.dossier h3.k-doc i{background:var(--doc-paper);border:1px solid var(--doc-ink);border-left:3px solid var(--doc-fold)}
+.a11y-mini button.chip-person{border-left:3px solid var(--mark)}
+.a11y-mini button.chip-place{border-left:3px solid var(--navy)}
+.a11y-mini button.chip-doc{border-left:3px solid var(--doc-fold);background:color-mix(in srgb,var(--doc-paper) 55%,var(--surface))}
+
+/* ไฮไลต์: คน=วงทอง · เอกสาร=วงหมึก+เงา · สถานที่=วงนavy — ไม่ทับตัวอักษร */
+.embed-frame.has-sel g.card:not(.on),
+.embed-frame.has-sel g.mark:not(.on){opacity:.22}
+.embed-frame.has-sel .yarns path{opacity:.1}
+.embed-frame.has-sel .yarns path.hot{opacity:.92}
+g.card.on .card-file{stroke:var(--gold-loud);stroke-width:2.2;fill:var(--card-paper)}
+g.mark.on .mark-place{fill:var(--navy);stroke:var(--gold-loud);stroke-width:2.2}
+g.mark.on .mark-doc{fill:var(--doc-paper);stroke:var(--ink);stroke-width:2}
+[data-theme="dark"] g.mark.on .mark-doc{fill:#161a1f;stroke:#E8E5DC}
+g.mark.on.mark-doc{filter:drop-shadow(0 2px 5px rgba(27,36,48,.16))}
+g.mark.on.mark-doc .pin-doc-n{fill:var(--card-ink)}
+g.mark.on.mark-doc .pin-lab,g.mark.on.mark-doc .pin-sub,g.mark.on.mark-doc .pin-kind{fill:var(--board-text)}
+
+#ov .card.card-venue{border-left-color:var(--navy)}
+#ov .card.card-venue .pc-head{background:#1B2A4A;color:#F6F4EE}
+#ov .card.card-venue .pc-rail{color:var(--navy)}
+#ov .ev-shot{margin:12px 0 4px;border:1px solid rgba(27,36,48,.2);background:#111}
+#ov .ev-shot img{display:block;width:100%;height:auto;max-height:360px;object-fit:contain}
+#ov .ev-cap{font:500 11px/1.35 'IBM Plex Mono',monospace;color:#5C6672;margin:6px 0 0}
+/* แฟ้มเอกสารบนบอร์ด = กระดาษ+หมึก ไม่ใช่แผ่นทองทึบ */
+#ov .card.card-source{border-left-color:var(--doc-fold)}
+#ov .card.card-source .sc-head{background:#1B2430;color:#F6F4EE}
+#ov .card.card-source .sc-rail{color:var(--doc-fold)}
+html.theme-dark #ov .card.card-source .sc-head{background:#0e1014;color:#E8E5DC}
+
+/* venue timeline — พอร์ตภาษาจาก story #hotels */
+.venue-rail{position:relative;margin:4px auto 14px;padding-left:120px;max-width:760px}
+.venue-rail:before{content:"";position:absolute;left:92px;top:10px;bottom:10px;width:1px;background:rgba(27,36,48,.24)}
+[data-theme="dark"] .venue-rail:before{background:rgba(231,227,216,.24)}
+.venue-rail .vhit{
+  position:relative;display:block;width:100%;text-align:left;border:0;background:transparent;
+  font:inherit;color:inherit;cursor:pointer;padding:0 0 16px 28px;
+}
+.venue-rail .vhit:before{
+  content:"";position:absolute;left:-33px;top:7px;width:10px;height:10px;border-radius:50%;
+  background:#596572;box-shadow:0 0 0 4px var(--bg);
+}
+.venue-rail .vhit:nth-child(1):before,.venue-rail .vhit:nth-child(2):before{background:var(--navy)}
+.venue-rail .vhit:nth-child(3):before{background:var(--gold-loud)}
+.venue-rail .vhit:nth-child(4):before{background:var(--yarn-poy)}
+.venue-rail .vhit .vk:before{
+  content:attr(data-when);position:absolute;right:calc(100% + 28px);width:92px;
+  text-align:right;color:var(--text-secondary);font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.04em;
+}
+.venue-rail .vk{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dim);margin:0 0 6px}
+.venue-rail h4{font:700 18px/1.2 Trirong,serif;margin:0 0 2px;color:var(--text)}
+.venue-rail .muted{color:var(--text-secondary);margin:0 0 4px;font-size:13px}
+.venue-rail .detail{margin:0 0 6px;font-size:14px;line-height:1.4;color:var(--text);max-width:48ch}
+.venue-rail .vg{font:600 11px/1 'IBM Plex Mono',monospace;color:var(--gold-loud);border-bottom:1px solid rgba(185,139,0,.4)}
+@media(max-width:640px){
+  .venue-rail{padding-left:72px}
+  .venue-rail:before{left:56px}
+  .venue-rail .vhit .vk:before{width:52px;right:calc(100% + 28px);font-size:9px}
+}
+
+.zone{fill:rgba(243,232,208,.025);stroke:rgba(243,232,208,.25);stroke-dasharray:3 6;stroke-width:.7}
+[data-theme="dark"] .zone{fill:rgba(231,227,216,.025);stroke:rgba(231,227,216,.18)}
+.zone-lab{font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.04em;fill:#D8C58C;opacity:.95}
+.yarns path{filter:drop-shadow(0 1px 1px rgba(0,0,0,.55))}
+.yarn-gold{stroke:#D2A932;fill:none;stroke-linecap:round;opacity:.86}
+.yarn-red{stroke:var(--yarn-phone);fill:none;stroke-linecap:round;opacity:.82}
+.yarn-venue{stroke:#AAB4AE;fill:none;stroke-linecap:round;opacity:.58;stroke-dasharray:2 5}
+.yarn-poy{stroke:var(--yarn-poy);fill:none;stroke-linecap:round;opacity:.6}
+
+g.card{cursor:pointer;filter:drop-shadow(2px 3px 3px rgba(0,0,0,.3))}
+g.card:hover .card-file{stroke:var(--gold-loud)}
+g.card:focus .card-file,g.mark:focus .mark-shape{stroke:#F2D024;stroke-width:2.2}
+.card-file{fill:var(--card-paper);stroke:rgba(27,24,19,.42);stroke-width:1}
+[data-theme="dark"] .card-file{fill:var(--card-paper);stroke:rgba(231,227,216,.28)}
+.card-rail{fill:var(--mark)}
+.card-rail.poy{fill:var(--yarn-poy)}
+.card-kind{fill:var(--mark);font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.08em}
+.card-name{fill:var(--card-ink);font:700 13px Trirong,'Noto Serif Thai',serif}
+.card-id{fill:#645E53;font:500 9px 'IBM Plex Mono',monospace}
+[data-theme="dark"] .card-id{fill:#AAA294}
+.card line{stroke:var(--card-ink)}
+.card-pin{fill:#A52E2A;stroke:#70201D;stroke-width:.8;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45));pointer-events:none}
+
+.mark{cursor:pointer}
+.mark:hover .mark-place{stroke:var(--gold-loud);stroke-width:1.6}
+.mark:hover .mark-doc{stroke:var(--ink);stroke-width:1.5}
+.mark-shape{stroke-width:1.2}
+.mark-place{fill:var(--navy);stroke:var(--board-text)}
+.mark-doc{fill:var(--doc-paper);stroke:var(--doc-ink);stroke-width:1.1}
+[data-theme="dark"] .mark-doc{fill:#161a1f;stroke:rgba(231,227,216,.35)}
+.mark-doc-fold{fill:var(--doc-fold);opacity:.55;stroke:none;pointer-events:none}
+g.mark.on .mark-doc-fold{opacity:.75}
+.pin-doc-n{fill:var(--card-ink)}
+.pin-lab{font:600 12px Trirong,serif;fill:var(--board-text);paint-order:stroke;stroke:var(--board);stroke-width:3px}
+.pin-sub{font:500 9px 'IBM Plex Mono',monospace;fill:var(--board-muted);paint-order:stroke;stroke:var(--board);stroke-width:3px}
+.pin-kind{font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.04em;fill:#D8C58C;paint-order:stroke;stroke:var(--board);stroke-width:3px}
+
+.anno{pointer-events:none}
+.anno-box{fill:var(--paper);stroke:rgba(27,36,48,.18);stroke-width:1}
+[data-theme="dark"] .anno-box{stroke:rgba(231,227,216,.2)}
+.anno-k{font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.1em;fill:var(--gold-dim)}
+.anno-t{font:700 13px Trirong,serif;fill:var(--text)}
+.anno-d{font:500 10px Sarabun,sans-serif;fill:var(--text-secondary)}
+.anno-line{stroke:var(--gold-loud);stroke-width:1;fill:none;opacity:.7}
+
+#ov .card .counter{margin:8px 0 0;padding:0;list-style:none;font-size:12px}
+#ov .card .counter li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed rgba(179,38,30,.22);padding:3px 0}
+.title-svg{font:600 10px 'IBM Plex Mono',monospace;fill:var(--gold-dim)}
+.ballot{fill:var(--card-paper);stroke:rgba(27,36,48,.32);stroke-width:.8}
+[data-theme="dark"] .ballot{fill:var(--card-paper);stroke:rgba(231,227,216,.28)}
+.slot{fill:none;stroke:var(--gold-dim);stroke-width:.55;opacity:.7}
+.key{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:4px 0 0;font:500 12px/1.3 'IBM Plex Mono',monospace;color:var(--text-secondary)}
+.key i{display:inline-block;vertical-align:middle;margin-right:6px}
+.key i.line{width:18px;height:2px}
+.key i.g{background:var(--gold-loud)} .key i.r{background:var(--yarn-phone)} .key i.v{background:var(--text-secondary);opacity:.55}
+.key i.person{width:14px;height:12px;border:1px solid rgba(27,36,48,.35);border-left:3px solid var(--mark);background:#FFFEF9;border-radius:1px}
+.key i.place{width:12px;height:12px;border-radius:2px;background:var(--navy)}
+.key i.doc{width:11px;height:14px;border:1px solid var(--doc-ink);border-left:3px solid var(--doc-fold);background:var(--doc-paper);border-radius:1px}
+.key .sep{opacity:.35}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+
+@media(max-width:760px){
+  .slide{margin:0;padding:48px 22px 28px;border-width:0 0 7px}.slide:before{top:14px;right:14px}
+  .read-path{align-items:flex-start;flex-direction:column;gap:3px}.read-path i{display:none}
+  .board-block{padding-top:40px}.board-block .intro{display:block}.callout{margin:18px 0 12px;transform:none}
+  .embed-frame{border-width:6px;overflow-x:auto}.embed-frame svg{min-width:720px}
+  #board-venue .embed-frame svg{min-width:620px}
+  .frame-cap{width:auto;margin:-5px 8px 0;padding:6px 8px;transform:none}
+}
+
+/* โหมดแผ่นหลักฐานในหน้า story: parent เป็นผู้เล่าและสลับทีละแผ่น */
+html.v-embed,html.v-embed body{height:100%;margin:0;overflow:hidden;background:var(--paper)}
+html.v-embed #themeBtn,html.v-embed .tempflag,html.v-embed #top,
+html.v-embed .board-block>.intro,html.v-embed .board-block>.a11y-mini,
+html.v-embed .venue-rail{display:none!important}
+html.v-embed .board-block{display:none;height:100%;padding:0;border:0}
+html.v-embed .board-block.is-active{display:block}
+html.v-embed .stage{width:100%;height:100%;max-width:none;padding:12px;box-sizing:border-box;display:grid;grid-template-rows:minmax(0,1fr) auto}
+html.v-embed .embed-frame{min-height:0;border:0;background:var(--board);display:flex;align-items:center;justify-content:center}
+html.v-embed .embed-frame svg{width:100%;height:100%;min-width:0;max-height:100%}
+html.v-embed .frame-cap{padding:6px 10px 0}
+html.v-embed #ov{position:fixed}
+</style>
+</head>
+<body>
+<button class="toggle mono" type="button" id="themeBtn">◐ ธีม</button>
+<div class="tempflag">กระดานหลักฐาน · แยกข้อเท็จจริง ข้อกล่าวหา และข้อจำกัดออกจากกัน</div>
+
+<section class="slide" id="top">
+  <div class="k">คดีฮั้ว สว. 2567 · กระดานโยงหลักฐาน</div>
+  <h1>สามเส้นที่ปรากฏในสำนวน<br>โอน · โทร · สถานที่</h1>
+  <p class="lead">แต่ละแผ่นแยกหลักฐานหนึ่งชนิด คนที่คาบหลายเส้นจะปรากฏซ้ำเพื่อให้ตามความเชื่อมโยงได้โดยไม่ปนความหมายของหลักฐาน</p>
+  <div class="read-path" aria-label="วิธีอ่านกราฟ">
+    <b>เริ่มที่การ์ดฮับ</b><i>→</i><span>ตามสีและความหนาของเส้น</span><i>→</i><span>คลิกการ์ดหรือหมุดเพื่อเปิดแฟ้ม</span>
+  </div>
+  <div class="caveat">สายโทร ≠ พิสูจน์เนื้อหาสนทนา · โอน ≠ สัญญาจ่าย · <b>presumption of innocence</b> · โพยจากบท iLaw 59410 (S227) แปะในงาน <a href="https://www.ilaw.or.th/articles/59420">59420</a></div>
+  <div class="tools" role="navigation" aria-label="ไปแผ่นหลักฐาน">
+    <span class="k" style="margin:0">ไป</span>
+    <a href="#board-money">01 · โอน</a>
+    <a href="#board-phone">02 · โทร</a>
+    <a href="#board-venue">03 · สถานที่</a>
+  </div>
+</section>
+
+<section class="board-block" id="board-money">
+  <div class="intro">
+    <div class="k">01 · การเงิน</div>
+    <h2>วรพจน์โอน 2.17 ล้าน<br>ให้เจ็ดคนในเส้นใต้</h2>
+    <p class="lead">อีกเส้นคู่ขนาน: ญาณี → สุรชัย <b>860,000 บาท</b> สิบสามครั้ง · ความหนาของเส้น = ยอดบาท · <b>โอน ≠ สัญญาจ่าย</b></p>
+    <aside class="callout" aria-label="จุดอ่านหลัก">
+      <div class="n">2.17M</div>
+      <div>
+        <p class="t">ฮับใต้ · วรพจน์ (H009)</p>
+        <p class="d">31 รายการ · 15 พ.ค.–26 มิ.ย.67 · เอกสารธุรกรรมตามสำนวนที่ iLaw อ้าง</p>
+      </div>
+    </aside>
+    <div class="key" aria-label="สัญลักษณ์บนแผ่น">
+      <span><i class="person" aria-hidden="true"></i>คน</span>
+      <span><i class="place" aria-hidden="true"></i>สถานที่</span>
+      <span><i class="doc" aria-hidden="true"></i>เอกสาร</span>
+      <span class="sep">·</span>
+      <span><i class="line g"></i>โอน</span>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="embed-frame" data-case="แผ่น 01 · เส้นการเงิน"><svg id="svg-money" viewBox="0 0 1080 520" role="img" aria-labelledby="t-money"></svg></div>
+    <p class="frame-cap">อ่านจากซ้ายไปขวา · เส้นยิ่งหนา = ยอดโอนยิ่งมาก</p>
+  </div>
+  <div class="a11y-mini" id="list-money"></div>
+</section>
+
+<section class="board-block" id="board-phone">
+  <div class="intro">
+    <div class="k">02 · สายโทร</div>
+    <h2>ภราดรปรากฏ 76 ครั้ง<br>ในกราฟโทรหน้าต่างเดียวกัน</h2>
+    <p class="lead">ฮับอื่น: รัตนา 62 · กรวีร์ · เจเศรษฐ์ · นภินทร · พิพัฒน์ · หน้าต่าง <b>16 มิ.ย.–15 ก.ย.67</b> · <b>สายโทร ≠ เนื้อหาสนทนา</b></p>
+    <aside class="callout phone" aria-label="จุดอ่านหลัก">
+      <div class="n">76×</div>
+      <div>
+        <p class="t">ฮับอ่างทอง · ภราดร (P220)</p>
+        <p class="d">อย่างน้อย 7 คู่สายในกราฟ · สุเทพ 39 ครั้งเป็นปลายหนาที่สุด</p>
+      </div>
+    </aside>
+    <div class="key" aria-label="สัญลักษณ์บนแผ่น">
+      <span><i class="person" aria-hidden="true"></i>คน</span>
+      <span><i class="place" aria-hidden="true"></i>สถานที่</span>
+      <span><i class="doc" aria-hidden="true"></i>เอกสาร</span>
+      <span class="sep">·</span>
+      <span><i class="line r"></i>ประวัติโทร · ความหนา = ครั้ง</span>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="embed-frame" data-case="แผ่น 02 · เส้นสายโทร"><svg id="svg-phone" viewBox="0 0 980 310" role="img" aria-labelledby="t-phone"></svg></div>
+    <p class="frame-cap">เส้นยิ่งหนา = พบประวัติโทรยิ่งบ่อย · แสดงเฉพาะคู่สายที่วางบนแผ่น</p>
+  </div>
+  <div class="a11y-mini" id="list-phone"></div>
+</section>
+
+<section class="board-block" id="board-venue">
+  <div class="intro">
+    <div class="k">03 · สถานที่</div>
+    <h2>ห้องแจกซอง · สนามบอล<br>แล้วถึงโพยบนผนังนิทรรศการ</h2>
+    <p class="lead">คนละชั้นเวลา: เมืองคอนก่อนเลือก · อ่างทองจ้างงาน · โพยเป็นแพทเทิร์นซ้ำจาก S227 แปะในงาน 59420 · <b>จ้างงาน ≠ ฮั้วตรง</b></p>
+    <aside class="callout venue" aria-label="จุดอ่านหลัก">
+      <div class="n">140</div>
+      <div>
+        <p class="t">โพยล็อกมง · S227 / A224</p>
+        <p class="d">แผนผังบัตรด้านล่างเป็นแพทเทิร์นซ้ำ 10 ช่อง — ไม่ใช่เลขจากบัตรใบใดใบหนึ่ง</p>
+      </div>
+    </aside>
+    <div class="key" aria-label="สัญลักษณ์บนแผ่น">
+      <span><i class="person" aria-hidden="true"></i>คน</span>
+      <span><i class="place" aria-hidden="true"></i>สถานที่ / โรงแรม</span>
+      <span><i class="doc" aria-hidden="true"></i>เอกสาร</span>
+    </div>
+  </div>
+
+  <div class="venue-rail" id="venue-rail" aria-label="เส้นเวลาสถานที่บนแผ่นนี้"></div>
+
+  <div class="stage">
+    <div class="embed-frame" data-case="แผ่น 03 · เส้นสถานที่"><svg id="svg-venue" viewBox="0 0 760 490" role="img" aria-labelledby="t-venue"></svg></div>
+    <p class="frame-cap">เส้นประโยงคนกับสถานที่หรือเอกสาร · คลิกจุดใดก็ได้เพื่อเปิดแฟ้ม</p>
+  </div>
+  <div class="a11y-mini" id="list-venue"></div>
+  <div class="intro" style="padding-top:8px">
+    <div class="caveat"><b>โพย ≠ สำนวน</b> · บท 59420 เป็นนิทรรศการแปะหลักฐาน · ตัวอย่างแพทเทิร์นจาก 59410 (S227) · อย่าแตก A 140 แถว</div>
+  </div>
+</section>
+
+<div id="ov" role="dialog" aria-modal="true" aria-label="แฟ้มคดี">
+  <div class="card card-person" id="ovcard">
+    <button type="button" class="x" id="ovx" aria-label="ปิด">×</button>
+    <div id="cardbody"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var DATA=null, SPECS=[], sel=null;
+  var QUERY=new URLSearchParams(location.search);
+  var EMBED=QUERY.get('embed')==='1';
+  var ACTIVE_PANEL=QUERY.get('panel')||'money';
+  function setEvidencePanel(panel){
+    if(['money','phone','venue'].indexOf(panel)<0) panel='money';
+    ACTIVE_PANEL=panel;
+    document.querySelectorAll('.board-block').forEach(function(el){
+      el.classList.toggle('is-active',el.id==='board-'+panel);
+    });
+    document.documentElement.setAttribute('data-evidence-panel',panel);
+  }
+  window.setEvidencePanel=setEvidencePanel;
+  if(EMBED){
+    setEvidencePanel(ACTIVE_PANEL);
+    addEventListener('message',function(ev){
+      var d=ev.data||{};
+      if(d.type==='hua-evidence-panel') setEvidencePanel(d.panel);
+    });
+  }
+  var CW=108, CH=62;
+  /* สถานที่จริง (โรงแรม/สโมสร/หอ) — ที่เหลือใน pins = เอกสารหลักฐาน */
+  var PLACE_IDS={"pin-aswin":1,"pin-wangyao":1,"pin-fc":1,"pin-exhibit":1};
+  function entityOf(pin){ return PLACE_IDS[pin.id] ? "place" : "doc"; }
+  function entityLabel(e){ return e==="place"?"สถานที่":e==="doc"?"เอกสาร":"คน"; }
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function stamp(t){
+    t=String(t||"").toLowerCase();
+    if(/เอกสาร|ตรง|document|direct/.test(t)) return "เอกสาร";
+    if(/พยาน|hearsay/.test(t)) return "พยาน";
+    if(/สันนิษฐาน|inference|claim/.test(t)) return "สันนิษฐาน";
+    if(/campaign|นิทรรศการ/.test(t)) return "หมายเหตุ";
+    return "สันนิษฐาน";
+  }
+  function chips(ids){
+    return (ids||[]).map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join("");
+  }
+  function personFile(d){
+    var nAl=(d.a||[]).length;
+    var h='<header class="pc-head">แฟ้ม · คน · '+(nAl?nAl+" ข้อกล่าวหา":"ยังไม่มีข้อกล่าวหาเจาะจง")+"</header>";
+    h+='<div class="pc-body"><span class="pc-rail" aria-hidden="true">ชื่อคน</span><div class="pc-main">';
+    h+='<h2 class="pc-name">'+esc(d.name)+"</h2>";
+    h+='<div class="pc-badges">';
+    h+='<span class="badge">'+esc(d.id)+"</span>";
+    if(d.hub) h+='<span class="badge r">ฮับสายโทร</span>';
+    if(d.inPoy) h+='<span class="badge ilaw">อยู่ในโพย 140 [S227]</span>';
+    var ZN={south:"ใต้",phone:"สายโทร",kon:"เมืองคอน",amnat:"อำนาจ",angthong:"อ่างทอง"};
+    (d.clusters||[]).forEach(function(z){h+='<span class="badge">'+esc(ZN[z]||z)+"</span>";});
+    h+="</div>";
+    h+='<div class="pc-pos">'+esc(d.role||"")+"</div>";
+    h+='<article class="pc-al">';
+    h+='<div class="pc-k">'+esc((d.a||[]).join(" · "))+" · "+esc(stamp(d.tier))+"</div>";
+    h+='<h3 class="pc-role">'+esc(d.role||"ข้อกล่าวหา")+"</h3>";
+    if(d.claim) h+='<p class="pc-claim">'+esc(d.claim)+"</p>";
+    h+='<div class="pc-meta">'+chips(d.a)+chips(d.src);
+    if(d.tier) h+="<span>หลักฐาน: "+esc(d.tier)+"</span>";
+    h+="</div>";
+    if(d.response) h+='<div class="pc-rsp">คำชี้แจง: '+esc(d.response)+"</div>";
+    if(d.caveat) h+='<div class="pc-rsp">'+esc(d.caveat)+"</div>";
+    h+='<div class="pc-al-foot"><span class="pc-stamp">'+esc(stamp(d.tier))+"</span></div>";
+    h+="</article>";
+    if(d.counterparts){
+      h+='<div class="pc-sec-lab">คู่สาย · '+d.counterparts.length+" คน (คลิกฮับ — ไม่ติดการ์ดครบ)</div>";
+      h+="<ul class='counter'>"+d.counterparts.map(function(c){
+        return "<li><span>"+esc(c.name)+"</span><b>"+c.n+" ครั้ง</b></li>";
+      }).join("")+"</ul>";
+    }
+    h+='<div class="none">ข้อกล่าวหาไม่ใช่คำพิพากษา · presumption of innocence</div>';
+    h+="</div></div>";
+    return h;
+  }
+  function pinFile(d){
+    var ent=entityOf(d);
+    var kind=entityLabel(ent);
+    var rail=ent==="doc"?"เอกสาร":"สถานที่";
+    var cls=ent==="doc"?"card-source":"card-venue";
+    var h='<header class="'+(cls==="card-source"?"sc-head":"pc-head")+'">แฟ้ม · '+kind+" · #"+(d.n||"—")+"</header>";
+    h+='<div class="'+(cls==="card-source"?"sc-body":"pc-body")+'"><span class="'+(cls==="card-source"?"sc-rail":"pc-rail")+'" aria-hidden="true">'+rail+'</span><div class="pc-main">';
+    if(cls==="card-source") h+='<div class="sc-id">#'+esc(String(d.n||""))+"</div>";
+    h+='<h2 class="'+(cls==="card-source"?"sc-title":"pc-name")+'">'+esc(d.label)+"</h2>";
+    h+='<div class="pc-badges"><span class="badge">'+esc(kind)+'</span><span class="badge">'+esc(d.sub||'')+'</span>'+chips(d.a)+chips(d.src)+'</div>';
+    h+='<article class="pc-al">';
+    if(d.image){
+      h+='<figure class="ev-shot"><img src="'+esc(d.image)+'" alt="'+esc(d.label)+'" loading="lazy"></figure>';
+      h+='<p class="ev-cap">ใบปลิวรณรงค์ — ไม่ใช่สำนวน · ไม่แตก A จาก OCR</p>';
+    }
+    if(d.claim) h+='<p class="pc-claim">'+esc(d.claim)+'</p>';
+    if(d.caveat) h+='<div class="pc-rsp">'+esc(d.caveat)+'</div>';
+    if(d.url) h+='<div class="sc-links"><a class="sc-go" href="'+esc(d.url)+'" target="_blank" rel="noopener">เปิดแหล่ง</a></div>';
+    h+='<div class="pc-al-foot"><span class="'+(cls==="card-source"?"sc-stamp":"pc-stamp")+'">'+esc(stamp(d.tier))+"</span></div>";
+    h+="</article>";
+    h+='<div class="none">ข้อกล่าวหาไม่ใช่คำพิพากษา · presumption of innocence</div>';
+    h+="</div></div>";
+    return {cls:cls, html:h};
+  }
+  function thickMoney(b){return Math.max(1.0, Math.min(4.6, 0.75+Math.log10(b)*0.9))}
+  function thickPhone(n){return Math.max(0.9, Math.min(3.8, 0.5+Math.sqrt(n)*0.4))}
+  function curve(a,b,k){
+    var mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    var dx=b.y-a.y, dy=a.x-b.x, len=Math.hypot(dx,dy)||1;
+    mx+=dx/len*k; my+=dy/len*k;
+    return "M"+a.x+","+a.y+" Q"+mx+","+my+" "+b.x+","+b.y;
+  }
+  function elbow(a,b){
+    var mx=Math.round((a.x+b.x)/2);
+    return "M"+a.x+","+a.y+" H"+mx+" V"+b.y+" H"+b.x;
+  }
+  function touchesSel(a,b){ return !!(sel && (a.id===sel || b.id===sel)); }
+  function setFrameSel(svgId){
+    var el=document.getElementById(svgId);
+    var fr=el && el.closest(".embed-frame");
+    if(fr) fr.classList.toggle("has-sel", !!sel);
+  }
+  function pick(list, pos){
+    return list.map(function(d){
+      var xy=pos[d.id];
+      return xy?Object.assign({},d,xy):null;
+    }).filter(Boolean);
+  }
+  function byId(spec,id){
+    return spec.people.find(function(d){return d.id===id})||
+           spec.pins.find(function(d){return d.id===id});
+  }
+  function closeOv(){
+    document.getElementById("ov").classList.remove("on");
+    sel=null;
+    drawAll();
+  }
+  function openItem(d, kind){
+    sel=d.id;
+    var card=document.getElementById("ovcard");
+    var body=document.getElementById("cardbody");
+    card.className="card";
+    if(kind==="pin"||d.label){
+      var pin=pinFile(d);
+      card.classList.add(pin.cls);
+      body.innerHTML=pin.html;
+    }else{
+      card.classList.add("card-person");
+      body.innerHTML=personFile(d);
+    }
+    document.getElementById("ov").classList.add("on");
+    drawAll();
+  }
+  function drawBallots(svg,x,y,scale){
+    scale=scale||1;
+    var gPoy=svg.append("g").attr("class","poy-ex")
+      .attr("transform","translate("+x+","+y+") scale("+scale+")");
+    function ballot(gx, title){
+      var g=gPoy.append("g").attr("transform","translate("+gx+",0)");
+      g.append("rect").attr("class","ballot").attr("width",72).attr("height",96).attr("rx",2);
+      g.append("text").attr("x",6).attr("y",12).attr("class","title-svg").text(title);
+      for(var i=0;i<10;i++){
+        g.append("rect").attr("class","slot").attr("x",8).attr("y",18+i*7.2).attr("width",56).attr("height",6.4);
+        g.append("text").attr("x",11).attr("y",23.5+i*7.2).attr("font-size","6")
+          .attr("font-family","IBM Plex Mono,monospace").attr("fill","#8b1e2d")
+          .text((i+1)+". —");
+      }
+    }
+    ballot(0,"บัตร ก");
+    ballot(80,"บัตร ข · แพทเทิร์นเดียว");
+  }
+  function drawAnno(svg, a){
+    var g=svg.append("g").attr("class","anno");
+    if(a.line){
+      g.append("path").attr("class","anno-line").attr("d",a.line);
+    }
+    g.append("rect").attr("class","anno-box")
+      .attr("x",a.x).attr("y",a.y).attr("width",a.w).attr("height",a.h).attr("rx",2);
+    g.append("text").attr("class","anno-k").attr("x",a.x+10).attr("y",a.y+16).text(a.k);
+    g.append("text").attr("class","anno-t").attr("x",a.x+10).attr("y",a.y+34).text(a.t);
+    if(a.d) g.append("text").attr("class","anno-d").attr("x",a.x+10).attr("y",a.y+50).text(a.d);
+  }
+  function drawBoard(spec){
+    var svg=d3.select("#"+spec.svg);
+    svg.selectAll("*").remove();
+    svg.attr("aria-labelledby", spec.tid);
+    if(!document.getElementById(spec.tid)){
+      var tEl=document.createElement("span");
+      tEl.id=spec.tid; tEl.hidden=true; tEl.textContent=spec.title;
+      document.body.appendChild(tEl);
+    }
+    svg.append("desc").text(spec.desc);
+    svg.selectAll("rect.zone").data(spec.zones).enter().append("rect")
+      .attr("class","zone").attr("x",function(d){return d.x}).attr("y",function(d){return d.y})
+      .attr("width",function(d){return d.w}).attr("height",function(d){return d.h}).attr("rx",2);
+    svg.selectAll("text.zone-lab").data(spec.zones).enter().append("text")
+      .attr("class","zone-lab").attr("x",function(d){return d.x+12}).attr("y",function(d){return d.y+20})
+      .text(function(d){return d.name});
+    var yarns=svg.append("g").attr("class","yarns");
+    (spec.money||[]).forEach(function(e){
+      var a=byId(spec,e.from), b=byId(spec,e.to);
+      if(!a||!b) return;
+      yarns.append("path")
+        .attr("class","yarn-gold"+(touchesSel(a,b)?" hot":""))
+        .attr("d",elbow(a,b))
+        .attr("stroke-width",thickMoney(e.baht)).attr("vector-effect","non-scaling-stroke");
+    });
+    (spec.phone||[]).forEach(function(e){
+      var a=byId(spec,e.from), b=byId(spec,e.to);
+      if(!a||!b) return;
+      yarns.append("path")
+        .attr("class","yarn-red"+(touchesSel(a,b)?" hot":""))
+        .attr("d",curve(a,b,-14))
+        .attr("stroke-width",thickPhone(e.n)).attr("vector-effect","non-scaling-stroke");
+    });
+    (spec.phoneToPin||[]).forEach(function(e){
+      var a=byId(spec,e.from), b=byId(spec,e.to);
+      if(!a||!b) return;
+      yarns.append("path")
+        .attr("class",(e.kind==="process"?"yarn-venue":"yarn-red")+(touchesSel(a,b)?" hot":""))
+        .attr("d",curve(a,b,12))
+        .attr("stroke-width", e.kind==="process"?1.0:thickPhone(e.n)*0.5)
+        .attr("vector-effect","non-scaling-stroke");
+    });
+    (spec.venueEdges||[]).forEach(function(e){
+      var a=byId(spec,e.from), b=byId(spec,e.to);
+      if(!a||!b) return;
+      yarns.append("path")
+        .attr("class",(b.kind==="poy"?"yarn-poy":"yarn-venue")+(touchesSel(a,b)?" hot":""))
+        .attr("d",elbow(a,b))
+        .attr("stroke-width",1.1).attr("vector-effect","non-scaling-stroke");
+    });
+    if(spec.ballots) drawBallots(svg, spec.ballots.x, spec.ballots.y, spec.ballots.scale||1);
+    (spec.annos||[]).forEach(function(a){ drawAnno(svg, a); });
+    var cards=svg.append("g").selectAll("g.card").data(spec.people).enter().append("g")
+      .attr("class",function(d){return "card"+(sel===d.id?" on":"");})
+      .attr("role","button").attr("tabindex",0)
+      .attr("aria-label",function(d){return "เปิดแฟ้ม "+d.short+" "+d.id;})
+      .attr("transform",function(d){return "translate("+(d.x-CW/2)+","+(d.y-CH/2)+")"})
+      .on("click",function(ev,d){ev.stopPropagation(); openItem(d,"person");})
+      .on("keydown",function(ev,d){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();openItem(d,"person");}});
+    cards.append("rect").attr("class","card-file").attr("x",0).attr("y",0).attr("width",CW).attr("height",CH);
+    cards.append("rect").attr("class",function(d){return "card-rail"+(d.inPoy?" poy":"");})
+      .attr("x",0).attr("y",0).attr("width",3).attr("height",CH);
+    cards.append("text").attr("class","card-kind").attr("x",10).attr("y",14).text("คน");
+    cards.append("text").attr("class","card-name").attr("x",10).attr("y",30).text(function(d){return d.short;});
+    cards.append("line").attr("x1",10).attr("x2",function(d){return 10+Math.min(78, d.short.length*7.2);})
+      .attr("y1",34).attr("y2",34).attr("stroke","currentColor").attr("stroke-width",1).attr("opacity",.35);
+    cards.append("text").attr("class","card-id").attr("x",10).attr("y",50)
+      .text(function(d){return d.id+(d.hub?" · ฮับ":"");});
+    cards.append("circle").attr("class","card-pin").attr("cx",CW/2).attr("cy",4).attr("r",3.2);
+    var marks=svg.append("g").selectAll("g.mark").data(spec.pins).enter().append("g")
+      .attr("class",function(d){return "mark mark-"+entityOf(d)+(sel===d.id?" on":"");})
+      .attr("role","button").attr("tabindex",0)
+      .attr("aria-label",function(d){return "เปิดแฟ้ม "+entityLabel(entityOf(d))+" "+d.label;})
+      .attr("transform",function(d){return "translate("+d.x+","+d.y+")"})
+      .on("click",function(ev,d){ev.stopPropagation(); openItem(d,"pin");})
+      .on("keydown",function(ev,d){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();openItem(d,"pin");}});
+    marks.each(function(d){
+      var g=d3.select(this);
+      var ent=entityOf(d);
+      if(ent==="place"){
+        g.append("rect").attr("class","mark-shape mark-place")
+          .attr("x",-8).attr("y",-8).attr("width",16).attr("height",16).attr("rx",2);
+        g.append("text").attr("text-anchor","middle").attr("y",3.5).attr("font-size","8")
+          .attr("font-family","IBM Plex Mono,monospace").attr("font-weight","600").attr("fill","#FFFEF9")
+          .text(d.n);
+      }else{
+        g.append("rect").attr("class","mark-shape mark-doc")
+          .attr("x",-7).attr("y",-10).attr("width",14).attr("height",18).attr("rx",1);
+        g.append("path").attr("class","mark-doc-fold").attr("d","M1,-10 L7,-10 L7,-4 Z");
+        g.append("text").attr("text-anchor","middle").attr("y",4).attr("font-size","8")
+          .attr("font-family","IBM Plex Mono,monospace").attr("font-weight","600").attr("fill","currentColor")
+          .attr("class","pin-doc-n")
+          .text(d.n);
+      }
+      g.append("text").attr("class","pin-kind").attr("x",12).attr("y",-8).text(entityLabel(ent));
+      g.append("text").attr("class","pin-lab").attr("x",12).attr("y",4).text(d.label);
+      g.append("text").attr("class","pin-sub").attr("x",12).attr("y",16).text(d.sub);
+    });
+    setFrameSel(spec.svg);
+  }
+  function drawAll(){
+    SPECS.forEach(drawBoard);
+    SPECS.forEach(listBoard);
+  }
+  function buildSpecs(){
+    /* โอน = บันไดฮับ→คอลัมน์ผู้รับ · โทร = สองแถวห่าง · ไม่ทับการ์ด */
+    var posM={
+      H009:{x:130,y:255},
+      H008:{x:400,y:65},P1572:{x:400,y:133},H010:{x:400,y:201},P1597:{x:400,y:269},
+      P1598:{x:400,y:337},H013:{x:400,y:405},H012:{x:400,y:473},
+      H011:{x:560,y:269},
+      P1590:{x:720,y:190},X044:{x:930,y:190},H030:{x:720,y:390},P553:{x:930,y:390}
+    };
+    var posP={
+      P1695:{x:140,y:130},H004:{x:320,y:110},P279:{x:500,y:110},P947:{x:700,y:130},
+      P220:{x:240,y:230},P221:{x:420,y:240},P1572:{x:600,y:250},P612:{x:780,y:230}
+    };
+    var posV={
+      H005:{x:330,y:78},P220:{x:140,y:225},P1599:{x:440,y:245},P1572:{x:145,y:400}
+    };
+    var pinM={
+      "pin-217":{x:90,y:50},"pin-860":{x:760,y:50},"pin-cash20":{x:90,y:475}
+    };
+    var pinP={"pin-window":{x:420,y:32},"pin-ect":{x:860,y:42}};
+    var pinV={
+      "pin-aswin":{x:70,y:72},"pin-ect-mp":{x:540,y:72},"pin-fc":{x:250,y:175},
+      "pin-wangyao":{x:560,y:220},"pin-bike8":{x:250,y:292},"pin-poy":{x:250,y:380},
+      "pin-exhibit":{x:320,y:450}
+    };
+    return [
+      {
+        svg:"svg-money", tid:"t-money", title:"แผ่นโอน — ใต้ 2.17 ล้านและอำนาจ 860,000",
+        desc:"สายทอง = รายการโอนตามสำนวน · โอนไม่ใช่สัญญาจ่าย",
+        zones:[
+          {name:"ใต้ · 2.17 ล้าน",x:20,y:12,w:580,h:496},
+          {name:"อำนาจ · 860,000",x:620,y:12,w:440,h:496}
+        ],
+        people:pick(DATA.people,posM), pins:pick(DATA.pins,pinM),
+        money:DATA.money, phone:[], phoneToPin:[], venueEdges:[],
+        annos:[]
+      },
+      {
+        svg:"svg-phone", tid:"t-phone", title:"แผ่นโทร — ฮับ 16มิ.ย.–15ก.ย.67",
+        desc:"สายแดง = ประวัติโทร · ไม่พิสูจน์เนื้อหาสนทนา",
+        zones:[{name:"สายโทร · หน้าต่างเดียวกัน",x:24,y:10,w:932,h:288}],
+        people:pick(DATA.people,posP), pins:pick(DATA.pins,pinP),
+        money:[], phone:DATA.phone, phoneToPin:DATA.phoneToPin, venueEdges:[],
+        annos:[]
+      },
+      {
+        svg:"svg-venue", tid:"t-venue", title:"แผ่นสถานที่ — เมืองคอน อ่างทอง โพย",
+        desc:"หมุดโรงแรม/สโมสร/หอศิลปฯ · โพยเป็นแพทเทิร์นซ้ำไม่ใช่สำเนาบัตร",
+        zones:[
+          {name:"เมืองคอน",x:10,y:8,w:740,h:120},
+          {name:"อ่างทอง",x:10,y:144,w:740,h:176},
+          {name:"โพย / นิทรรศการ",x:10,y:336,w:740,h:140}
+        ],
+        people:pick(DATA.people,posV), pins:pick(DATA.pins,pinV),
+        money:[], phone:[], phoneToPin:[],
+        venueEdges:DATA.venueEdges.filter(function(e){
+          return ["pin-aswin","pin-ect-mp","pin-bike8","pin-wangyao","pin-poy"].indexOf(e.to)>=0;
+        }),
+        ballots:{x:560,y:355,scale:0.88},
+        annos:[]
+      }
+    ];
+  }
+
+  function setTheme(t){
+    document.documentElement.setAttribute("data-theme",t);
+    document.documentElement.classList.toggle("theme-dark",t==="dark");
+    try{localStorage.setItem("baanyai-theme",t);localStorage.setItem("viz-theme",t);}catch(e){}
+  }
+  function bindTools(){
+    var tb=document.getElementById("themeBtn");
+    if(tb) tb.onclick=function(){
+      setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark");
+    };
+  }
+  function listBoard(spec){
+    var box=document.getElementById(spec.list);
+    if(!box) return;
+    box.innerHTML="";
+    var wrap=document.createElement("div");
+    wrap.className="dossier";
+    function sec(cls, title, items, makeBtn){
+      if(!items.length) return;
+      var s=document.createElement("section");
+      var h=document.createElement("h3");
+      h.className=cls;
+      h.innerHTML='<i aria-hidden="true"></i>'+title+" · "+items.length;
+      s.appendChild(h);
+      items.forEach(function(it){ s.appendChild(makeBtn(it)); });
+      wrap.appendChild(s);
+    }
+    function mk(label, cls, fn, id){
+      var b=document.createElement("button");
+      b.type="button";
+      b.className=cls+(sel===id?" on":"");
+      b.textContent=label;
+      b.onclick=fn;
+      return b;
+    }
+    sec("k-person","คนที่เกี่ยวข้อง", spec.people, function(p){
+      return mk(p.short+" · "+p.id+(p.hub?" · ฮับ":""), "chip-person", function(){openItem(p,"person");}, p.id);
+    });
+    var places=spec.pins.filter(function(p){return entityOf(p)==="place";});
+    var docs=spec.pins.filter(function(p){return entityOf(p)==="doc";});
+    sec("k-place","สถานที่ / โรงแรม", places, function(p){
+      return mk("#"+p.n+" "+p.label, "chip-place", function(){openItem(p,"pin");}, p.id);
+    });
+    sec("k-doc","เอกสารในแผ่น", docs, function(p){
+      return mk("#"+p.n+" "+p.label, "chip-doc", function(){openItem(p,"pin");}, p.id);
+    });
+    box.appendChild(wrap);
+  }
+  function buildVenueRail(){
+    var rail=document.getElementById("venue-rail");
+    if(!rail||!DATA) return;
+    var pinBy=function(id){return DATA.pins.find(function(p){return p.id===id});};
+    var rows=[
+      {pin:"pin-aswin", when:"ก่อนเลือก", role:"แจกซอง / ห้อง", who:"วาริน H005"},
+      {pin:"pin-fc", when:"จ้างงาน", role:"อ่างทองเอฟซี", who:"นิทัศน์ P1599"},
+      {pin:"pin-wangyao", when:"ที่พัก", role:"วังยาว", who:"พยานอ้างค่าห้อง"},
+      {pin:"pin-poy", when:"นิทรรศการ", role:"โพยล็อกมง 140", who:"S227 · แปะใน 59420"}
+    ];
+    rail.innerHTML=rows.map(function(r){
+      var p=pinBy(r.pin);
+      if(!p) return "";
+      return '<button type="button" class="vhit" data-pin="'+esc(p.id)+'">'+
+        '<div class="vk" data-when="'+esc(r.when)+'">'+esc(r.role)+'</div>'+
+        '<h4>'+esc(p.label)+'</h4>'+
+        '<p class="muted">'+esc(p.sub||"")+'</p>'+
+        '<p class="detail">'+esc(p.claim||r.who)+'</p>'+
+        '<span class="vg">เปิดแฟ้มหลักฐาน</span></button>';
+    }).join("");
+    rail.querySelectorAll("[data-pin]").forEach(function(btn){
+      btn.onclick=function(){
+        var p=DATA.pins.find(function(x){return x.id===btn.getAttribute("data-pin");});
+        if(p) openItem(p,"pin");
+      };
+    });
+  }
+  function boot(d){
+    DATA=d;
+    (DATA.pins||[]).forEach(function(p){
+      if(p.id==="pin-bike8"){
+        p.sub="ใบปลิวรณรงค์ · เบอร์ 8";
+        p.image="media/nitath_bike8.jpg";
+      }
+    });
+    SPECS=buildSpecs();
+    SPECS[0].list="list-money";
+    SPECS[1].list="list-phone";
+    SPECS[2].list="list-venue";
+    bindTools();
+    buildVenueRail();
+    SPECS.forEach(listBoard);
+    drawAll();
+    SPECS.forEach(function(s){
+      d3.select("#"+s.svg).on("click",function(){closeOv();});
+    });
+    document.getElementById("ovx").onclick=function(e){e.stopPropagation(); closeOv();};
+    document.getElementById("ov").onclick=function(e){if(e.target.id==="ov") closeOv();};
+    document.addEventListener("keydown",function(e){if(e.key==="Escape") closeOv();});
+    if(EMBED){
+      setEvidencePanel(ACTIVE_PANEL);
+      try{parent.postMessage({type:'hua-evidence-ready'},'*');}catch(e){}
+    }
+  }
+
+  d3.json("hv_connect_board_edges.json?v=1").catch(function(){
+    return d3.json("hv_connect_board_edges.json");
+  }).then(boot).catch(function(err){
+    document.getElementById("cardbody").textContent="โหลด edges ไม่ได้ — เปิดผ่าน http จากราก repo";
+    document.getElementById("ov").classList.add("on");
+    console.error(err);
+  });
+})();
+</script>
+</body>
+</html>
